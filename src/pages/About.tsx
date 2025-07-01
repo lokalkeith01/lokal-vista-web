@@ -1,4 +1,3 @@
-
 import { Award, Heart, Lightbulb, Shield, Video, Users, MapPin, Zap } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
 import Navbar from '@/components/Navbar';
@@ -42,7 +41,7 @@ const About = () => {
     {
       name: "Jordan Taylor",
       role: "Community Director",
-      description: "Local culture enthusiast dedicated to building genuine communities around shared experiences."
+      description: "Family man who wants to share the world with his kids and help other families discover authentic local experiences together."
     }
   ];
 
