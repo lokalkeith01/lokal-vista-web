@@ -1,5 +1,5 @@
 
-import { BarChart3, Megaphone, Settings, TrendingUp, Users, Zap } from 'lucide-react';
+import { Building2, Users, Video, TrendingUp, Heart, Handshake } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
@@ -7,84 +7,89 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 
 const Services = () => {
-  const services = [
+  const chamberServices = [
     {
-      icon: <BarChart3 className="w-12 h-12 text-blue-600" />,
-      title: "Business Analytics",
-      description: "Data-driven insights to help you make informed decisions and track your business performance.",
-      features: ["Performance Dashboards", "Market Analysis", "ROI Tracking", "Competitive Intelligence"]
+      icon: <Building2 className="w-12 h-12 text-blue-600" />,
+      title: "Chamber Partnership",
+      description: "Partner with Lokal to provide your members with a powerful platform to showcase their businesses through authentic video content.",
+      features: ["Member spotlight videos", "Chamber-branded portal", "Business discovery tools", "Event promotion features"]
     },
     {
-      icon: <Megaphone className="w-12 h-12 text-green-600" />,
-      title: "Marketing Solutions",
-      description: "Comprehensive marketing strategies to boost your local presence and attract more customers.",
-      features: ["Local SEO", "Social Media Management", "Content Marketing", "Ad Campaign Management"]
+      icon: <Users className="w-12 h-12 text-green-600" />,
+      title: "Member Engagement",
+      description: "Help your members connect with local customers and build stronger community relationships through genuine recommendations.",
+      features: ["Member networking", "Customer testimonials", "Local influencer connections", "Community building tools"]
     },
     {
-      icon: <Settings className="w-12 h-12 text-purple-600" />,
-      title: "Operations Optimization",
-      description: "Streamline your business processes and improve efficiency with our operational expertise.",
-      features: ["Process Automation", "Workflow Design", "Quality Management", "Cost Optimization"]
+      icon: <Video className="w-12 h-12 text-purple-600" />,
+      title: "Video Storytelling",
+      description: "Enable your members to tell their business stories through short, authentic videos that capture the real experience.",
+      features: ["Easy video creation", "Professional templates", "Mobile-first design", "Social media integration"]
+    }
+  ];
+
+  const businessServices = [
+    {
+      icon: <Heart className="w-12 h-12 text-red-600" />,
+      title: "Authentic Promotion",
+      description: "Connect with local customers who genuinely love what you do and let them share their experiences with others.",
+      features: ["Customer advocacy", "Genuine reviews", "Local community reach", "Trust building"]
     },
     {
-      icon: <TrendingUp className="w-12 h-12 text-orange-600" />,
-      title: "Growth Strategy",
-      description: "Strategic planning and execution to scale your business and enter new markets.",
-      features: ["Market Expansion", "Strategic Planning", "Partnership Development", "Revenue Growth"]
+      icon: <Handshake className="w-12 h-12 text-orange-600" />,
+      title: "Influencer Connections",
+      description: "Partner with local influencers and community advocates who can authentically promote your business to their networks.",
+      features: ["Local influencer matching", "Authentic partnerships", "Community ambassadors", "Word-of-mouth amplification"]
     },
     {
-      icon: <Users className="w-12 h-12 text-red-600" />,
-      title: "Team Development",
-      description: "Build stronger teams and improve workplace culture for better business outcomes.",
-      features: ["Leadership Training", "Team Building", "Performance Management", "Culture Development"]
-    },
-    {
-      icon: <Zap className="w-12 h-12 text-yellow-600" />,
-      title: "Digital Transformation",
-      description: "Modernize your business with the latest technology and digital solutions.",
-      features: ["Technology Integration", "Digital Tools", "Cloud Solutions", "Mobile Optimization"]
+      icon: <TrendingUp className="w-12 h-12 text-yellow-600" />,
+      title: "Business Growth",
+      description: "Grow your business through the most trusted form of marketing - recommendations from real customers and community members.",
+      features: ["Organic growth", "Community-driven marketing", "Local SEO boost", "Customer loyalty programs"]
     }
   ];
 
   const packages = [
     {
-      name: "Starter",
-      price: "$299",
+      name: "Chamber Starter",
+      price: "$199",
       duration: "per month",
-      description: "Perfect for small businesses just getting started",
+      description: "Perfect for smaller chambers looking to enhance member services",
       features: [
-        "Business consultation (2 hours/month)",
-        "Basic marketing audit",
-        "Monthly performance report",
+        "Up to 25 member businesses",
+        "Basic video creation tools",
+        "Chamber-branded portal",
+        "Monthly analytics report",
         "Email support"
       ]
     },
     {
-      name: "Professional",
-      price: "$699",
+      name: "Chamber Pro",
+      price: "$399",
       duration: "per month",
-      description: "Ideal for growing businesses ready to scale",
+      description: "Ideal for growing chambers with active member engagement",
       features: [
-        "Business consultation (6 hours/month)",
-        "Complete marketing strategy",
-        "Bi-weekly performance reports",
-        "Priority phone & email support",
-        "Quarterly strategy review"
+        "Up to 100 member businesses",
+        "Advanced video features",
+        "Custom branding options",
+        "Influencer matching service",
+        "Bi-weekly strategy sessions",
+        "Priority support"
       ],
       popular: true
     },
     {
-      name: "Enterprise",
-      price: "$1,299",
+      name: "Chamber Enterprise",
+      price: "$699",
       duration: "per month",
-      description: "Comprehensive solution for established businesses",
+      description: "Comprehensive solution for large chambers and business networks",
       features: [
-        "Unlimited consultation hours",
-        "Full-service marketing management",
-        "Weekly performance reports",
-        "24/7 dedicated support",
-        "Monthly strategy sessions",
-        "Custom integrations"
+        "Unlimited member businesses",
+        "Full-service video production",
+        "White-label platform",
+        "Dedicated account manager",
+        "Custom integrations",
+        "24/7 support"
       ]
     }
   ];
@@ -97,20 +102,37 @@ const Services = () => {
       <section className="bg-gradient-to-br from-blue-50 to-indigo-100 py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-            Our <span className="text-blue-600">Services</span>
+            Empower Your <span className="text-blue-600">Chamber</span> & <span className="text-blue-600">Members</span>
           </h1>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Comprehensive business solutions designed to help your company grow, 
-            optimize operations, and achieve sustainable success.
+          <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-8">
+            Help Chambers of Commerce enhance their member services while connecting local businesses 
+            with customers and influencers through authentic word-of-mouth marketing.
           </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Button className="bg-blue-600 hover:bg-blue-700 text-lg px-8 py-3">
+              <Link to="/contact">Partner with Lokal</Link>
+            </Button>
+            <Button variant="outline" className="text-lg px-8 py-3">
+              Schedule Demo
+            </Button>
+          </div>
         </div>
       </section>
 
-      {/* Services Grid */}
+      {/* Chamber Services */}
       <section className="py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {services.map((service, index) => (
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+              For Chambers of Commerce
+            </h2>
+            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+              Enhance your member services and strengthen your local business community
+            </p>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {chamberServices.map((service, index) => (
               <Card key={index} className="hover:shadow-lg transition-shadow duration-300">
                 <CardHeader className="text-center pb-4">
                   <div className="flex justify-center mb-4">
@@ -139,15 +161,57 @@ const Services = () => {
         </div>
       </section>
 
-      {/* Pricing Section */}
+      {/* Business Services */}
       <section className="py-20 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-              Choose Your Plan
+              For Local Businesses
             </h2>
             <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              Flexible pricing options to match your business needs and budget
+              Connect with customers and influencers to grow through authentic word-of-mouth
+            </p>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {businessServices.map((service, index) => (
+              <Card key={index} className="hover:shadow-lg transition-shadow duration-300">
+                <CardHeader className="text-center pb-4">
+                  <div className="flex justify-center mb-4">
+                    {service.icon}
+                  </div>
+                  <CardTitle className="text-xl text-gray-900">
+                    {service.title}
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-gray-600 mb-4">
+                    {service.description}
+                  </p>
+                  <ul className="space-y-2">
+                    {service.features.map((feature, idx) => (
+                      <li key={idx} className="text-sm text-gray-500 flex items-center">
+                        <div className="w-2 h-2 bg-green-500 rounded-full mr-2"></div>
+                        {feature}
+                      </li>
+                    ))}
+                  </ul>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Pricing Section */}
+      <section className="py-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+              Chamber Partnership Plans
+            </h2>
+            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+              Flexible pricing options designed for chambers of all sizes
             </p>
           </div>
           
@@ -188,6 +252,27 @@ const Services = () => {
                 </CardContent>
               </Card>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section className="py-20 bg-blue-600">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
+            Ready to Transform Your Chamber?
+          </h2>
+          <p className="text-xl text-blue-100 max-w-2xl mx-auto mb-8">
+            Join forward-thinking chambers who are already using Lokal to enhance their member services 
+            and strengthen their local business communities.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Button className="bg-white text-blue-600 hover:bg-gray-100 text-lg px-8 py-3">
+              <Link to="/contact">Schedule a Demo</Link>
+            </Button>
+            <Button variant="outline" className="border-white text-white hover:bg-white hover:text-blue-600 text-lg px-8 py-3">
+              Learn More
+            </Button>
           </div>
         </div>
       </section>
