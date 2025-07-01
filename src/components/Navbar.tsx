@@ -22,10 +22,11 @@ const Navbar = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           <Link to="/" className="flex items-center space-x-2">
-            <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center">
-              <span className="text-white font-bold text-lg">L</span>
-            </div>
-            <span className="text-2xl font-bold text-gray-900">Lokal</span>
+            <img 
+              src="/lovable-uploads/fc662747-783c-4432-8ace-cbd6fef43497.png" 
+              alt="Lokal" 
+              className="h-8 w-auto"
+            />
           </Link>
 
           {/* Desktop Navigation */}
