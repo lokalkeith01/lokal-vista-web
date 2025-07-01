@@ -1,6 +1,6 @@
 
 import { Link } from 'react-router-dom';
-import { Mail, Phone, MapPin } from 'lucide-react';
+import { Mail, Phone, MapPin, Video } from 'lucide-react';
 
 const Footer = () => {
   return (
@@ -16,24 +16,24 @@ const Footer = () => {
               <span className="text-2xl font-bold">Lokal</span>
             </div>
             <p className="text-gray-300 mb-4 max-w-md">
-              Empowering local businesses with innovative solutions and exceptional service. 
-              We're committed to helping your business thrive in today's competitive landscape.
+              Giving a voice to small businesses through authentic, crowd-sourced video experiences. 
+              Share what you love and discover your city like never before.
             </p>
             <div className="flex space-x-4">
               <div className="flex items-center space-x-2 text-gray-300">
                 <Mail size={16} />
-                <span>hello@lokal.com</span>
+                <span>hello@belokal.com</span>
               </div>
               <div className="flex items-center space-x-2 text-gray-300">
-                <Phone size={16} />
-                <span>(555) 123-4567</span>
+                <Video size={16} />
+                <span>Share Your Story</span>
               </div>
             </div>
           </div>
 
           {/* Quick Links */}
           <div>
-            <h3 className="text-lg font-semibold mb-4">Quick Links</h3>
+            <h3 className="text-lg font-semibold mb-4">Explore</h3>
             <ul className="space-y-2">
               <li>
                 <Link to="/" className="text-gray-300 hover:text-white transition-colors">
@@ -42,41 +42,41 @@ const Footer = () => {
               </li>
               <li>
                 <Link to="/about" className="text-gray-300 hover:text-white transition-colors">
-                  About Us
+                  Our Story
                 </Link>
               </li>
               <li>
                 <Link to="/services" className="text-gray-300 hover:text-white transition-colors">
-                  Services
+                  For Businesses
                 </Link>
               </li>
               <li>
                 <Link to="/contact" className="text-gray-300 hover:text-white transition-colors">
-                  Contact
+                  Join Lokal
                 </Link>
               </li>
             </ul>
           </div>
 
-          {/* Services */}
+          {/* Community */}
           <div>
-            <h3 className="text-lg font-semibold mb-4">Services</h3>
+            <h3 className="text-lg font-semibold mb-4">Community</h3>
             <ul className="space-y-2 text-gray-300">
-              <li>Business Consulting</li>
-              <li>Digital Solutions</li>
-              <li>Marketing Strategy</li>
-              <li>Growth Planning</li>
+              <li>Video Guidelines</li>
+              <li>Local Ambassadors</li>
+              <li>Business Partners</li>
+              <li>Success Stories</li>
             </ul>
           </div>
         </div>
 
         <div className="border-t border-gray-700 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center">
           <p className="text-gray-400 text-sm">
-            © 2024 Lokal. All rights reserved.
+            © 2024 Lokal. Empowering small businesses, one video at a time.
           </p>
           <div className="flex space-x-6 mt-4 md:mt-0">
             <a href="#" className="text-gray-400 hover:text-white text-sm">Privacy Policy</a>
-            <a href="#" className="text-gray-400 hover:text-white text-sm">Terms of Service</a>
+            <a href="#" className="text-gray-400 hover:text-white text-sm">Community Guidelines</a>
           </div>
         </div>
       </div>

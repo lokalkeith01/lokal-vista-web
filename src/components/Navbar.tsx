@@ -12,9 +12,9 @@ const Navbar = () => {
 
   const navLinks = [
     { path: '/', label: 'Home' },
-    { path: '/about', label: 'About' },
-    { path: '/services', label: 'Services' },
-    { path: '/contact', label: 'Contact' },
+    { path: '/about', label: 'Our Story' },
+    { path: '/services', label: 'For Businesses' },
+    { path: '/contact', label: 'Join Lokal' },
   ];
 
   return (
@@ -44,7 +44,7 @@ const Navbar = () => {
               </Link>
             ))}
             <Button className="bg-blue-600 hover:bg-blue-700">
-              Get Started
+              Share Your Story
             </Button>
           </div>
 
@@ -79,7 +79,7 @@ const Navbar = () => {
                 </Link>
               ))}
               <Button className="mt-2 bg-blue-600 hover:bg-blue-700">
-                Get Started
+                Share Your Story
               </Button>
             </div>
           </div>
