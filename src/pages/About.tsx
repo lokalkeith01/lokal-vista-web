@@ -1,3 +1,4 @@
+
 import { Award, Heart, Lightbulb, Shield, Video, Users, MapPin, Zap } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
 import Navbar from '@/components/Navbar';
@@ -31,7 +32,7 @@ const About = () => {
     {
       name: "Alex Martinez",
       role: "CEO & Founder",
-      description: "Former small business owner who understands the struggle of getting discovered in a crowded market."
+      description: "Family man who wants to share the world with his kids and help other families discover authentic local experiences together."
     },
     {
       name: "Sam Chen",
