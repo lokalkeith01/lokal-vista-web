@@ -18,7 +18,7 @@ const Navbar = () => {
   ];
 
   return (
-    <nav className="bg-white/95 backdrop-blur-sm border-b border-gray-200 sticky top-0 z-50">
+    <nav className="bg-background/95 backdrop-blur-sm border-b border-border sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           <Link to="/" className="flex items-center space-x-2">
@@ -37,14 +37,14 @@ const Navbar = () => {
                 to={link.path}
                 className={`text-sm font-medium transition-colors duration-200 ${
                   isActive(link.path)
-                    ? 'text-blue-600 border-b-2 border-blue-600 pb-1'
-                    : 'text-gray-700 hover:text-blue-600'
+                    ? 'text-primary border-b-2 border-primary pb-1'
+                    : 'text-foreground hover:text-primary'
                 }`}
               >
                 {link.label}
               </Link>
             ))}
-            <Button className="bg-blue-600 hover:bg-blue-700">
+            <Button className="bg-primary hover:bg-primary/90 text-primary-foreground">
               Share Your Story
             </Button>
           </div>
@@ -71,15 +71,15 @@ const Navbar = () => {
                   to={link.path}
                   className={`px-3 py-2 text-base font-medium transition-colors duration-200 ${
                     isActive(link.path)
-                      ? 'text-blue-600 bg-blue-50 rounded-md'
-                      : 'text-gray-700 hover:text-blue-600 hover:bg-gray-50 rounded-md'
+                      ? 'text-primary bg-primary/10 rounded-md'
+                      : 'text-foreground hover:text-primary hover:bg-muted rounded-md'
                   }`}
                   onClick={() => setIsOpen(false)}
                 >
                   {link.label}
                 </Link>
               ))}
-              <Button className="mt-2 bg-blue-600 hover:bg-blue-700">
+              <Button className="mt-2 bg-primary hover:bg-primary/90 text-primary-foreground">
                 Share Your Story
               </Button>
             </div>
