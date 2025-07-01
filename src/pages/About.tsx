@@ -1,6 +1,8 @@
 
+
 import { Award, Heart, Lightbulb, Shield, Video, Users, MapPin, Zap } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
+import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 
@@ -30,9 +32,10 @@ const About = () => {
 
   const team = [
     {
-      name: "Alex Martinez",
+      name: "Keith Ondra",
       role: "CEO & Founder",
-      description: "Family man who wants to share the world with his kids and help other families discover authentic local experiences together."
+      description: "Family man who wants to share the world with his kids and help other families discover authentic local experiences together.",
+      photo: "/lovable-uploads/de06dd76-6f75-41ad-99ee-12e3c8cc0ddf.png"
     },
     {
       name: "Sam Chen",
@@ -159,7 +162,14 @@ const About = () => {
             {team.map((member, index) => (
               <Card key={index} className="text-center p-8 hover:shadow-lg transition-shadow duration-300">
                 <CardContent className="pt-6">
-                  <div className="w-24 h-24 bg-gray-200 rounded-full mx-auto mb-4"></div>
+                  {member.photo ? (
+                    <Avatar className="w-24 h-24 mx-auto mb-4">
+                      <AvatarImage src={member.photo} alt={member.name} />
+                      <AvatarFallback>{member.name.split(' ').map(n => n[0]).join('')}</AvatarFallback>
+                    </Avatar>
+                  ) : (
+                    <div className="w-24 h-24 bg-gray-200 rounded-full mx-auto mb-4"></div>
+                  )}
                   <h3 className="text-xl font-semibold text-gray-900 mb-2">
                     {member.name}
                   </h3>
@@ -182,3 +192,4 @@ const About = () => {
 };
 
 export default About;
+
