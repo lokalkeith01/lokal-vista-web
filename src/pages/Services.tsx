@@ -51,9 +51,9 @@ const Services = () => {
 
   const packages = [
     {
-      name: "Chamber Starter",
-      price: "$199",
-      duration: "per month",
+      name: "a little",
+      price: "a little",
+      duration: "month",
       description: "Perfect for smaller chambers looking to enhance member services",
       features: [
         "Up to 25 member businesses",
@@ -64,9 +64,9 @@ const Services = () => {
       ]
     },
     {
-      name: "Chamber Pro",
-      price: "$399",
-      duration: "per month",
+      name: "a bit more",
+      price: "a bit more",
+      duration: "month",
       description: "Ideal for growing chambers with active member engagement",
       features: [
         "Up to 100 member businesses",
@@ -79,9 +79,9 @@ const Services = () => {
       popular: true
     },
     {
-      name: "Chamber Enterprise",
-      price: "$699",
-      duration: "per month",
+      name: "top dollar",
+      price: "top dollar",
+      duration: "month",
       description: "Comprehensive solution for large chambers and business networks",
       features: [
         "Unlimited member businesses",
