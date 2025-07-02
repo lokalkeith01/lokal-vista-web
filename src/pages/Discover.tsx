@@ -152,8 +152,58 @@ const Discover = () => {
         </div>
       </section>
 
+      {/* How it Works */}
+      <section className="py-12 bg-card">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-8">
+            <h2 className="text-2xl font-bold text-foreground mb-2">
+              Your pocket guide to authentic experiences
+            </h2>
+            <p className="text-muted-foreground">
+              Whether you're at home or traveling, discover places that locals actually love
+            </p>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="text-center">
+              <div className="w-16 h-16 bg-primary rounded-full flex items-center justify-center mx-auto mb-4">
+                <Heart className="w-8 h-8 text-primary-foreground" />
+              </div>
+              <h3 className="text-lg font-semibold text-foreground mb-2">
+                Get Inspired at Home
+              </h3>
+              <p className="text-muted-foreground text-sm">
+                Browse videos from your neighborhood and discover hidden gems you never knew existed
+              </p>
+            </div>
+            <div className="text-center">
+              <div className="w-16 h-16 bg-primary rounded-full flex items-center justify-center mx-auto mb-4">
+                <MapPin className="w-8 h-8 text-primary-foreground" />
+              </div>
+              <h3 className="text-lg font-semibold text-foreground mb-2">
+                Travel Like a Local
+              </h3>
+              <p className="text-muted-foreground text-sm">
+                Find authentic spots in any city through real stories from people who live there
+              </p>
+            </div>
+            <div className="text-center">
+              <div className="w-16 h-16 bg-primary rounded-full flex items-center justify-center mx-auto mb-4">
+                <Bookmark className="w-8 h-8 text-primary-foreground" />
+              </div>
+              <h3 className="text-lg font-semibold text-foreground mb-2">
+                Save & Share Easily
+              </h3>
+              <p className="text-muted-foreground text-sm">
+                Bookmark places for later and share your own discoveries with friends and community
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Map Section */}
-      <section className="py-8 bg-card">
+      <section className="py-8 bg-background">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="mb-6">
             <h2 className="text-2xl font-bold text-foreground mb-2">
@@ -164,34 +214,57 @@ const Discover = () => {
             </p>
           </div>
           
-          {!mapboxToken ? (
-            <div className="bg-background border border-border rounded-lg p-8 text-center">
-              <MapPin className="w-12 h-12 text-muted-foreground mx-auto mb-4" />
-              <h3 className="text-lg font-semibold text-foreground mb-2">Add your Mapbox token to see the map</h3>
-              <p className="text-muted-foreground mb-4">
-                Get your free token at <a href="https://mapbox.com" target="_blank" className="text-primary underline">mapbox.com</a>
-              </p>
-              <div className="max-w-md mx-auto">
-                <input
-                  type="text"
-                  placeholder="Enter your Mapbox public token"
-                  value={mapboxToken}
-                  onChange={(e) => setMapboxToken(e.target.value)}
-                  className="w-full p-3 border border-border rounded-lg mb-4 bg-background text-foreground"
-                />
-                <Button 
-                  onClick={() => setMapboxToken(mapboxToken)}
-                  className="w-full bg-primary hover:bg-primary/90"
-                >
-                  Show Map
-                </Button>
+          <div className="relative h-96 rounded-lg overflow-hidden border border-border bg-card">
+            <img 
+              src="https://images.unsplash.com/photo-1466442929976-97f336a657be?w=800&h=600&fit=crop" 
+              alt="Map showing local businesses" 
+              className="w-full h-full object-cover opacity-20"
+            />
+            <div className="absolute inset-0 bg-gradient-to-br from-muted/50 to-muted/30"></div>
+            
+            {/* Map Points */}
+            <div className="absolute top-1/4 left-1/3 transform -translate-x-1/2 -translate-y-1/2">
+              <div className="relative group cursor-pointer">
+                <div className="w-8 h-8 bg-primary rounded-full flex items-center justify-center shadow-lg">
+                  <MapPin className="w-4 h-4 text-primary-foreground" />
+                </div>
+                <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                  <div className="bg-background border border-border rounded-lg p-3 shadow-lg whitespace-nowrap">
+                    <p className="font-semibold text-foreground text-sm">Mama Rosa's Café</p>
+                    <p className="text-xs text-muted-foreground">Sarah's cozy morning spot</p>
+                  </div>
+                </div>
               </div>
             </div>
-          ) : (
-            <div className="relative h-96 rounded-lg overflow-hidden border border-border">
-              <div ref={mapContainer} className="absolute inset-0" />
+            
+            <div className="absolute top-1/2 right-1/4 transform -translate-x-1/2 -translate-y-1/2">
+              <div className="relative group cursor-pointer">
+                <div className="w-8 h-8 bg-primary rounded-full flex items-center justify-center shadow-lg">
+                  <MapPin className="w-4 h-4 text-primary-foreground" />
+                </div>
+                <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                  <div className="bg-background border border-border rounded-lg p-3 shadow-lg whitespace-nowrap">
+                    <p className="font-semibold text-foreground text-sm">Corner Taco Stand</p>
+                    <p className="text-xs text-muted-foreground">Mike's quick bite favorite</p>
+                  </div>
+                </div>
+              </div>
             </div>
-          )}
+            
+            <div className="absolute bottom-1/4 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+              <div className="relative group cursor-pointer">
+                <div className="w-8 h-8 bg-primary rounded-full flex items-center justify-center shadow-lg">
+                  <MapPin className="w-4 h-4 text-primary-foreground" />
+                </div>
+                <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                  <div className="bg-background border border-border rounded-lg p-3 shadow-lg whitespace-nowrap">
+                    <p className="font-semibold text-foreground text-sm">Murphy's Irish Pub</p>
+                    <p className="text-xs text-muted-foreground">Emma's night out pick</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -258,56 +331,6 @@ const Discover = () => {
                 </CardContent>
               </Card>
             ))}
-          </div>
-        </div>
-      </section>
-
-      {/* How it Works */}
-      <section className="py-12 bg-card">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-8">
-            <h2 className="text-2xl font-bold text-foreground mb-2">
-              Your pocket guide to authentic experiences
-            </h2>
-            <p className="text-muted-foreground">
-              Whether you're at home or traveling, discover places that locals actually love
-            </p>
-          </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="text-center">
-              <div className="w-16 h-16 bg-primary rounded-full flex items-center justify-center mx-auto mb-4">
-                <Heart className="w-8 h-8 text-primary-foreground" />
-              </div>
-              <h3 className="text-lg font-semibold text-foreground mb-2">
-                Get Inspired at Home
-              </h3>
-              <p className="text-muted-foreground text-sm">
-                Browse videos from your neighborhood and discover hidden gems you never knew existed
-              </p>
-            </div>
-            <div className="text-center">
-              <div className="w-16 h-16 bg-primary rounded-full flex items-center justify-center mx-auto mb-4">
-                <MapPin className="w-8 h-8 text-primary-foreground" />
-              </div>
-              <h3 className="text-lg font-semibold text-foreground mb-2">
-                Travel Like a Local
-              </h3>
-              <p className="text-muted-foreground text-sm">
-                Find authentic spots in any city through real stories from people who live there
-              </p>
-            </div>
-            <div className="text-center">
-              <div className="w-16 h-16 bg-primary rounded-full flex items-center justify-center mx-auto mb-4">
-                <Bookmark className="w-8 h-8 text-primary-foreground" />
-              </div>
-              <h3 className="text-lg font-semibold text-foreground mb-2">
-                Save & Share Easily
-              </h3>
-              <p className="text-muted-foreground text-sm">
-                Bookmark places for later and share your own discoveries with friends and community
-              </p>
-            </div>
           </div>
         </div>
       </section>
