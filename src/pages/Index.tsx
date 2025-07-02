@@ -47,7 +47,7 @@ const Index = () => {
               Your favorite coffee shop needs more customers. That taco truck makes the best al pastor in town.
             </p>
             <p className="text-base text-muted-foreground mb-8 max-w-2xl mx-auto">
-              Share quick videos of the local spots you love - help your community discover them too. All Lokal. No Chains.
+              Share quick videos of the local spots you love - help your community discover them too. <p All Lokal. No Chains.
             </p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
               <Button size="lg" className="bg-primary hover:bg-primary/90 text-lg px-6">
