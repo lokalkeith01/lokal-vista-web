@@ -202,72 +202,6 @@ const Discover = () => {
         </div>
       </section>
 
-      {/* Map Section */}
-      <section className="py-8 bg-background">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="mb-6">
-            <h2 className="text-2xl font-bold text-foreground mb-2">
-              What's happening near you
-            </h2>
-            <p className="text-muted-foreground">
-              Explore local spots and see what your neighbors are sharing
-            </p>
-          </div>
-          
-          <div className="relative h-96 rounded-lg overflow-hidden border border-border bg-card">
-            <img 
-              src="https://images.unsplash.com/photo-1466442929976-97f336a657be?w=800&h=600&fit=crop" 
-              alt="Map showing local businesses" 
-              className="w-full h-full object-cover opacity-20"
-            />
-            <div className="absolute inset-0 bg-gradient-to-br from-muted/50 to-muted/30"></div>
-            
-            {/* Map Points */}
-            <div className="absolute top-1/4 left-1/3 transform -translate-x-1/2 -translate-y-1/2">
-              <div className="relative group cursor-pointer">
-                <div className="w-8 h-8 bg-primary rounded-full flex items-center justify-center shadow-lg">
-                  <MapPin className="w-4 h-4 text-primary-foreground" />
-                </div>
-                <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                  <div className="bg-background border border-border rounded-lg p-3 shadow-lg whitespace-nowrap">
-                    <p className="font-semibold text-foreground text-sm">Mama Rosa's Café</p>
-                    <p className="text-xs text-muted-foreground">Sarah's cozy morning spot</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-            
-            <div className="absolute top-1/2 right-1/4 transform -translate-x-1/2 -translate-y-1/2">
-              <div className="relative group cursor-pointer">
-                <div className="w-8 h-8 bg-primary rounded-full flex items-center justify-center shadow-lg">
-                  <MapPin className="w-4 h-4 text-primary-foreground" />
-                </div>
-                <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                  <div className="bg-background border border-border rounded-lg p-3 shadow-lg whitespace-nowrap">
-                    <p className="font-semibold text-foreground text-sm">Corner Taco Stand</p>
-                    <p className="text-xs text-muted-foreground">Mike's quick bite favorite</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-            
-            <div className="absolute bottom-1/4 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-              <div className="relative group cursor-pointer">
-                <div className="w-8 h-8 bg-primary rounded-full flex items-center justify-center shadow-lg">
-                  <MapPin className="w-4 h-4 text-primary-foreground" />
-                </div>
-                <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                  <div className="bg-background border border-border rounded-lg p-3 shadow-lg whitespace-nowrap">
-                    <p className="font-semibold text-foreground text-sm">Murphy's Irish Pub</p>
-                    <p className="text-xs text-muted-foreground">Emma's night out pick</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* Featured Content */}
       <section className="py-12 bg-background">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -331,6 +265,71 @@ const Discover = () => {
                 </CardContent>
               </Card>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Map Section */}
+      <section className="py-8 bg-card">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="mb-6">
+            <h2 className="text-2xl font-bold text-foreground mb-2">
+              What's happening near you
+            </h2>
+            <p className="text-muted-foreground">
+              Explore local spots and see what your neighbors are sharing
+            </p>
+          </div>
+          
+          <div className="relative h-96 rounded-lg overflow-hidden border border-border bg-card">
+            <img 
+              src="/lovable-uploads/6ba0bf60-e843-436e-9085-6c04c3219a57.png" 
+              alt="Map showing local businesses" 
+              className="w-full h-full object-cover"
+            />
+            
+            {/* Map Points */}
+            <div className="absolute top-1/4 left-1/3 transform -translate-x-1/2 -translate-y-1/2">
+              <div className="relative group cursor-pointer">
+                <div className="w-8 h-8 bg-primary rounded-full flex items-center justify-center shadow-lg">
+                  <MapPin className="w-4 h-4 text-primary-foreground" />
+                </div>
+                <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                  <div className="bg-background border border-border rounded-lg p-3 shadow-lg whitespace-nowrap">
+                    <p className="font-semibold text-foreground text-sm">Mama Rosa's Café</p>
+                    <p className="text-xs text-muted-foreground">Sarah's cozy morning spot</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div className="absolute top-1/2 right-1/4 transform -translate-x-1/2 -translate-y-1/2">
+              <div className="relative group cursor-pointer">
+                <div className="w-8 h-8 bg-primary rounded-full flex items-center justify-center shadow-lg">
+                  <MapPin className="w-4 h-4 text-primary-foreground" />
+                </div>
+                <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                  <div className="bg-background border border-border rounded-lg p-3 shadow-lg whitespace-nowrap">
+                    <p className="font-semibold text-foreground text-sm">Corner Taco Stand</p>
+                    <p className="text-xs text-muted-foreground">Mike's quick bite favorite</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div className="absolute bottom-1/4 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+              <div className="relative group cursor-pointer">
+                <div className="w-8 h-8 bg-primary rounded-full flex items-center justify-center shadow-lg">
+                  <MapPin className="w-4 h-4 text-primary-foreground" />
+                </div>
+                <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                  <div className="bg-background border border-border rounded-lg p-3 shadow-lg whitespace-nowrap">
+                    <p className="font-semibold text-foreground text-sm">Murphy's Irish Pub</p>
+                    <p className="text-xs text-muted-foreground">Emma's night out pick</p>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
