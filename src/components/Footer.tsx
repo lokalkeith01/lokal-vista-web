@@ -22,7 +22,7 @@ const Footer = () => {
             <div className="flex space-x-4">
               <div className="flex items-center space-x-2 text-gray-300">
                 <Mail size={16} />
-                <span>hello@belokal.com</span>
+                <span>keith@sharelokal.com</span>
               </div>
               <div className="flex items-center space-x-2 text-gray-300">
                 <Video size={16} />

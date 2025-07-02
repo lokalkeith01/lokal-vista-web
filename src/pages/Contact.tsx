@@ -39,7 +39,7 @@ const Contact = () => {
     {
       icon: <Mail className="w-6 h-6 text-blue-600" />,
       title: "Email",
-      info: "hello@lokal.com",
+      info: "keith@sharelokal.com",
       description: "Send us an email anytime"
     },
     {
