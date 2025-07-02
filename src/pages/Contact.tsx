@@ -47,18 +47,6 @@ const Contact = () => {
       title: "Phone",
       info: "(555) 123-4567",
       description: "Call us during business hours"
-    },
-    {
-      icon: <MapPin className="w-6 h-6 text-blue-600" />,
-      title: "Office",
-      info: "123 Business District, Suite 100",
-      description: "Visit our downtown office"
-    },
-    {
-      icon: <Clock className="w-6 h-6 text-blue-600" />,
-      title: "Hours",
-      info: "Mon-Fri: 9AM-6PM",
-      description: "We're here to help"
     }
   ];
 
