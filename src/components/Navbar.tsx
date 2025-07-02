@@ -12,6 +12,7 @@ const Navbar = () => {
 
   const navLinks = [
     { path: '/', label: 'Home' },
+    { path: '/discover', label: 'Discover' },
     { path: '/about', label: 'Our Story' },
     { path: '/services', label: 'For Businesses' },
     { path: '/contact', label: 'Join Lokal' },
