@@ -9,27 +9,27 @@ import Footer from '@/components/Footer';
 const Index = () => {
   const features = [
     {
-      icon: <Video className="w-8 h-8 text-blue-600" />,
-      title: "Short Video Stories",
-      description: "Authentic crowd-sourced videos that capture the real essence of local spots"
+      icon: <Video className="w-8 h-8 text-primary" />,
+      title: "Real Stories",
+      description: "Quick videos from your neighbors about the spots they actually love"
     },
     {
-      icon: <Target className="w-8 h-8 text-blue-600" />,
-      title: "Vibe & Venue Tags",
-      description: "Discover places by mood, atmosphere, and exactly what you're looking for"
+      icon: <Target className="w-8 h-8 text-primary" />,
+      title: "Find Your Vibe",
+      description: "Looking for cozy coffee or late-night tacos? We've got you covered"
     },
     {
-      icon: <Heart className="w-8 h-8 text-blue-600" />,
-      title: "Share What You Love",
-      description: "Only positive vibes - share the places that truly inspire you"
+      icon: <Heart className="w-8 h-8 text-primary" />,
+      title: "Share the Love",
+      description: "Know a great spot? Help your community discover it too"
     }
   ];
 
   const benefits = [
-    "Give small businesses a powerful voice",
-    "Discover authentic local experiences",
-    "Connect locals and travelers naturally",
-    "Build genuine word-of-mouth buzz"
+    "Help your favorite local spots get noticed",
+    "Find hidden gems in your neighborhood", 
+    "Connect with people who share your taste",
+    "Support small businesses that need it most"
   ];
 
   return (
@@ -37,27 +37,26 @@ const Index = () => {
       <Navbar />
       
       {/* Hero Section */}
-      <section className="relative bg-gradient-to-br from-blue-50 to-indigo-100 py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="relative bg-background py-20">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
-            <h1 className="text-5xl md:text-6xl font-bold text-gray-900 mb-6">
-              Be a <span className="text-blue-600">Lokal</span>
+            <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-6">
+              Hey neighbor! <span className="text-primary">Be Lokal</span>
             </h1>
-            <p className="text-xl text-gray-600 mb-4 max-w-3xl mx-auto">
-              Giving a voice to the underdog, the small business owner.
+            <p className="text-lg text-foreground mb-4 max-w-2xl mx-auto">
+              Your favorite coffee shop needs more customers. That taco truck makes the best al pastor in town.
             </p>
-            <p className="text-lg text-gray-600 mb-8 max-w-3xl mx-auto">
-              Using short crowd-sourced videos tagged by vibe and venue, Lokal is the word of mouth app 
-              that inspires locals and travelers to authentically experience any city.
+            <p className="text-base text-muted-foreground mb-8 max-w-2xl mx-auto">
+              Share quick videos of the local spots you love - help your community discover them too.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button size="lg" className="bg-blue-600 hover:bg-blue-700 text-lg px-8">
+            <div className="flex flex-col sm:flex-row gap-3 justify-center">
+              <Button size="lg" className="bg-primary hover:bg-primary/90 text-lg px-6">
                 <Link to="/contact" className="flex items-center">
-                  Join the Movement <ArrowRight className="ml-2 w-5 h-5" />
+                  Let's do this! <ArrowRight className="ml-2 w-4 h-4" />
                 </Link>
               </Button>
-              <Button size="lg" variant="outline" className="text-lg px-8">
-                <Link to="/about">Our Story</Link>
+              <Button size="lg" variant="outline" className="text-lg px-6">
+                <Link to="/about">Learn more</Link>
               </Button>
             </div>
           </div>
@@ -65,28 +64,28 @@ const Index = () => {
       </section>
 
       {/* Features Section */}
-      <section className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-              How Lokal Works
+      <section className="py-16 bg-card">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-3">
+              Here's how it works
             </h2>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              Authentic experiences shared by real people, for real people
+            <p className="text-lg text-muted-foreground max-w-xl mx-auto">
+              Simple. Real. No fancy stuff.
             </p>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {features.map((feature, index) => (
-              <Card key={index} className="text-center p-8 hover:shadow-lg transition-shadow duration-300">
-                <CardContent className="pt-6">
-                  <div className="flex justify-center mb-4">
+              <Card key={index} className="text-center p-6 bg-background border border-border">
+                <CardContent className="pt-4">
+                  <div className="flex justify-center mb-3">
                     {feature.icon}
                   </div>
-                  <h3 className="text-xl font-semibold text-gray-900 mb-3">
+                  <h3 className="text-lg font-semibold text-foreground mb-2">
                     {feature.title}
                   </h3>
-                  <p className="text-gray-600">
+                  <p className="text-muted-foreground text-sm">
                     {feature.description}
                   </p>
                 </CardContent>
@@ -97,35 +96,33 @@ const Index = () => {
       </section>
 
       {/* Mission Section */}
-      <section className="py-20 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+      <section className="py-16 bg-background">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
             <div>
-              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
-                Empowering Small Businesses
+              <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-4">
+                Why this matters
               </h2>
-              <p className="text-lg text-gray-600 mb-8">
-                Every small business has a story worth telling. Lokal gives them the platform 
-                to share their passion, connect with their community, and grow through authentic 
-                word-of-mouth recommendations.
+              <p className="text-base text-muted-foreground mb-6">
+                That little bakery down the street? The family restaurant that's been around for 20 years? 
+                They're what makes our neighborhoods special. Let's help them thrive.
               </p>
-              <ul className="space-y-4">
+              <ul className="space-y-3">
                 {benefits.map((benefit, index) => (
                   <li key={index} className="flex items-center">
-                    <CheckCircle className="w-6 h-6 text-green-500 mr-3" />
-                    <span className="text-gray-700">{benefit}</span>
+                    <CheckCircle className="w-5 h-5 text-primary mr-3" />
+                    <span className="text-foreground text-sm">{benefit}</span>
                   </li>
                 ))}
               </ul>
             </div>
-            <div className="bg-white p-8 rounded-lg shadow-lg">
-              <h3 className="text-2xl font-bold text-gray-900 mb-4">Ready to Share Your City?</h3>
-              <p className="text-gray-600 mb-6">
-                Join our community of locals and travelers who believe in supporting small businesses 
-                and sharing authentic experiences.
+            <div className="bg-card p-6 rounded-lg border border-border">
+              <h3 className="text-xl font-bold text-foreground mb-3">Want to help out?</h3>
+              <p className="text-muted-foreground mb-4 text-sm">
+                Join folks who care about keeping their neighborhoods vibrant and full of character.
               </p>
-              <Button className="w-full bg-blue-600 hover:bg-blue-700">
-                <Link to="/contact">Get Early Access</Link>
+              <Button className="w-full bg-primary hover:bg-primary/90">
+                <Link to="/contact">Count me in</Link>
               </Button>
             </div>
           </div>
@@ -133,31 +130,31 @@ const Index = () => {
       </section>
 
       {/* Values Section */}
-      <section className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-8">
-            Our Philosophy
+      <section className="py-16 bg-card">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-6">
+            What we're about
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="p-6">
-              <Users className="w-12 h-12 text-blue-600 mx-auto mb-4" />
-              <h3 className="text-xl font-semibold text-gray-900 mb-3">Community First</h3>
-              <p className="text-gray-600">
-                We believe in the power of community connections and authentic recommendations
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="p-4">
+              <Users className="w-10 h-10 text-primary mx-auto mb-3" />
+              <h3 className="text-lg font-semibold text-foreground mb-2">Neighbors helping neighbors</h3>
+              <p className="text-muted-foreground text-sm">
+                Real recommendations from people who actually live here
               </p>
             </div>
-            <div className="p-6">
-              <Heart className="w-12 h-12 text-red-500 mx-auto mb-4" />
-              <h3 className="text-xl font-semibold text-gray-900 mb-3">Share What You Love</h3>
-              <p className="text-gray-600">
-                Only positive vibes - we encourage sharing places that truly inspire you
+            <div className="p-4">
+              <Heart className="w-10 h-10 text-primary mx-auto mb-3" />
+              <h3 className="text-lg font-semibold text-foreground mb-2">Good vibes only</h3>
+              <p className="text-muted-foreground text-sm">
+                Share the places that make you smile - keep it positive
               </p>
             </div>
-            <div className="p-6">
-              <MapPin className="w-12 h-12 text-green-500 mx-auto mb-4" />
-              <h3 className="text-xl font-semibold text-gray-900 mb-3">Authentic Experiences</h3>
-              <p className="text-gray-600">
-                Real stories from real people about the places that matter most
+            <div className="p-4">
+              <MapPin className="w-10 h-10 text-primary mx-auto mb-3" />
+              <h3 className="text-lg font-semibold text-foreground mb-2">Keep it real</h3>
+              <p className="text-muted-foreground text-sm">
+                No fake reviews, no paid promotions - just honest stories
               </p>
             </div>
           </div>
