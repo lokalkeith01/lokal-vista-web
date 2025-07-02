@@ -51,7 +51,7 @@ const Services = () => {
 
   const packages = [
     {
-      name: "a little",
+      name: "Small Town",
       price: "a little",
       duration: "month",
       description: "Perfect for smaller chambers looking to enhance member services",
@@ -64,7 +64,7 @@ const Services = () => {
       ]
     },
     {
-      name: "a bit more",
+      name: "Mid Town",
       price: "a bit more",
       duration: "month",
       description: "Ideal for growing chambers with active member engagement",
@@ -79,7 +79,7 @@ const Services = () => {
       popular: true
     },
     {
-      name: "top dollar",
+      name: "Regional",
       price: "top dollar",
       duration: "month",
       description: "Comprehensive solution for large chambers and business networks",
