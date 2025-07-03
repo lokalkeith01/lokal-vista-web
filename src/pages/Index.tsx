@@ -14,12 +14,12 @@ const Index = () => {
     {
       icon: <Video className="w-8 h-8 text-primary" />,
       title: "Real Stories",
-      description: "Quick videos from your neighbors about the spots they actually love"
+      description: "Quick videos from local neighbors about the spots they actually love"
     },
     {
       icon: <Target className="w-8 h-8 text-primary" />,
       title: "Find Your Vibe",
-      description: "Looking for cozy coffee or late-night tacos? We've got you covered"
+      description: "Looking for cozy coffee or free kid-friendly enterainment? We've got you covered"
     },
     {
       icon: <Heart className="w-8 h-8 text-primary" />,
