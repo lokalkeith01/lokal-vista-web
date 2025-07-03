@@ -83,7 +83,7 @@ const Services = () => {
     },
     {
       name: "Regional",
-      price: "top dollar",
+      price: "reasonable value",
       duration: "month",
       description: "Comprehensive solution for large chambers and business networks",
       features: [
