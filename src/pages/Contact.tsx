@@ -45,7 +45,7 @@ const Contact = () => {
     {
       icon: <Phone className="w-6 h-6 text-blue-600" />,
       title: "Phone",
-      info: "(555) 123-4567",
+      info: "(313) 613-7045",
       description: "Call us during business hours"
     }
   ];
