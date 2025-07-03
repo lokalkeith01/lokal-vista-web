@@ -162,30 +162,43 @@ const Index = () => {
 
       {/* Mission Section */}
       <section className="py-16 bg-background">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
-            <div>
-              <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-4">
-                Why this matters
-              </h2>
-              <p className="text-base text-muted-foreground mb-6">
-                That little bakery down the street? The family restaurant that's been around for 20 years? 
-                They're what makes our neighborhoods special. Let's help them thrive.
-              </p>
-              <ul className="space-y-3">
-                {benefits.map((benefit, index) => (
-                  <li key={index} className="flex items-center">
-                    <CheckCircle className="w-5 h-5 text-primary mr-3" />
-                    <span className="text-foreground text-sm">{benefit}</span>
-                  </li>
-                ))}
-              </ul>
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-4">
+            Why this matters
+          </h2>
+          <p className="text-base text-muted-foreground mb-8 max-w-2xl mx-auto">
+            That little bakery down the street? The family restaurant that's been around for 20 years? 
+            They're what makes our neighborhoods special. Let's help them thrive.
+          </p>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+            <div className="space-y-3">
+              <div className="flex items-center">
+                <CheckCircle className="w-5 h-5 text-primary mr-3" />
+                <span className="text-foreground text-sm">{benefits[0]}</span>
+              </div>
+              <div className="flex items-center">
+                <CheckCircle className="w-5 h-5 text-primary mr-3" />
+                <span className="text-foreground text-sm">{benefits[1]}</span>
+              </div>
             </div>
-            <div className="bg-card p-6 rounded-lg border border-border">
-              <h3 className="text-xl font-bold text-foreground mb-3">Want to help out?</h3>
-              <p className="text-muted-foreground mb-4 text-sm">
-                Join folks who care about keeping their neighborhoods vibrant and full of character.
-              </p>
+            <div className="space-y-3">
+              <div className="flex items-center">
+                <CheckCircle className="w-5 h-5 text-primary mr-3" />
+                <span className="text-foreground text-sm">{benefits[2]}</span>
+              </div>
+              <div className="flex items-center">
+                <CheckCircle className="w-5 h-5 text-primary mr-3" />
+                <span className="text-foreground text-sm">{benefits[3]}</span>
+              </div>
+            </div>
+          </div>
+          
+          <div className="bg-card p-6 rounded-lg border border-border max-w-md mx-auto">
+            <h3 className="text-xl font-bold text-foreground mb-3">Want to help out?</h3>
+            <p className="text-muted-foreground mb-4 text-sm">
+              Join folks who care about keeping their neighborhoods vibrant and full of character.
+            </p>
               <Button 
                 className="w-full bg-primary hover:bg-primary/90"
                 onClick={async () => {
@@ -211,7 +224,6 @@ const Index = () => {
               >
                 Count me in
               </Button>
-            </div>
           </div>
         </div>
       </section>
