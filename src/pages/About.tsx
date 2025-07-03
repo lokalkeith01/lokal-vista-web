@@ -32,20 +32,20 @@ const About = () => {
 
   const team = [
     {
-      name: "Keith Ondra",
+      name: "Keith",
       role: "CEO & Founder",
       description: "Family man who wants to share the world with his kids and help other families discover authentic local experiences together.",
       photo: "/lovable-uploads/de06dd76-6f75-41ad-99ee-12e3c8cc0ddf.png"
     },
     {
-      name: "Sam Chen",
-      role: "Head of Product",
-      description: "Video technology expert passionate about creating authentic connection through visual storytelling."
+      name: "Sawyer",
+      role: "Head of Design",
+      description: "College trained eyes with a vision for how the newest generations absorb content."
     },
     {
-      name: "Jordan Taylor",
-      role: "Community Director",
-      description: "Family man who wants to share the world with his kids and help other families discover authentic local experiences together."
+      name: "Kristen",
+      role: "Community Liason",
+      description: "FA voice of the people who takes her family on "mystry trips" to explore their world."
     }
   ];
 
@@ -60,8 +60,8 @@ const About = () => {
             The Story Behind <span className="text-blue-600">Lokal</span>
           </h1>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Born from the belief that small businesses are the heartbeat of every community, 
-            and that authentic word-of-mouth is the most powerful form of marketing.
+            Born from the belief that to truly experience a place is to connect with the people who make it, 
+            and that authentic word-of-mouth is the most powerful tool.
           </p>
         </div>
       </section>
