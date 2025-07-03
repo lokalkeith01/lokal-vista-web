@@ -54,8 +54,12 @@ const About = () => {
       <Navbar />
       
       {/* Hero Section */}
-      <section className="bg-card py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <section className="relative bg-card py-20 overflow-hidden">
+        <div 
+          className="absolute inset-0 bg-cover bg-center opacity-10"
+          style={{ backgroundImage: 'url(/lovable-uploads/b0cac4c4-f77a-445e-a334-18d9a9d30e29.png)' }}
+        ></div>
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-6">
             The Story Behind <span className="text-primary">Lokal</span>
           </h1>
