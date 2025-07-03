@@ -6,6 +6,7 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { useToast } from '@/hooks/use-toast';
+import { supabase } from '@/integrations/supabase/client';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 
@@ -18,14 +19,35 @@ const Contact = () => {
   });
   const { toast } = useToast();
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Form submitted:', formData);
-    toast({
-      title: "Message Sent!",
-      description: "Thank you for contacting us. We'll get back to you within 24 hours.",
-    });
-    setFormData({ name: '', email: '', company: '', message: '' });
+    
+    try {
+      const { data, error } = await supabase.functions.invoke('send-email', {
+        body: {
+          type: 'contact',
+          name: formData.name,
+          email: formData.email,
+          company: formData.company,
+          message: formData.message
+        }
+      });
+
+      if (error) throw error;
+
+      toast({
+        title: "Message Sent!",
+        description: "Thank you for contacting us. We'll get back to you within 24 hours.",
+      });
+      setFormData({ name: '', email: '', company: '', message: '' });
+    } catch (error) {
+      console.error('Error sending email:', error);
+      toast({
+        title: "Error",
+        description: "Failed to send message. Please try again.",
+        variant: "destructive",
+      });
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -188,7 +210,29 @@ const Contact = () => {
                   Schedule a free 30-minute consultation to discuss your business needs 
                   and learn how we can help you achieve your goals.
                 </p>
-                <Button className="bg-blue-600 hover:bg-blue-700">
+                <Button 
+                  className="bg-blue-600 hover:bg-blue-700"
+                  onClick={async () => {
+                    try {
+                      await supabase.functions.invoke('send-email', {
+                        body: {
+                          type: 'consultation',
+                          source: 'contact page'
+                        }
+                      });
+                      toast({
+                        title: "Request Sent!",
+                        description: "We'll contact you soon to schedule your consultation.",
+                      });
+                    } catch (error) {
+                      toast({
+                        title: "Error",
+                        description: "Failed to send request. Please try again.",
+                        variant: "destructive",
+                      });
+                    }
+                  }}
+                >
                   Schedule Consultation
                 </Button>
               </div>

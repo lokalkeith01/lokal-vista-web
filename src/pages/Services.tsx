@@ -3,10 +3,13 @@ import { Building2, Users, Video, TrendingUp, Heart, Handshake } from 'lucide-re
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
+import { useToast } from '@/hooks/use-toast';
+import { supabase } from '@/integrations/supabase/client';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 
 const Services = () => {
+  const { toast } = useToast();
   const chamberServices = [
     {
       icon: <Building2 className="w-12 h-12 text-blue-600" />,
@@ -112,7 +115,30 @@ const Services = () => {
             <Button className="bg-blue-600 hover:bg-blue-700 text-lg px-8 py-3">
               <Link to="/contact">Partner with Lokal</Link>
             </Button>
-            <Button variant="outline" className="text-lg px-8 py-3">
+            <Button 
+              variant="outline" 
+              className="text-lg px-8 py-3"
+              onClick={async () => {
+                try {
+                  await supabase.functions.invoke('send-email', {
+                    body: {
+                      type: 'demo',
+                      source: 'services page - hero'
+                    }
+                  });
+                  toast({
+                    title: "Demo Request Sent!",
+                    description: "We'll contact you soon to schedule your demo.",
+                  });
+                } catch (error) {
+                  toast({
+                    title: "Error",
+                    description: "Failed to send request. Please try again.",
+                    variant: "destructive",
+                  });
+                }
+              }}
+            >
               Schedule Demo
             </Button>
           </div>
@@ -246,8 +272,30 @@ const Services = () => {
                       </li>
                     ))}
                   </ul>
-                  <Button className={`w-full ${pkg.popular ? 'bg-blue-600 hover:bg-blue-700' : 'bg-gray-900 hover:bg-gray-800'}`}>
-                    <Link to="/contact">Get Started</Link>
+                  <Button 
+                    className={`w-full ${pkg.popular ? 'bg-blue-600 hover:bg-blue-700' : 'bg-gray-900 hover:bg-gray-800'}`}
+                    onClick={async () => {
+                      try {
+                        await supabase.functions.invoke('send-email', {
+                          body: {
+                            type: 'partnership',
+                            source: `services page - ${pkg.name} package`
+                          }
+                        });
+                        toast({
+                          title: "Interest Sent!",
+                          description: "We'll contact you soon about the " + pkg.name + " package.",
+                        });
+                      } catch (error) {
+                        toast({
+                          title: "Error",
+                          description: "Failed to send request. Please try again.",
+                          variant: "destructive",
+                        });
+                      }
+                    }}
+                  >
+                    Get Started
                   </Button>
                 </CardContent>
               </Card>
@@ -267,10 +315,55 @@ const Services = () => {
             and strengthen their local business communities.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button className="bg-white text-blue-600 hover:bg-gray-100 text-lg px-8 py-3">
-              <Link to="/contact">Schedule a Demo</Link>
+            <Button 
+              className="bg-white text-blue-600 hover:bg-gray-100 text-lg px-8 py-3"
+              onClick={async () => {
+                try {
+                  await supabase.functions.invoke('send-email', {
+                    body: {
+                      type: 'demo',
+                      source: 'services page - CTA'
+                    }
+                  });
+                  toast({
+                    title: "Demo Request Sent!",
+                    description: "We'll contact you soon to schedule your demo.",
+                  });
+                } catch (error) {
+                  toast({
+                    title: "Error",
+                    description: "Failed to send request. Please try again.",
+                    variant: "destructive",
+                  });
+                }
+              }}
+            >
+              Schedule a Demo
             </Button>
-            <Button variant="outline" className="border-white text-white hover:bg-white hover:text-blue-600 text-lg px-8 py-3">
+            <Button 
+              variant="outline" 
+              className="border-white text-white hover:bg-white hover:text-blue-600 text-lg px-8 py-3"
+              onClick={async () => {
+                try {
+                  await supabase.functions.invoke('send-email', {
+                    body: {
+                      type: 'interest',
+                      source: 'services page - learn more'
+                    }
+                  });
+                  toast({
+                    title: "Interest Sent!",
+                    description: "We'll send you more information soon.",
+                  });
+                } catch (error) {
+                  toast({
+                    title: "Error",
+                    description: "Failed to send request. Please try again.",
+                    variant: "destructive",
+                  });
+                }
+              }}
+            >
               Learn More
             </Button>
           </div>

@@ -3,10 +3,13 @@ import { ArrowRight, CheckCircle, Users, Target, Zap, Video, Heart, MapPin } fro
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Link } from 'react-router-dom';
+import { useToast } from '@/hooks/use-toast';
+import { supabase } from '@/integrations/supabase/client';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 
 const Index = () => {
+  const { toast } = useToast();
   const features = [
     {
       icon: <Video className="w-8 h-8 text-primary" />,
@@ -51,10 +54,31 @@ const Index = () => {
             
             </p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
-              <Button size="lg" className="bg-primary hover:bg-primary/90 text-lg px-6">
-                <Link to="/contact" className="flex items-center">
-                  Let's do this! <ArrowRight className="ml-2 w-4 h-4" />
-                </Link>
+              <Button 
+                size="lg" 
+                className="bg-primary hover:bg-primary/90 text-lg px-6"
+                onClick={async () => {
+                  try {
+                    await supabase.functions.invoke('send-email', {
+                      body: {
+                        type: 'interest',
+                        source: 'homepage - lets do this'
+                      }
+                    });
+                    toast({
+                      title: "Interest Sent!",
+                      description: "We'll be in touch soon about Lokal!",
+                    });
+                  } catch (error) {
+                    toast({
+                      title: "Error",
+                      description: "Failed to send request. Please try again.",
+                      variant: "destructive",
+                    });
+                  }
+                }}
+              >
+                Let's do this! <ArrowRight className="ml-2 w-4 h-4" />
               </Button>
               <Button size="lg" variant="outline" className="text-lg px-6">
                 <Link to="/about">Learn more</Link>
@@ -122,8 +146,30 @@ const Index = () => {
               <p className="text-muted-foreground mb-4 text-sm">
                 Join folks who care about keeping their neighborhoods vibrant and full of character.
               </p>
-              <Button className="w-full bg-primary hover:bg-primary/90">
-                <Link to="/contact">Count me in</Link>
+              <Button 
+                className="w-full bg-primary hover:bg-primary/90"
+                onClick={async () => {
+                  try {
+                    await supabase.functions.invoke('send-email', {
+                      body: {
+                        type: 'interest',
+                        source: 'homepage - count me in'
+                      }
+                    });
+                    toast({
+                      title: "Interest Sent!",
+                      description: "We'll be in touch soon about Lokal!",
+                    });
+                  } catch (error) {
+                    toast({
+                      title: "Error",
+                      description: "Failed to send request. Please try again.",
+                      variant: "destructive",
+                    });
+                  }
+                }}
+              >
+                Count me in
               </Button>
             </div>
           </div>
