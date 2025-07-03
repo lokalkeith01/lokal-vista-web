@@ -45,7 +45,7 @@ const About = () => {
     {
       name: "Kristen",
       role: "Community Liason",
-      description: "FA voice of the people who takes her family on <q> mystery trips </q> to explore their world."
+      description: "A voice of the people who takes her family on mystery trips to explore their world."
     }
   ];
 
