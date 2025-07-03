@@ -128,6 +128,38 @@ const Index = () => {
         </div>
       </section>
 
+      {/* Values Section */}
+      <section className="py-16 bg-card">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-6">
+            What we're about
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="p-4">
+              <Users className="w-10 h-10 text-primary mx-auto mb-3" />
+              <h3 className="text-lg font-semibold text-foreground mb-2">Neighbors helping neighbors</h3>
+              <p className="text-muted-foreground text-sm">
+                Real recommendations from people who actually live here
+              </p>
+            </div>
+            <div className="p-4">
+              <Heart className="w-10 h-10 text-primary mx-auto mb-3" />
+              <h3 className="text-lg font-semibold text-foreground mb-2">Good vibes only</h3>
+              <p className="text-muted-foreground text-sm">
+                Share the places that make you smile - keep it positive
+              </p>
+            </div>
+            <div className="p-4">
+              <MapPin className="w-10 h-10 text-primary mx-auto mb-3" />
+              <h3 className="text-lg font-semibold text-foreground mb-2">Keep it real</h3>
+              <p className="text-muted-foreground text-sm">
+                No fake reviews, no paid promotions - just honest stories
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Mission Section */}
       <section className="py-16 bg-background">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -179,38 +211,6 @@ const Index = () => {
               >
                 Count me in
               </Button>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Values Section */}
-      <section className="py-16 bg-card">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-6">
-            What we're about
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="p-4">
-              <Users className="w-10 h-10 text-primary mx-auto mb-3" />
-              <h3 className="text-lg font-semibold text-foreground mb-2">Neighbors helping neighbors</h3>
-              <p className="text-muted-foreground text-sm">
-                Real recommendations from people who actually live here
-              </p>
-            </div>
-            <div className="p-4">
-              <Heart className="w-10 h-10 text-primary mx-auto mb-3" />
-              <h3 className="text-lg font-semibold text-foreground mb-2">Good vibes only</h3>
-              <p className="text-muted-foreground text-sm">
-                Share the places that make you smile - keep it positive
-              </p>
-            </div>
-            <div className="p-4">
-              <MapPin className="w-10 h-10 text-primary mx-auto mb-3" />
-              <h3 className="text-lg font-semibold text-foreground mb-2">Keep it real</h3>
-              <p className="text-muted-foreground text-sm">
-                No fake reviews, no paid promotions - just honest stories
-              </p>
             </div>
           </div>
         </div>
