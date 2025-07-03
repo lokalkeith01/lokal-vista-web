@@ -16,6 +16,7 @@ const Navbar = () => {
     { path: '/about', label: 'Our Story' },
     { path: '/services', label: 'For Businesses' },
     { path: '/contact', label: 'Join Lokal' },
+    { path: '/auth', label: 'Login' },
   ];
 
   return (
