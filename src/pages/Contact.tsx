@@ -59,13 +59,13 @@ const Contact = () => {
 
   const contactInfo = [
     {
-      icon: <Mail className="w-6 h-6 text-blue-600" />,
+      icon: <Mail className="w-6 h-6 text-primary" />,
       title: "Email",
       info: "keith@sharelokal.com",
       description: "Send us an email anytime"
     },
     {
-      icon: <Phone className="w-6 h-6 text-blue-600" />,
+      icon: <Phone className="w-6 h-6 text-primary" />,
       title: "Phone",
       info: "(313) 613-7045",
       description: "Call us during business hours"
@@ -73,16 +73,16 @@ const Contact = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-background">
       <Navbar />
       
       {/* Hero Section */}
-      <section className="bg-gradient-to-br from-blue-50 to-indigo-100 py-20">
+      <section className="bg-card py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-            Get In <span className="text-blue-600">Touch</span>
+          <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-6">
+            Get In <span className="text-primary">Touch</span>
           </h1>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
             Ready to transform your business? We'd love to hear from you. 
             Let's discuss how we can help you achieve your goals.
           </p>
@@ -90,13 +90,13 @@ const Contact = () => {
       </section>
 
       {/* Contact Form & Info */}
-      <section className="py-20">
+      <section className="py-20 bg-background">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
             {/* Contact Form */}
-            <Card className="shadow-lg">
+            <Card className="shadow-lg bg-card border border-border">
               <CardHeader>
-                <CardTitle className="text-2xl text-gray-900">
+                <CardTitle className="text-2xl text-foreground">
                   Send Us a Message
                 </CardTitle>
               </CardHeader>
@@ -104,7 +104,7 @@ const Contact = () => {
                 <form onSubmit={handleSubmit} className="space-y-6">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
-                      <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
+                      <label htmlFor="name" className="block text-sm font-medium text-foreground mb-2">
                         Full Name
                       </label>
                       <Input
@@ -118,7 +118,7 @@ const Contact = () => {
                       />
                     </div>
                     <div>
-                      <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
+                      <label htmlFor="email" className="block text-sm font-medium text-foreground mb-2">
                         Email Address
                       </label>
                       <Input
@@ -134,7 +134,7 @@ const Contact = () => {
                   </div>
                   
                   <div>
-                    <label htmlFor="company" className="block text-sm font-medium text-gray-700 mb-2">
+                    <label htmlFor="company" className="block text-sm font-medium text-foreground mb-2">
                       Company Name
                     </label>
                     <Input
@@ -148,7 +148,7 @@ const Contact = () => {
                   </div>
                   
                   <div>
-                    <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-2">
+                    <label htmlFor="message" className="block text-sm font-medium text-foreground mb-2">
                       Message
                     </label>
                     <Textarea
@@ -162,7 +162,7 @@ const Contact = () => {
                     />
                   </div>
                   
-                  <Button type="submit" className="w-full bg-blue-600 hover:bg-blue-700">
+                  <Button type="submit" className="w-full bg-primary hover:bg-primary/90">
                     Send Message
                   </Button>
                 </form>
@@ -171,29 +171,29 @@ const Contact = () => {
 
             {/* Contact Information */}
             <div>
-              <h2 className="text-3xl font-bold text-gray-900 mb-8">
+              <h2 className="text-3xl font-bold text-foreground mb-8">
                 Let's Start a Conversation
               </h2>
-              <p className="text-lg text-gray-600 mb-8">
+              <p className="text-lg text-muted-foreground mb-8">
                 We're here to help your business succeed. Reach out to us through any of these channels, 
                 and we'll get back to you as soon as possible.
               </p>
               
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {contactInfo.map((item, index) => (
-                  <Card key={index} className="p-6 hover:shadow-md transition-shadow duration-300">
+                  <Card key={index} className="p-6 hover:shadow-md transition-shadow duration-300 bg-card border border-border">
                     <div className="flex items-start space-x-4">
                       <div className="flex-shrink-0">
                         {item.icon}
                       </div>
                       <div>
-                        <h3 className="text-lg font-semibold text-gray-900 mb-1">
+                        <h3 className="text-lg font-semibold text-foreground mb-1">
                           {item.title}
                         </h3>
-                        <p className="text-gray-800 font-medium mb-1">
+                        <p className="text-foreground font-medium mb-1">
                           {item.info}
                         </p>
-                        <p className="text-sm text-gray-600">
+                        <p className="text-sm text-muted-foreground">
                           {item.description}
                         </p>
                       </div>
@@ -202,16 +202,16 @@ const Contact = () => {
                 ))}
               </div>
 
-              <div className="mt-8 p-6 bg-blue-50 rounded-lg">
-                <h3 className="text-xl font-semibold text-gray-900 mb-3">
+              <div className="mt-8 p-6 bg-card rounded-lg border border-border">
+                <h3 className="text-xl font-semibold text-foreground mb-3">
                   Free Consultation
                 </h3>
-                <p className="text-gray-600 mb-4">
+                <p className="text-muted-foreground mb-4">
                   Schedule a free 30-minute consultation to discuss your business needs 
                   and learn how we can help you achieve your goals.
                 </p>
                 <Button 
-                  className="bg-blue-600 hover:bg-blue-700"
+                  className="bg-primary hover:bg-primary/90"
                   onClick={async () => {
                     try {
                       await supabase.functions.invoke('send-email', {
