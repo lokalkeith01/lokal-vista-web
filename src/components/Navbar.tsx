@@ -22,13 +22,26 @@ const Navbar = () => {
     <nav className="bg-white backdrop-blur-sm border-b border-border sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
-          <Link to="/" className="flex items-center space-x-2">
-            <img 
-              src="/lovable-uploads/fc662747-783c-4432-8ace-cbd6fef43497.png" 
-              alt="Lokal" 
-              className="h-8 w-auto"
-            />
-          </Link>
+          <div className="flex items-center space-x-3">
+            <Link to="/" className="flex items-center space-x-2">
+              <img 
+                src="/lovable-uploads/fc662747-783c-4432-8ace-cbd6fef43497.png" 
+                alt="Lokal" 
+                className="h-8 w-auto"
+              />
+            </Link>
+            <button 
+              onClick={() => window.open('/', '_blank')}
+              className="p-1 hover:bg-muted rounded transition-colors"
+              title="Scan QR Code"
+            >
+              <img 
+                src="/lovable-uploads/2d593be4-acea-42d0-82cf-1f07e2108495.png" 
+                alt="QR Code" 
+                className="h-8 w-8"
+              />
+            </button>
+          </div>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
