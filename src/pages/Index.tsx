@@ -96,6 +96,38 @@ const Index = () => {
         </div>
       </section>
 
+      {/* Try It Out Section */}
+      <section className="py-16 bg-card">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <div className="bg-background p-6 rounded-lg border border-border max-w-md mx-auto">
+            <h3 className="text-xl font-bold text-foreground mb-3">Try It Out</h3>
+            <p className="text-muted-foreground mb-4 text-sm">
+              Follow the link to see the latest version of the web application and give us your feedback.
+            </p>
+            <div className="flex justify-center mb-4">
+              <a 
+                href="https://lokalv1.lovable.app/" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="hover:opacity-80 transition-opacity"
+              >
+                <img 
+                  src="/lovable-uploads/2d593be4-acea-42d0-82cf-1f07e2108495.png" 
+                  alt="QR Code - Try the app" 
+                  className="w-20 h-20"
+                />
+              </a>
+            </div>
+              <Button 
+                className="w-full bg-primary hover:bg-primary/90"
+                onClick={() => window.open('https://lokalv1.lovable.app/', '_blank')}
+              >
+                Try the App
+              </Button>
+          </div>
+        </div>
+      </section>
+
       {/* Features Section */}
       <section className="py-16 bg-card">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -192,33 +224,6 @@ const Index = () => {
                 <span className="text-foreground text-sm">{benefits[3]}</span>
               </div>
             </div>
-          </div>
-          
-          <div className="bg-card p-6 rounded-lg border border-border max-w-md mx-auto">
-            <h3 className="text-xl font-bold text-foreground mb-3">Try It Out</h3>
-            <p className="text-muted-foreground mb-4 text-sm">
-              Follow the link to see the latest version of the web application and give us your feedback.
-            </p>
-            <div className="flex justify-center mb-4">
-              <a 
-                href="https://lokalv1.lovable.app/" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="hover:opacity-80 transition-opacity"
-              >
-                <img 
-                  src="/lovable-uploads/2d593be4-acea-42d0-82cf-1f07e2108495.png" 
-                  alt="QR Code - Try the app" 
-                  className="w-20 h-20"
-                />
-              </a>
-            </div>
-              <Button 
-                className="w-full bg-primary hover:bg-primary/90"
-                onClick={() => window.open('https://lokalv1.lovable.app/', '_blank')}
-              >
-                Try the App
-              </Button>
           </div>
         </div>
       </section>
