@@ -195,34 +195,29 @@ const Index = () => {
           </div>
           
           <div className="bg-card p-6 rounded-lg border border-border max-w-md mx-auto">
-            <h3 className="text-xl font-bold text-foreground mb-3">Want to help out?</h3>
+            <h3 className="text-xl font-bold text-foreground mb-3">Try It Out</h3>
             <p className="text-muted-foreground mb-4 text-sm">
-              Join folks who care about keeping their neighborhoods vibrant and full of character.
+              Follow the link to see the latest version of the web application and give us your feedback.
             </p>
+            <div className="flex justify-center mb-4">
+              <a 
+                href="https://lokalv1.lovable.app/" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="hover:opacity-80 transition-opacity"
+              >
+                <img 
+                  src="/lovable-uploads/2d593be4-acea-42d0-82cf-1f07e2108495.png" 
+                  alt="QR Code - Try the app" 
+                  className="w-20 h-20"
+                />
+              </a>
+            </div>
               <Button 
                 className="w-full bg-primary hover:bg-primary/90"
-                onClick={async () => {
-                  try {
-                    await supabase.functions.invoke('send-email', {
-                      body: {
-                        type: 'interest',
-                        source: 'homepage - count me in'
-                      }
-                    });
-                    toast({
-                      title: "Interest Sent!",
-                      description: "We'll be in touch soon about Lokal!",
-                    });
-                  } catch (error) {
-                    toast({
-                      title: "Error",
-                      description: "Failed to send request. Please try again.",
-                      variant: "destructive",
-                    });
-                  }
-                }}
+                onClick={() => window.open('https://lokalv1.lovable.app/', '_blank')}
               >
-                Count me in
+                Try the App
               </Button>
           </div>
         </div>
