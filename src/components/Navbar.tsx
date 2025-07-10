@@ -31,7 +31,7 @@ const Navbar = () => {
               />
             </Link>
             <button 
-              onClick={() => window.open('/', '_blank')}
+              onClick={() => window.open('https://lokalv1.lovable.app/', '_blank')}
               className="p-1 hover:bg-muted rounded transition-colors"
               title="Scan QR Code"
             >
