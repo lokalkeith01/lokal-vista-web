@@ -200,7 +200,7 @@ const Index = () => {
           </h2>
           <p className="text-base text-muted-foreground mb-8 max-w-2xl mx-auto">
             That little bakery down the street? The family restaurant that's been around for 20 years? 
-            They're what makes our neighborhoods special. Let's help them thrive.
+            They're what make our neighborhoods special. Let's help them thrive.
           </p>
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
