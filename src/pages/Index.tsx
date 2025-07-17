@@ -3,6 +3,7 @@ import { ArrowRight, CheckCircle, Users, Target, Zap, Video, Heart, MapPin } fro
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { Link } from 'react-router-dom';
 import { useToast } from '@/hooks/use-toast';
 import { supabase } from '@/integrations/supabase/client';
@@ -13,6 +14,7 @@ import Footer from '@/components/Footer';
 const Index = () => {
   const { toast } = useToast();
   const [email, setEmail] = useState('');
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
   const features = [
     {
       icon: <Video className="w-8 h-8 text-primary" />,
@@ -37,6 +39,38 @@ const Index = () => {
     "Connect with people who share your taste",
     "Support small businesses that need it most"
   ];
+
+  const handleEmailSubmit = async () => {
+    if (!email) {
+      toast({
+        title: "Email Required",
+        description: "Please enter your email address.",
+        variant: "destructive",
+      });
+      return;
+    }
+    try {
+      await supabase.functions.invoke('send-email', {
+        body: {
+          type: 'interest',
+          source: 'homepage - lets do this',
+          email: email
+        }
+      });
+      toast({
+        title: "Interest Sent!",
+        description: "We'll be in touch soon about Lokal!",
+      });
+      setEmail('');
+      setIsDialogOpen(false);
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: "Failed to send request. Please try again.",
+        variant: "destructive",
+      });
+    }
+  };
 
   return (
     <div className="min-h-screen bg-white">
@@ -64,50 +98,46 @@ const Index = () => {
               Share quick videos of the local spots you love - help your community discover them too. <br></br> All Lokal. No Chains.
             
             </p>
-            <div className="flex flex-col sm:flex-row gap-3 justify-center max-w-md mx-auto">
-              <Input
-                type="email"
-                placeholder="Enter your email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                className="flex-1"
-              />
-              <Button 
-                size="lg" 
-                className="bg-primary hover:bg-primary/90 text-lg px-6"
-                onClick={async () => {
-                  if (!email) {
-                    toast({
-                      title: "Email Required",
-                      description: "Please enter your email address.",
-                      variant: "destructive",
-                    });
-                    return;
-                  }
-                  try {
-                    await supabase.functions.invoke('send-email', {
-                      body: {
-                        type: 'interest',
-                        source: 'homepage - lets do this',
-                        email: email
-                      }
-                    });
-                    toast({
-                      title: "Interest Sent!",
-                      description: "We'll be in touch soon about Lokal!",
-                    });
-                    setEmail('');
-                  } catch (error) {
-                    toast({
-                      title: "Error",
-                      description: "Failed to send request. Please try again.",
-                      variant: "destructive",
-                    });
-                  }
-                }}
-              >
-                Let's do this! <ArrowRight className="ml-2 w-4 h-4" />
-              </Button>
+            <div className="flex flex-col sm:flex-row gap-3 justify-center">
+              <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
+                <DialogTrigger asChild>
+                  <Button 
+                    size="lg" 
+                    className="bg-primary hover:bg-primary/90 text-lg px-6"
+                  >
+                    Let's do this! <ArrowRight className="ml-2 w-4 h-4" />
+                  </Button>
+                </DialogTrigger>
+                <DialogContent className="sm:max-w-md">
+                  <DialogHeader>
+                    <DialogTitle>Join the Lokal community!</DialogTitle>
+                  </DialogHeader>
+                  <div className="space-y-4">
+                    <p className="text-muted-foreground">
+                      Enter your email to get notified when we launch and be part of building something amazing for local businesses.
+                    </p>
+                    <div className="space-y-3">
+                      <Input
+                        type="email"
+                        placeholder="Enter your email address"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        onKeyDown={(e) => {
+                          if (e.key === 'Enter') {
+                            handleEmailSubmit();
+                          }
+                        }}
+                      />
+                      <Button 
+                        onClick={handleEmailSubmit}
+                        className="w-full bg-primary hover:bg-primary/90"
+                      >
+                        Count me in! <ArrowRight className="ml-2 w-4 h-4" />
+                      </Button>
+                    </div>
+                  </div>
+                </DialogContent>
+              </Dialog>
               <Button size="lg" variant="outline" className="text-lg px-6">
                 <Link to="/about">Learn more</Link>
               </Button>
