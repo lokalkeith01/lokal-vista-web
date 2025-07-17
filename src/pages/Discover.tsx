@@ -104,8 +104,8 @@ const Discover = () => {
       const el = document.createElement('div');
       el.className = 'marker';
       el.style.backgroundImage = 'url(/lovable-uploads/5abd728f-cdbf-4d25-8991-fc4d87776263.png)';
-      el.style.width = '32px';
-      el.style.height = '32px';
+      el.style.width = '48px';
+      el.style.height = '48px';
       el.style.backgroundSize = '100%';
       el.style.backgroundRepeat = 'no-repeat';
       el.style.cursor = 'pointer';
@@ -296,8 +296,8 @@ const Discover = () => {
             {/* Map Points */}
             <div className="absolute top-1/4 left-1/3 transform -translate-x-1/2 -translate-y-1/2">
               <div className="relative group cursor-pointer">
-                <div className="w-8 h-8 flex items-center justify-center">
-                  <img src="/lovable-uploads/5abd728f-cdbf-4d25-8991-fc4d87776263.png" alt="Location pin" className="w-8 h-8" />
+                <div className="w-12 h-12 flex items-center justify-center">
+                  <img src="/lovable-uploads/5abd728f-cdbf-4d25-8991-fc4d87776263.png" alt="Location pin" className="w-12 h-12" />
                 </div>
                 <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 opacity-0 group-hover:opacity-100 transition-opacity">
                   <div className="bg-background border border-border rounded-lg p-3 shadow-lg whitespace-nowrap">
@@ -310,8 +310,8 @@ const Discover = () => {
             
             <div className="absolute top-1/2 right-1/4 transform -translate-x-1/2 -translate-y-1/2">
               <div className="relative group cursor-pointer">
-                <div className="w-8 h-8 flex items-center justify-center">
-                  <img src="/lovable-uploads/5abd728f-cdbf-4d25-8991-fc4d87776263.png" alt="Location pin" className="w-8 h-8" />
+                <div className="w-12 h-12 flex items-center justify-center">
+                  <img src="/lovable-uploads/5abd728f-cdbf-4d25-8991-fc4d87776263.png" alt="Location pin" className="w-12 h-12" />
                 </div>
                 <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 opacity-0 group-hover:opacity-100 transition-opacity">
                   <div className="bg-background border border-border rounded-lg p-3 shadow-lg whitespace-nowrap">
@@ -324,8 +324,8 @@ const Discover = () => {
             
             <div className="absolute bottom-1/4 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
               <div className="relative group cursor-pointer">
-                <div className="w-8 h-8 flex items-center justify-center">
-                  <img src="/lovable-uploads/5abd728f-cdbf-4d25-8991-fc4d87776263.png" alt="Location pin" className="w-8 h-8" />
+                <div className="w-12 h-12 flex items-center justify-center">
+                  <img src="/lovable-uploads/5abd728f-cdbf-4d25-8991-fc4d87776263.png" alt="Location pin" className="w-12 h-12" />
                 </div>
                 <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 opacity-0 group-hover:opacity-100 transition-opacity">
                   <div className="bg-background border border-border rounded-lg p-3 shadow-lg whitespace-nowrap">
