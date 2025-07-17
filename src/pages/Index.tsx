@@ -2,14 +2,17 @@
 import { ArrowRight, CheckCircle, Users, Target, Zap, Video, Heart, MapPin } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
 import { Link } from 'react-router-dom';
 import { useToast } from '@/hooks/use-toast';
 import { supabase } from '@/integrations/supabase/client';
+import { useState } from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 
 const Index = () => {
   const { toast } = useToast();
+  const [email, setEmail] = useState('');
   const features = [
     {
       icon: <Video className="w-8 h-8 text-primary" />,
@@ -61,22 +64,39 @@ const Index = () => {
               Share quick videos of the local spots you love - help your community discover them too. <br></br> All Lokal. No Chains.
             
             </p>
-            <div className="flex flex-col sm:flex-row gap-3 justify-center">
+            <div className="flex flex-col sm:flex-row gap-3 justify-center max-w-md mx-auto">
+              <Input
+                type="email"
+                placeholder="Enter your email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className="flex-1"
+              />
               <Button 
                 size="lg" 
                 className="bg-primary hover:bg-primary/90 text-lg px-6"
                 onClick={async () => {
+                  if (!email) {
+                    toast({
+                      title: "Email Required",
+                      description: "Please enter your email address.",
+                      variant: "destructive",
+                    });
+                    return;
+                  }
                   try {
                     await supabase.functions.invoke('send-email', {
                       body: {
                         type: 'interest',
-                        source: 'homepage - lets do this'
+                        source: 'homepage - lets do this',
+                        email: email
                       }
                     });
                     toast({
                       title: "Interest Sent!",
                       description: "We'll be in touch soon about Lokal!",
                     });
+                    setEmail('');
                   } catch (error) {
                     toast({
                       title: "Error",
@@ -104,26 +124,12 @@ const Index = () => {
             <p className="text-muted-foreground mb-4 text-sm">
               Follow the link to see the latest version of the web application and give us your feedback.
             </p>
-            <div className="flex justify-center mb-4">
-              <a 
-                href="https://lokalv1.lovable.app/" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="hover:opacity-80 transition-opacity"
-              >
-                <img 
-                  src="/lovable-uploads/2d593be4-acea-42d0-82cf-1f07e2108495.png" 
-                  alt="QR Code - Try the app" 
-                  className="w-20 h-20"
-                />
-              </a>
-            </div>
-              <Button 
-                className="w-full bg-primary hover:bg-primary/90"
-                onClick={() => window.open('https://lokalv1.lovable.app/', '_blank')}
-              >
-                Try the App
-              </Button>
+            <Button 
+              className="w-full bg-primary hover:bg-primary/90"
+              onClick={() => window.open('https://lokalv1.lovable.app/', '_blank')}
+            >
+              Try the App
+            </Button>
           </div>
         </div>
       </section>

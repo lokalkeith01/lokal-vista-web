@@ -70,7 +70,9 @@ const handler = async (req: Request): Promise<Response> => {
         subject = "New Interest Signup";
         htmlContent = `
           <h2>New Interest Signup</h2>
-          <p>Someone has shown interest in Lokal from the ${source || 'website'}.</p>
+          <p><strong>Email:</strong> ${email || 'Not provided'}</p>
+          <p><strong>Source:</strong> ${source || 'website'}</p>
+          <p><strong>Timestamp:</strong> ${new Date().toISOString()}</p>
         `;
         break;
       default:
@@ -83,7 +85,7 @@ const handler = async (req: Request): Promise<Response> => {
 
     const emailResponse = await resend.emails.send({
       from: "Lokal Website <onboarding@resend.dev>",
-      to: ["keith@sharelokal.com"],
+      to: ["info@sharelokal.com"],
       subject: subject,
       html: htmlContent,
     });
