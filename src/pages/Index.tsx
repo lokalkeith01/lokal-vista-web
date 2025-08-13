@@ -89,7 +89,7 @@ const Index = () => {
         <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
             <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-6">
-              Hey neighbor! <span className="text-primary">Be Lokal</span>
+              Hey, Neighbor! <span className="text-primary">Be Lokal</span>
             </h1>
             <p className="text-lg text-foreground mb-4 max-w-2xl mx-auto">
               Your favorite coffee shop needs more customers. That taco truck makes the best al pastor in town.
