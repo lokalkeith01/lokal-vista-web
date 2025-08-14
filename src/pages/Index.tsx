@@ -10,6 +10,7 @@ import { supabase } from '@/integrations/supabase/client';
 import { useState } from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import HeroCarousel from '@/components/HeroCarousel';
 
 const Index = () => {
   const { toast } = useToast();
@@ -78,15 +79,8 @@ const Index = () => {
       
       {/* Hero Section - Full height with centered content */}
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-        {/* Background Image */}
-        <div className="absolute inset-0">
-          <img 
-            src="/lovable-uploads/e0fd6983-a921-40fc-9282-3f5c90be0d41.png" 
-            alt="Local business community" 
-            className="w-full h-full object-cover"
-          />
-          <div className="absolute inset-0 bg-black/40"></div>
-        </div>
+        {/* Background Carousel */}
+        <HeroCarousel />
         
         {/* Hero Content */}
         <div className="relative z-10 text-center text-white px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto">
