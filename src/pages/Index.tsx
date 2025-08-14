@@ -85,10 +85,10 @@ const Index = () => {
         {/* Hero Content */}
         <div className="relative z-10 text-center text-white px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto">
           <h1 className="text-6xl md:text-8xl font-light tracking-wide mb-4">
-            LOKAL
+            lokal
           </h1>
           <p className="text-xl md:text-2xl font-light tracking-wider uppercase mb-12">
-            COMMUNITY
+            share what you love
           </p>
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
