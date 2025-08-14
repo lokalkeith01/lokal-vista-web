@@ -85,7 +85,7 @@ const Index = () => {
             alt="Local business community" 
             className="w-full h-full object-cover"
           />
-          <div className="absolute inset-0" style={{ backgroundColor: '#484d6d' }}></div>
+          <div className="absolute inset-0 bg-black/40"></div>
         </div>
         
         {/* Hero Content */}
