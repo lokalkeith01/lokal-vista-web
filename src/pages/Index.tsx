@@ -73,154 +73,159 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen">
       <Navbar />
       
-      {/* Hero Section */}
-      <section className="relative bg-background py-20 overflow-hidden">
+      {/* Hero Section - Full height with centered content */}
+      <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
         {/* Background Image */}
-        <div className="absolute inset-0 opacity-10">
+        <div className="absolute inset-0">
           <img 
             src="/lovable-uploads/e0fd6983-a921-40fc-9282-3f5c90be0d41.png" 
-            alt="Local business owners celebrating" 
+            alt="Local business community" 
             className="w-full h-full object-cover"
           />
+          <div className="absolute inset-0 bg-black/40"></div>
         </div>
-        <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center">
-            <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-6">
-              Hey, Neighbor! <span className="text-primary">Be Lokal</span>
-            </h1>
-            <p className="text-lg text-foreground mb-4 max-w-2xl mx-auto">
-              Your favorite coffee shop needs more customers. That taco truck makes the best al pastor in town.
-            </p>
-            <p className="text-base text-muted-foreground mb-8 max-w-2xl mx-auto">
-              Share quick videos of the local spots you love - help your community discover them too. <br></br> All Lokal. No Chains.
-            
-            </p>
-            <div className="flex flex-col sm:flex-row gap-3 justify-center">
-              <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
-                <DialogTrigger asChild>
-                  <Button 
-                    size="lg" 
-                    className="bg-primary hover:bg-primary/90 text-lg px-6"
-                  >
-                    Let's do this! <ArrowRight className="ml-2 w-4 h-4" />
-                  </Button>
-                </DialogTrigger>
-                <DialogContent className="sm:max-w-md">
-                  <DialogHeader>
-                    <DialogTitle>Join the Lokal community!</DialogTitle>
-                  </DialogHeader>
-                  <div className="space-y-4">
-                    <p className="text-muted-foreground">
-                      Enter your email to get notified when we launch and be part of building something amazing for local businesses.
-                    </p>
-                    <div className="space-y-3">
-                      <Input
-                        type="email"
-                        placeholder="Enter your email address"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                        onKeyDown={(e) => {
-                          if (e.key === 'Enter') {
-                            handleEmailSubmit();
-                          }
-                        }}
-                      />
-                      <Button 
-                        onClick={handleEmailSubmit}
-                        className="w-full bg-primary hover:bg-primary/90"
-                      >
-                        Count me in! <ArrowRight className="ml-2 w-4 h-4" />
-                      </Button>
-                    </div>
+        
+        {/* Hero Content */}
+        <div className="relative z-10 text-center text-white px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto">
+          <h1 className="text-6xl md:text-8xl font-light tracking-wide mb-4">
+            LOKAL
+          </h1>
+          <p className="text-xl md:text-2xl font-light tracking-wider uppercase mb-12">
+            COMMUNITY
+          </p>
+          
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
+              <DialogTrigger asChild>
+                <Button 
+                  size="lg" 
+                  className="bg-white text-black hover:bg-gray-100 text-base px-8 py-3 font-medium tracking-wide uppercase"
+                >
+                  Join Now
+                </Button>
+              </DialogTrigger>
+              <DialogContent className="sm:max-w-md">
+                <DialogHeader>
+                  <DialogTitle>Join the Lokal community!</DialogTitle>
+                </DialogHeader>
+                <div className="space-y-4">
+                  <p className="text-muted-foreground">
+                    Enter your email to get notified when we launch and be part of building something amazing for local businesses.
+                  </p>
+                  <div className="space-y-3">
+                    <Input
+                      type="email"
+                      placeholder="Enter your email address"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      onKeyDown={(e) => {
+                        if (e.key === 'Enter') {
+                          handleEmailSubmit();
+                        }
+                      }}
+                    />
+                    <Button 
+                      onClick={handleEmailSubmit}
+                      className="w-full bg-primary hover:bg-primary/90"
+                    >
+                      Count me in! <ArrowRight className="ml-2 w-4 h-4" />
+                    </Button>
                   </div>
-                </DialogContent>
-              </Dialog>
-              <Button size="lg" variant="outline" className="text-lg px-6">
-                <Link to="/about">Learn more</Link>
-              </Button>
-            </div>
+                </div>
+              </DialogContent>
+            </Dialog>
+            <Button 
+              size="lg" 
+              variant="outline" 
+              className="text-white border-white hover:bg-white hover:text-black text-base px-8 py-3 font-medium tracking-wide uppercase"
+            >
+              <Link to="/about">Learn More</Link>
+            </Button>
           </div>
         </div>
-      </section>
-
-      {/* Try It Out Section */}
-      <section className="py-16 bg-card">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <div className="bg-background p-6 rounded-lg border border-border max-w-md mx-auto">
-            <h3 className="text-xl font-bold text-foreground mb-3">Try It Out</h3>
-            <p className="text-muted-foreground mb-4 text-sm">
-              Follow the link to see the latest version of the web application and give us your feedback.
-            </p>
-            <Button 
-              className="w-full bg-primary hover:bg-primary/90"
-              onClick={() => window.open('https://lokalv1.lovable.app/', '_blank')}
-            >
-              Try the App
-            </Button>
+        
+        {/* Scroll indicator */}
+        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 text-white">
+          <div className="animate-bounce">
+            <ArrowRight className="w-6 h-6 rotate-90" />
           </div>
         </div>
       </section>
 
       {/* Features Section */}
-      <section className="py-16 bg-card">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-3">
-              Here's how it works
+      <section className="py-20 bg-white">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-light text-gray-900 mb-4">
+              How It Works
             </h2>
-            <p className="text-lg text-muted-foreground max-w-xl mx-auto">
+            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
               Simple. Real. No fancy stuff.
             </p>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
             {features.map((feature, index) => (
-              <Card key={index} className="text-center p-6 bg-background border border-border">
-                <CardContent className="pt-4">
-                  <div className="flex justify-center mb-3">
+              <div key={index} className="text-center">
+                <div className="flex justify-center mb-6">
+                  <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center">
                     {feature.icon}
                   </div>
-                  <h3 className="text-lg font-semibold text-foreground mb-2">
-                    {feature.title}
-                  </h3>
-                  <p className="text-muted-foreground text-sm">
-                    {feature.description}
-                  </p>
-                </CardContent>
-              </Card>
+                </div>
+                <h3 className="text-xl font-medium text-gray-900 mb-4">
+                  {feature.title}
+                </h3>
+                <p className="text-gray-600 leading-relaxed">
+                  {feature.description}
+                </p>
+              </div>
             ))}
           </div>
         </div>
       </section>
 
       {/* Values Section */}
-      <section className="py-16 bg-card">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-6">
-            What we're about
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="p-4">
-              <Users className="w-10 h-10 text-primary mx-auto mb-3" />
-              <h3 className="text-lg font-semibold text-foreground mb-2">Neighbors helping neighbors</h3>
-              <p className="text-muted-foreground text-sm">
+      <section className="py-20 bg-gray-50">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-light text-gray-900 mb-4">
+              Our Values
+            </h2>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+            <div className="text-center">
+              <div className="flex justify-center mb-6">
+                <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center">
+                  <Users className="w-8 h-8 text-primary" />
+                </div>
+              </div>
+              <h3 className="text-xl font-medium text-gray-900 mb-4">Neighbors helping neighbors</h3>
+              <p className="text-gray-600 leading-relaxed">
                 Real recommendations from people who actually live here
               </p>
             </div>
-            <div className="p-4">
-              <Heart className="w-10 h-10 text-primary mx-auto mb-3" />
-              <h3 className="text-lg font-semibold text-foreground mb-2">Good vibes only</h3>
-              <p className="text-muted-foreground text-sm">
+            <div className="text-center">
+              <div className="flex justify-center mb-6">
+                <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center">
+                  <Heart className="w-8 h-8 text-primary" />
+                </div>
+              </div>
+              <h3 className="text-xl font-medium text-gray-900 mb-4">Good vibes only</h3>
+              <p className="text-gray-600 leading-relaxed">
                 Share the places that make you smile - keep it positive
               </p>
             </div>
-            <div className="p-4">
-              <MapPin className="w-10 h-10 text-primary mx-auto mb-3" />
-              <h3 className="text-lg font-semibold text-foreground mb-2">Keep it real</h3>
-              <p className="text-muted-foreground text-sm">
+            <div className="text-center">
+              <div className="flex justify-center mb-6">
+                <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center">
+                  <MapPin className="w-8 h-8 text-primary" />
+                </div>
+              </div>
+              <h3 className="text-xl font-medium text-gray-900 mb-4">Keep it real</h3>
+              <p className="text-gray-600 leading-relaxed">
                 No fake reviews, no paid promotions - just honest stories
               </p>
             </div>
@@ -228,39 +233,32 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Mission Section */}
-      <section className="py-16 bg-background">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-4">
-            Why this matters
+      {/* Call to Action Section */}
+      <section className="py-20 bg-white">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <h2 className="text-4xl md:text-5xl font-light text-gray-900 mb-6">
+            Ready to Join?
           </h2>
-          <p className="text-base text-muted-foreground mb-8 max-w-2xl mx-auto">
-            That little bakery down the street? The family restaurant that's been around for 20 years? 
-            They're what make our neighborhoods special. Let's help them thrive.
+          <p className="text-xl text-gray-600 mb-12 max-w-2xl mx-auto">
+            Help your favorite local spots get discovered. Build community. Support what makes your neighborhood special.
           </p>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
-            <div className="space-y-3 flex flex-col items-center">
-              <div className="flex items-center">
-                <CheckCircle className="w-5 h-5 text-primary mr-3" />
-                <span className="text-foreground text-sm">{benefits[0]}</span>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+            {benefits.map((benefit, index) => (
+              <div key={index} className="flex items-center justify-center md:justify-start">
+                <CheckCircle className="w-6 h-6 text-primary mr-4 flex-shrink-0" />
+                <span className="text-gray-700 text-lg">{benefit}</span>
               </div>
-              <div className="flex items-center">
-                <CheckCircle className="w-5 h-5 text-primary mr-3" />
-                <span className="text-foreground text-sm">{benefits[1]}</span>
-              </div>
-            </div>
-            <div className="space-y-3 flex flex-col items-center">
-              <div className="flex items-center">
-                <CheckCircle className="w-5 h-5 text-primary mr-3" />
-                <span className="text-foreground text-sm">{benefits[2]}</span>
-              </div>
-              <div className="flex items-center">
-                <CheckCircle className="w-5 h-5 text-primary mr-3" />
-                <span className="text-foreground text-sm">{benefits[3]}</span>
-              </div>
-            </div>
+            ))}
           </div>
+          
+          <Button 
+            size="lg"
+            className="bg-primary hover:bg-primary/90 text-white text-lg px-12 py-4 font-medium tracking-wide uppercase"
+            onClick={() => window.open('https://lokalv1.lovable.app/', '_blank')}
+          >
+            Try the App
+          </Button>
         </div>
       </section>
 
