@@ -133,8 +133,7 @@ const Index = () => {
             </Dialog>
             <Button 
               size="lg" 
-              variant="outline" 
-              className="text-white border-white hover:bg-white hover:text-black text-base px-8 py-3 font-medium tracking-wide uppercase"
+              className="bg-white text-black hover:bg-gray-100 text-base px-8 py-3 font-medium tracking-wide uppercase"
             >
               <Link to="/about">Learn More</Link>
             </Button>
