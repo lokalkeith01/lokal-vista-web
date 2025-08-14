@@ -36,7 +36,7 @@ const Navbar = () => {
               title="Scan QR Code"
             >
               <img 
-                src="/lovable-uploads/a563dfae-5c26-4349-b2d9-f960a85c1678.png" 
+                src="/lovable-uploads/2ace7d65-8b16-4dd2-ac95-61df677c58e0.png"
                 alt="QR Code" 
                 className="h-8 w-8"
               />
