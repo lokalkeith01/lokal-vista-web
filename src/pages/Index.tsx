@@ -94,29 +94,29 @@ const Index = () => {
         
         {/* Hero Content */}
         <div className="relative z-10 text-center text-white px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto">
-          <div className="flex items-center justify-center mb-4">
-            <h1 className="text-6xl md:text-8xl font-light tracking-wide flex items-center">
+          <div className="flex items-center justify-center mb-6">
+            <h1 className="text-4xl sm:text-6xl md:text-8xl font-light tracking-wide flex items-center">
               <span>l</span>
-              <div className="relative mx-1">
+              <div className="relative mx-0.5 sm:mx-1">
                 <img 
                   src={locationIconUrl}
                   alt="Lokal location pin"
-                  className="w-12 h-12 md:w-16 md:h-16"
+                  className="w-8 h-8 sm:w-12 sm:h-12 md:w-16 md:h-16"
                 />
               </div>
               <span>kal</span>
             </h1>
           </div>
-          <p className="text-xl md:text-2xl font-light tracking-wider uppercase mb-12">
+          <p className="text-lg sm:text-xl md:text-2xl font-light tracking-wider uppercase mb-8 sm:mb-12">
             share what you love
           </p>
           
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-center">
             <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
               <DialogTrigger asChild>
                 <Button 
                   size="lg" 
-                  className="bg-white text-black hover:bg-gray-100 text-base px-8 py-3 font-medium tracking-wide uppercase"
+                  className="bg-white text-black hover:bg-gray-100 text-sm sm:text-base px-6 sm:px-8 py-3 sm:py-4 font-medium tracking-wide uppercase min-h-[48px] w-full sm:w-auto"
                 >
                   Join Now
                 </Button>
@@ -153,7 +153,7 @@ const Index = () => {
             </Dialog>
             <Button 
               size="lg" 
-              className="bg-white text-black hover:bg-gray-100 text-base px-8 py-3 font-medium tracking-wide uppercase"
+              className="bg-white text-black hover:bg-gray-100 text-sm sm:text-base px-6 sm:px-8 py-3 sm:py-4 font-medium tracking-wide uppercase min-h-[48px] w-full sm:w-auto"
             >
               <Link to="/about">Learn More</Link>
             </Button>
@@ -161,26 +161,26 @@ const Index = () => {
         </div>
         
         {/* Scroll indicator */}
-        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 text-white">
+        <div className="absolute bottom-6 sm:bottom-8 left-1/2 transform -translate-x-1/2 text-white">
           <div className="animate-bounce">
-            <ArrowRight className="w-6 h-6 rotate-90" />
+            <ArrowRight className="w-5 h-5 sm:w-6 sm:h-6 rotate-90" />
           </div>
         </div>
       </section>
 
       {/* Features Section */}
-      <section className="pt-6 pb-20 bg-white">
+      <section className="pt-12 sm:pt-16 pb-16 sm:pb-20 bg-white">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-light text-gray-900 mb-4">
+          <div className="text-center mb-12 sm:mb-16">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-light text-gray-900 mb-4">
               How It Works
             </h2>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+            <p className="text-lg sm:text-xl text-gray-600 max-w-2xl mx-auto px-4">
               Simple. Real. No fancy stuff.
             </p>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 sm:gap-12">
             {features.map((feature, index) => (
               <div key={index} className="text-center">
                 <div className="flex justify-center mb-6">
@@ -201,14 +201,14 @@ const Index = () => {
       </section>
 
       {/* Values Section */}
-      <section className="py-20 bg-gray-50">
+      <section className="py-16 sm:py-20 bg-gray-50">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-light text-gray-900 mb-4">
+          <div className="text-center mb-12 sm:mb-16">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-light text-gray-900 mb-4">
               Our Values
             </h2>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 sm:gap-12">
             <div className="text-center">
               <div className="flex justify-center mb-6">
                 <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center">
@@ -247,16 +247,16 @@ const Index = () => {
       </section>
 
       {/* Call to Action Section */}
-      <section className="py-20 bg-white">
+      <section className="py-16 sm:py-20 bg-white">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-4xl md:text-5xl font-light text-gray-900 mb-6">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-light text-gray-900 mb-6">
             Ready to Join?
           </h2>
-          <p className="text-xl text-gray-600 mb-12 max-w-2xl mx-auto">
+          <p className="text-lg sm:text-xl text-gray-600 mb-8 sm:mb-12 max-w-2xl mx-auto px-4">
             Help your favorite local spots get discovered. Build community. Support what makes your neighborhood special.
           </p>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 mb-8 sm:mb-12">
             {benefits.map((benefit, index) => (
               <div key={index} className="flex items-center justify-center md:justify-start">
                 <CheckCircle className="w-6 h-6 text-primary mr-4 flex-shrink-0" />
@@ -267,7 +267,7 @@ const Index = () => {
           
           <Button 
             size="lg"
-            className="bg-primary hover:bg-primary/90 text-white text-lg px-12 py-4 font-medium tracking-wide uppercase"
+            className="bg-primary hover:bg-primary/90 text-white text-base sm:text-lg px-8 sm:px-12 py-4 font-medium tracking-wide uppercase min-h-[48px] w-full sm:w-auto max-w-xs sm:max-w-none"
             onClick={() => window.open('https://lokalv1.lovable.app/', '_blank')}
           >
             Try the App
