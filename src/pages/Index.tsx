@@ -17,7 +17,7 @@ const Index = () => {
   const { toast } = useToast();
   const [email, setEmail] = useState('');
   const [isDialogOpen, setIsDialogOpen] = useState(false);
-  const [locationIconUrl, setLocationIconUrl] = useState('/lovable-uploads/07447040-2666-4d80-a6ab-c05e325dc616.png');
+  const [locationIconUrl, setLocationIconUrl] = useState('/lovable-uploads/b4f684d4-4f52-4ee4-bbf0-c161100391ca.png');
 
   useEffect(() => {
     const processIcon = async () => {
