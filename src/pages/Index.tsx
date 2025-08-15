@@ -28,17 +28,17 @@ const Index = () => {
   }, []);
   const features = [
     {
-      icon: <Video className="w-8 h-8 text-primary" />,
+      icon: <Video className="w-8 h-8 text-accent" />,
       title: "Real Stories",
       description: "Quick videos from local neighbors about the spots they actually love"
     },
     {
-      icon: <Target className="w-8 h-8 text-primary" />,
+      icon: <Target className="w-8 h-8 text-accent" />,
       title: "Find Your Vibe",
       description: "Looking for cozy coffee or free kid-friendly enterainment? We've got you covered"
     },
     {
-      icon: <Heart className="w-8 h-8 text-primary" />,
+      icon: <Heart className="w-8 h-8 text-accent" />,
       title: "Share the Love",
       description: "Know a great spot? Help your community discover it too"
     }
@@ -169,13 +169,13 @@ const Index = () => {
       </section>
 
       {/* Features Section */}
-      <section className="pt-12 sm:pt-16 pb-16 sm:pb-20 bg-white">
+      <section className="pt-12 sm:pt-16 pb-16 sm:pb-20 bg-primary">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12 sm:mb-16">
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-light text-gray-900 mb-4">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-light text-primary-foreground mb-4">
               How It Works
             </h2>
-            <p className="text-lg sm:text-xl text-gray-600 max-w-2xl mx-auto px-4">
+            <p className="text-lg sm:text-xl text-primary-foreground/80 max-w-2xl mx-auto px-4">
               Simple. Real. No fancy stuff.
             </p>
           </div>
@@ -184,14 +184,14 @@ const Index = () => {
             {features.map((feature, index) => (
               <div key={index} className="text-center">
                 <div className="flex justify-center mb-6">
-                  <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center">
+                  <div className="w-16 h-16 bg-primary-foreground/20 rounded-full flex items-center justify-center">
                     {feature.icon}
                   </div>
                 </div>
-                <h3 className="text-xl font-medium text-gray-900 mb-4">
+                <h3 className="text-xl font-medium text-primary-foreground mb-4">
                   {feature.title}
                 </h3>
-                <p className="text-gray-600 leading-relaxed">
+                <p className="text-primary-foreground/80 leading-relaxed">
                   {feature.description}
                 </p>
               </div>
