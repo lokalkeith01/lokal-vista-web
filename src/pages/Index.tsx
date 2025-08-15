@@ -88,7 +88,11 @@ const Index = () => {
             <h1 className="text-6xl md:text-8xl font-light tracking-wide flex items-center">
               <span>l</span>
               <div className="relative mx-1">
-                <Heart className="w-12 h-12 md:w-16 md:h-16 fill-red-500 text-red-500" />
+                <img 
+                  src="/lovable-uploads/07447040-2666-4d80-a6ab-c05e325dc616.png" 
+                  alt="Lokal location pin"
+                  className="w-12 h-12 md:w-16 md:h-16"
+                />
               </div>
               <span>kal</span>
             </h1>
