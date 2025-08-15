@@ -87,7 +87,9 @@ const Index = () => {
           <div className="flex items-center justify-center mb-4">
             <h1 className="text-6xl md:text-8xl font-light tracking-wide flex items-center">
               <span>l</span>
-              <MapPin className="w-12 h-12 md:w-16 md:h-16 mx-1 fill-current" />
+              <div className="relative mx-1">
+                <Heart className="w-12 h-12 md:w-16 md:h-16 fill-red-500 text-red-500" />
+              </div>
               <span>kal</span>
             </h1>
           </div>
