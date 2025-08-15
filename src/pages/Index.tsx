@@ -84,9 +84,13 @@ const Index = () => {
         
         {/* Hero Content */}
         <div className="relative z-10 text-center text-white px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto">
-          <h1 className="text-6xl md:text-8xl font-light tracking-wide mb-4">
-            lokal
-          </h1>
+          <div className="flex items-center justify-center mb-4">
+            <h1 className="text-6xl md:text-8xl font-light tracking-wide flex items-center">
+              <span>l</span>
+              <MapPin className="w-12 h-12 md:w-16 md:h-16 mx-1 fill-current" />
+              <span>kal</span>
+            </h1>
+          </div>
           <p className="text-xl md:text-2xl font-light tracking-wider uppercase mb-12">
             share what you love
           </p>
