@@ -7,15 +7,25 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from 
 import { Link } from 'react-router-dom';
 import { useToast } from '@/hooks/use-toast';
 import { supabase } from '@/integrations/supabase/client';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import HeroCarousel from '@/components/HeroCarousel';
+import { processLocationIcon } from '@/utils/processLocationIcon';
 
 const Index = () => {
   const { toast } = useToast();
   const [email, setEmail] = useState('');
   const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [locationIconUrl, setLocationIconUrl] = useState('/lovable-uploads/07447040-2666-4d80-a6ab-c05e325dc616.png');
+
+  useEffect(() => {
+    const processIcon = async () => {
+      const processedUrl = await processLocationIcon();
+      setLocationIconUrl(processedUrl);
+    };
+    processIcon();
+  }, []);
   const features = [
     {
       icon: <Video className="w-8 h-8 text-primary" />,
@@ -89,7 +99,7 @@ const Index = () => {
               <span>l</span>
               <div className="relative mx-1">
                 <img 
-                  src="/lovable-uploads/07447040-2666-4d80-a6ab-c05e325dc616.png" 
+                  src={locationIconUrl}
                   alt="Lokal location pin"
                   className="w-12 h-12 md:w-16 md:h-16"
                 />
