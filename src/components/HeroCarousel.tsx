@@ -45,7 +45,7 @@ const HeroCarousel = () => {
                 <img 
                   src={image} 
                   alt={`Local business atmosphere ${index + 1}`}
-                  className="w-full h-full object-cover transition-opacity duration-1000"
+                  className="w-full h-full object-cover object-center transition-opacity duration-1000"
                 />
                 <div className="absolute inset-0 bg-black/40"></div>
               </div>
