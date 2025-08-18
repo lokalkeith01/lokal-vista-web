@@ -73,47 +73,25 @@ const About = () => {
       {/* Mission Section */}
       <section className="py-20 bg-background">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div>
-              <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-6">
-                Our Mission
-              </h2>
-              <p className="text-lg text-muted-foreground mb-6">
-                We started Lokal because we believe small businesses are the underdogs that deserve 
-                the biggest cheers. In a world dominated by big chains and paid advertising, 
-                authentic recommendations from real people are more valuable than ever.
-              </p>
-              <p className="text-lg text-muted-foreground mb-6">
-                Through short, crowd-sourced videos tagged by vibe and venue, we're creating 
-                a platform where genuine experiences shine. Whether you're a local sharing 
-                your favorite hidden gem or a traveler looking for authentic experiences, 
-                Lokal connects you with what matters most.
-              </p>
-              <p className="text-lg text-muted-foreground">
-                Above all, we encourage everyone to share only what they love - because 
-                positivity is contagious, and great businesses deserve to be celebrated.
-              </p>
-            </div>
-            <div className="bg-card rounded-lg p-8 text-center border border-border">
-              <div className="grid grid-cols-2 gap-6">
-                <div>
-                  <div className="text-3xl font-bold text-primary mb-2">1M+</div>
-                  <div className="text-muted-foreground">Videos Shared</div>
-                </div>
-                <div>
-                  <div className="text-3xl font-bold text-primary mb-2">50K+</div>
-                  <div className="text-muted-foreground">Small Businesses</div>
-                </div>
-                <div>
-                  <div className="text-3xl font-bold text-primary mb-2">200+</div>
-                  <div className="text-muted-foreground">Cities Covered</div>
-                </div>
-                <div>
-                  <div className="text-3xl font-bold text-primary mb-2">500K+</div>
-                  <div className="text-muted-foreground">Local Advocates</div>
-                </div>
-              </div>
-            </div>
+          <div>
+            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-6">
+              Our Mission
+            </h2>
+            <p className="text-lg text-muted-foreground mb-6">
+              We started Lokal because we believe small businesses are the underdogs that deserve 
+              the biggest cheers. In a world dominated by big chains and paid advertising, 
+              authentic recommendations from real people are more valuable than ever.
+            </p>
+            <p className="text-lg text-muted-foreground mb-6">
+              Through short, crowd-sourced videos tagged by vibe and venue, we're creating 
+              a platform where genuine experiences shine. Whether you're a local sharing 
+              your favorite hidden gem or a traveler looking for authentic experiences, 
+              Lokal connects you with what matters most.
+            </p>
+            <p className="text-lg text-muted-foreground">
+              Above all, we encourage everyone to share only what they love - because 
+              positivity is contagious, and great businesses deserve to be celebrated.
+            </p>
           </div>
         </div>
       </section>
