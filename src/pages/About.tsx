@@ -9,22 +9,22 @@ import Footer from '@/components/Footer';
 const About = () => {
   const values = [
     {
-      icon: <Heart className="w-8 h-8 text-primary" />,
+      icon: <Heart className="w-8 h-8" color="white" />,
       title: "Authentic Sharing",
       description: "We believe in sharing only what you genuinely love - no fake reviews, just real experiences."
     },
     {
-      icon: <Users className="w-8 h-8 text-primary" />,
+      icon: <Users className="w-8 h-8" color="white" />,
       title: "Small Business Champions",
       description: "Every underdog deserves a voice. We're here to amplify small businesses and local gems."
     },
     {
-      icon: <Video className="w-8 h-8 text-primary" />,
+      icon: <Video className="w-8 h-8" color="white" />,
       title: "Visual Storytelling",
       description: "Short videos capture the real vibe of a place better than any written review ever could."
     },
     {
-      icon: <MapPin className="w-8 h-8 text-primary" />,
+      icon: <MapPin className="w-8 h-8" color="white" />,
       title: "Local Connection",
       description: "Bridging the gap between curious travelers and knowledgeable locals in every city."
     }
