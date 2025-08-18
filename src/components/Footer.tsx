@@ -15,16 +15,16 @@ const Footer = () => {
               </div>
               <span className="text-2xl font-bold">Lokal</span>
             </div>
-            <p className="text-gray-300 mb-4 max-w-md">
+            <p className="text-accent mb-4 max-w-md">
               Giving a voice to small businesses through authentic, crowd-sourced video experiences. 
               Share what you love and discover your city like never before.
             </p>
             <div className="flex space-x-4">
-              <div className="flex items-center space-x-2 text-gray-300">
+              <div className="flex items-center space-x-2 text-accent">
                 <Mail size={16} />
                 <span>keith@sharelokal.com</span>
               </div>
-              <div className="flex items-center space-x-2 text-gray-300">
+              <div className="flex items-center space-x-2 text-accent">
                 <Video size={16} />
                 <span>Share Your Story</span>
               </div>
@@ -36,22 +36,22 @@ const Footer = () => {
             <h3 className="text-lg font-semibold mb-4">Explore</h3>
             <ul className="space-y-2">
               <li>
-                <Link to="/" className="text-gray-300 hover:text-white transition-colors">
+                <Link to="/" className="text-accent hover:text-white transition-colors">
                   Home
                 </Link>
               </li>
               <li>
-                <Link to="/about" className="text-gray-300 hover:text-white transition-colors">
+                <Link to="/about" className="text-accent hover:text-white transition-colors">
                   Our Story
                 </Link>
               </li>
               <li>
-                <Link to="/services" className="text-gray-300 hover:text-white transition-colors">
+                <Link to="/services" className="text-accent hover:text-white transition-colors">
                   For Businesses
                 </Link>
               </li>
               <li>
-                <Link to="/contact" className="text-gray-300 hover:text-white transition-colors">
+                <Link to="/contact" className="text-accent hover:text-white transition-colors">
                   Join Lokal
                 </Link>
               </li>
@@ -61,7 +61,7 @@ const Footer = () => {
           {/* Community */}
           <div>
             <h3 className="text-lg font-semibold mb-4">Community</h3>
-            <ul className="space-y-2 text-gray-300">
+            <ul className="space-y-2 text-accent">
               <li>Video Guidelines</li>
               <li>Local Ambassadors</li>
               <li>Business Partners</li>
@@ -71,12 +71,12 @@ const Footer = () => {
         </div>
 
         <div className="border-t border-gray-700 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center">
-          <p className="text-gray-400 text-sm">
+          <p className="text-accent text-sm">
             © 2024 Lokal. Empowering small businesses, one video at a time.
           </p>
           <div className="flex space-x-6 mt-4 md:mt-0">
-            <a href="#" className="text-gray-400 hover:text-white text-sm">Privacy Policy</a>
-            <a href="#" className="text-gray-400 hover:text-white text-sm">Community Guidelines</a>
+            <a href="#" className="text-accent hover:text-white text-sm">Privacy Policy</a>
+            <a href="#" className="text-accent hover:text-white text-sm">Community Guidelines</a>
           </div>
         </div>
       </div>
