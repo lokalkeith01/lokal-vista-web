@@ -59,7 +59,7 @@ const Services = () => {
       duration: "month",
       description: "Perfect for smaller chambers looking to enhance member services",
       features: [
-        "Up to 25 member businesses",
+        "Up to 100 member businesses",
         "Basic video creation tools",
         "Chamber-branded portal",
         "Monthly analytics report",
@@ -72,7 +72,7 @@ const Services = () => {
       duration: "month",
       description: "Ideal for growing chambers with active member engagement",
       features: [
-        "Up to 100 member businesses",
+        "Up to 300 member businesses",
         "Advanced video features",
         "Custom branding options",
         "Influencer matching service",
