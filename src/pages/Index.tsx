@@ -239,7 +239,7 @@ const Index = () => {
               </div>
               <h3 className="text-xl font-medium text-accent mb-4">Keep it real</h3>
               <p className="text-accent leading-relaxed">
-                No fake reviews, no paid promotions - just honest stories
+                No fake reviews - just honest stories
               </p>
             </div>
           </div>
