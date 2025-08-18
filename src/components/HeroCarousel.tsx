@@ -3,11 +3,13 @@ import { Carousel, CarouselContent, CarouselItem } from '@/components/ui/carouse
 import type { CarouselApi } from '@/components/ui/carousel';
 
 const heroImages = [
-  '/lovable-uploads/02ecc544-ab7e-4d1e-af06-c69a13514b9d.png',
+  '/lovable-uploads/bc81065e-751e-4110-a4d4-f3040d56684c.png',
   '/lovable-uploads/dcd711d6-976c-4fe1-b58e-7d1eec1d04c4.png',
-  '/lovable-uploads/1ae285d1-f0e3-419a-9e88-2df2c15ea465.png',
+  '/lovable-uploads/ccd77544-eead-4378-8a69-7f9e99f19ed4.png',
   '/lovable-uploads/1b6587e2-c257-44b8-a922-506def5cea68.png',
-  '/lovable-uploads/f4a1065b-5198-43ec-a8d5-c5abb0d41d30.png'
+  '/lovable-uploads/f4a1065b-5198-43ec-a8d5-c5abb0d41d30.png',
+  '/lovable-uploads/35c240c1-f531-444d-9fe4-83b28dfd451b.png',
+  '/lovable-uploads/9da8703e-c203-475b-8f09-8c711c68b405.png'
 ];
 
 const HeroCarousel = () => {
