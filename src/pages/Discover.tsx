@@ -147,7 +147,7 @@ const Discover = () => {
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-8">
             <h1 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-              Discover places that <span className="text-primary">feel like home</span>
+              Discover places that feel like home
             </h1>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
               Get inspired at home and explore like a local when you travel. Find authentic spots 
