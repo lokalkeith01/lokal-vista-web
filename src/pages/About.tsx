@@ -61,7 +61,7 @@ const About = () => {
         ></div>
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-6">
-            The Story Behind <span className="text-primary">Lokal</span>
+            The Story Behind <span className="text-muted-background">Lokal</span>
           </h1>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
             Born from the belief that to truly experience a place is to connect with the people who make it, 
