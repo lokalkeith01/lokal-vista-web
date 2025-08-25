@@ -176,7 +176,7 @@ const Index = () => {
               How It Works
             </h2>
             <p className="text-lg sm:text-xl text-primary-foreground/80 max-w-2xl mx-auto px-4">
-              No Chains. Authentic, Local Inspiration.
+              No Chains. Good Vibes. Authentic, Local Inspiration.
             </p>
           </div>
           
