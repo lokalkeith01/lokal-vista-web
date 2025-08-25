@@ -97,7 +97,7 @@ const Index = () => {
           <div className="flex items-center justify-center mb-6">
             <div className="flex items-center justify-center">
               <img 
-                src="/lovable-uploads/1e53be25-4364-4bf7-abb8-235399bbd60d.png"
+                src="/lovable-uploads/839eba6f-dab6-49a3-96c3-65ac0df2f38e.png"
                 alt="Lokal logo"
                 className="w-32 h-32 sm:w-48 sm:h-48 md:w-64 md:h-64"
               />
