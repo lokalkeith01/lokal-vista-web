@@ -151,7 +151,7 @@ const Discover = () => {
               Discover places that feel like home
             </h1>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Get inspired at home and explore like a local when you travel. Find authentic spots 
+              Get inspired at home and when you travel. Experience wherever you are like a local. Find authentic spots 
               through real stories from neighbors who know best.
             </p>
           </div>
