@@ -96,7 +96,13 @@ const Index = () => {
         <div className="relative z-10 text-center text-white px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto">
           <div className="flex items-center justify-center mb-6">
             <h1 className="text-4xl sm:text-6xl md:text-8xl font-light tracking-wide flex items-center">
-              <span>l</span>
+              <div className="relative mx-0.5 sm:mx-1">
+                <img 
+                  src="/lovable-uploads/f37053d8-488f-4961-b4ae-38f46b121569.png"
+                  alt="Lokal location pin"
+                  className="w-8 h-8 sm:w-12 sm:h-12 md:w-16 md:h-16"
+                />
+              </div>
               <div className="relative mx-0.5 sm:mx-1">
                 <img 
                   src={locationIconUrl}
