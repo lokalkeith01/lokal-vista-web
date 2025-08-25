@@ -95,23 +95,13 @@ const Index = () => {
         {/* Hero Content */}
         <div className="relative z-10 text-center text-white px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto">
           <div className="flex items-center justify-center mb-6">
-            <h1 className="text-4xl sm:text-6xl md:text-8xl font-light tracking-wide flex items-center">
-              <div className="relative mx-0.5 sm:mx-1">
-                <img 
-                  src="/lovable-uploads/f37053d8-488f-4961-b4ae-38f46b121569.png"
-                  alt="Lokal location pin"
-                  className="w-8 h-8 sm:w-12 sm:h-12 md:w-16 md:h-16"
-                />
-              </div>
-              <div className="relative mx-0.5 sm:mx-1">
-                <img 
-                  src={locationIconUrl}
-                  alt="Lokal location pin"
-                  className="w-8 h-8 sm:w-12 sm:h-12 md:w-16 md:h-16"
-                />
-              </div>
-              <span>kal</span>
-            </h1>
+            <div className="flex items-center justify-center">
+              <img 
+                src="/lovable-uploads/1e53be25-4364-4bf7-abb8-235399bbd60d.png"
+                alt="Lokal logo"
+                className="w-32 h-32 sm:w-48 sm:h-48 md:w-64 md:h-64"
+              />
+            </div>
           </div>
           <p className="text-lg sm:text-xl md:text-2xl font-light tracking-wider uppercase mb-8 sm:mb-12">
             share what you love
