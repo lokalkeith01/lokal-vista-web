@@ -5,6 +5,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import LocalSpotCarousel from '@/components/LocalSpotCarousel';
 import mapboxgl from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 
@@ -154,6 +155,13 @@ const Discover = () => {
               through real stories from neighbors who know best.
             </p>
           </div>
+        </div>
+      </section>
+
+      {/* Local Spots Carousel */}
+      <section className="py-8 bg-background">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <LocalSpotCarousel />
         </div>
       </section>
 
