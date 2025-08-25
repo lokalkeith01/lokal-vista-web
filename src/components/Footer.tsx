@@ -10,9 +10,11 @@ const Footer = () => {
           {/* Company Info */}
           <div className="col-span-1 md:col-span-2">
             <div className="flex items-center space-x-2 mb-4">
-              <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center">
-                <span className="text-white font-bold text-lg">L</span>
-              </div>
+              <img 
+                src="/lovable-uploads/f37053d8-488f-4961-b4ae-38f46b121569.png"
+                alt="Lokal location pin"
+                className="w-8 h-8"
+              />
               <span className="text-2xl font-bold">Lokal</span>
             </div>
             <p className="text-accent mb-4 max-w-md">
