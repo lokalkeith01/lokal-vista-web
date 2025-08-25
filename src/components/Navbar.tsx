@@ -51,8 +51,8 @@ const Navbar = () => {
                 to={link.path}
                 className={`text-sm font-medium transition-colors duration-200 ${
                   isActive(link.path)
-                    ? 'text-primary border-b-2 border-primary pb-1'
-                    : 'text-foreground hover:text-primary'
+                    ? 'text-blue border-b-2 border-blue pb-1'
+                    : 'text-blue hover:text-blue/80'
                 }`}
               >
                 {link.label}
@@ -85,8 +85,8 @@ const Navbar = () => {
                   to={link.path}
                   className={`px-3 py-2 text-base font-medium transition-colors duration-200 ${
                     isActive(link.path)
-                      ? 'text-primary bg-primary/10 rounded-md'
-                      : 'text-foreground hover:text-primary hover:bg-muted rounded-md'
+                      ? 'text-blue bg-blue/10 rounded-md'
+                      : 'text-blue hover:text-blue/80 hover:bg-muted rounded-md'
                   }`}
                   onClick={() => setIsOpen(false)}
                 >
