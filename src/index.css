@@ -37,7 +37,7 @@ All colors MUST be HSL.
     --input: 35 15% 85%;
     --ring: 40 87% 64%; /* DFAO6E */
     
-    --blue: 214 100% 50%; /* Blue color for navigation */
+    --blue: 214 100% 70%; /* Blue color for navigation with better contrast */
     --blue-foreground: 0 0% 100%; /* #ffffff */
 
     --radius: 0.5rem;
@@ -81,7 +81,7 @@ All colors MUST be HSL.
     --input: 225 18% 25%;
     --ring: 40 87% 64%; /* DFAO6E */
     
-    --blue: 214 100% 50%; /* Blue color for navigation */
+    --blue: 214 100% 70%; /* Blue color for navigation with better contrast */
     --blue-foreground: 0 0% 100%; /* #ffffff */
     
     --sidebar-background: 225 18% 25%;
