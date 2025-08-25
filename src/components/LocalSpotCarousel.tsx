@@ -3,10 +3,10 @@ import { Carousel, CarouselContent, CarouselItem } from '@/components/ui/carouse
 import type { CarouselApi } from '@/components/ui/carousel';
 
 const spotImages = [
-  '/lovable-uploads/12922951-ccde-43c9-b99f-e0ea4d47c803.png',
-  '/lovable-uploads/7137be38-5f71-4b39-813b-d24521cdafb2.png',
-  '/lovable-uploads/2fdb2431-48b6-4e83-827c-22dc4ca42336.png',
-  '/lovable-uploads/adf4a4bd-714e-45de-9028-43dbf504f3e2.png',
+  '/lovable-uploads/76b34224-8a12-4901-9839-77f20c8654fe.png',
+  '/lovable-uploads/d7e2886b-5a3b-411b-bc33-b05a1a3f003f.png',
+  '/lovable-uploads/70503f81-ceee-48c9-b424-93801ce69203.png',
+  '/lovable-uploads/78e6639f-9c3a-41e9-b14a-4e3c34c9764d.png',
   '/lovable-uploads/4ad4aea1-5565-47ac-ac71-59db280ddac4.png'
 ];
 
