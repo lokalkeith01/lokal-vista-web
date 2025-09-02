@@ -35,7 +35,7 @@ const About = () => {
       name: "Keith",
       role: "came up with it",
       description: "Family man who wants to share the world with his kids and help other families discover authentic local experiences together.",
-      photo: "/lovable-uploads/de06dd76-6f75-41ad-99ee-12e3c8cc0ddf.png"
+      photo: "/lovable-uploads/9168de9a-64ac-43d2-801b-ebc51742887b.png"
     },
     {
       name: "Sawyer",
