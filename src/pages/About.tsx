@@ -46,7 +46,7 @@ const About = () => {
     {
       name: "Reagan",
       role: "gave it a voice",
-      description: "A pulse of the next generation and leading the Next. The social face of lokal, she's our mouthpiece. ",
+      description: "The pulse of this generation leading the newest thing. The social face and mouthpiece of lokal.",
       photo: "/lovable-uploads/f522ba14-ee8f-4ddf-96e9-7cfb12c1d6d4.png"
     }
   ];
