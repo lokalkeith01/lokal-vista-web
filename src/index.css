@@ -25,7 +25,7 @@ All colors MUST be HSL.
     --secondary-foreground: 0 0% 100%; /* #ffffff */
 
     --muted: 35 15% 90%;
-    --muted-foreground: 0 0% 100%; /* #ffffff */
+    --muted-foreground: 0 0% 70%; /* Light gray for better visibility */
 
     --accent: 40 87% 64%; /* DFAO6E */
     --accent-foreground: 0 0% 100%; /* #ffffff */
@@ -69,7 +69,7 @@ All colors MUST be HSL.
     --secondary-foreground: 0 0% 100%; /* #ffffff */
 
     --muted: 225 18% 25%;
-    --muted-foreground: 0 0% 100%; /* #ffffff */
+    --muted-foreground: 0 0% 70%; /* Light gray for better visibility */
 
     --accent: 40 87% 64%; /* DFAO6E */
     --accent-foreground: 0 0% 100%; /* #ffffff */
