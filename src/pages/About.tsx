@@ -47,7 +47,7 @@ const About = () => {
       name: "Reagan",
       role: "gave it a voice",
       description: "A voice of the next generation with her pulse on what's next.",
-      photo: "/lovable-uploads/f522ba14-ee8f-4ddf-96e9-7cfb12c1d6d4.png"
+      photo: "/lovable-uploads/7341cd04-15d5-435d-9794-222feb698813.png"
     }
   ];
 
