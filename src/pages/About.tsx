@@ -33,18 +33,18 @@ const About = () => {
   const team = [
     {
       name: "Keith",
-      role: "CEO & Founder",
+      role: "came up with it",
       description: "Family man who wants to share the world with his kids and help other families discover authentic local experiences together.",
       photo: "/lovable-uploads/de06dd76-6f75-41ad-99ee-12e3c8cc0ddf.png"
     },
     {
       name: "Sawyer",
-      role: "Head of Design",
+      role: "designed it",
       description: "College trained eyes with a vision for how the newest generations absorb content."
     },
     {
-      name: "Kristen",
-      role: "Community Liason",
+      name: "Reagan",
+      role: "gave it a voice",
       description: "A voice of the people who takes her family on mystery trips to explore their world."
     }
   ];
