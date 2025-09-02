@@ -78,8 +78,8 @@ const About = () => {
               Our Mission
             </h2>
             <p className="text-lg text-muted-foreground mb-6">
-              We started Lokal because we believe small businesses are the underdogs that deserve 
-              the biggest cheers. In a world dominated by big chains and paid advertising, 
+              We started Lokal because we believe small businesses deserve 
+              the biggest cheers. In a world dominated by big chains and false advertising, 
               authentic recommendations from real people are more valuable than ever.
             </p>
             <p className="text-lg text-muted-foreground mb-6">
