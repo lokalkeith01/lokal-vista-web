@@ -40,12 +40,14 @@ const About = () => {
     {
       name: "Sawyer",
       role: "designed it",
-      description: "College trained eyes with a vision for how the newest generations absorb content."
+      description: "College trained eyes with a vision for how the newest generations absorb content.",
+      photo: "/lovable-uploads/f522ba14-ee8f-4ddf-96e9-7cfb12c1d6d4.png"
     },
     {
       name: "Reagan",
       role: "gave it a voice",
-      description: "A voice of the people who takes her family on mystery trips to explore their world."
+      description: "A voice of the people who takes her family on mystery trips to explore their world.",
+      photo: "/lovable-uploads/1318bcb5-db6c-4aec-a3f7-9bb7b7253678.png"
     }
   ];
 
