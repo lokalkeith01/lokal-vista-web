@@ -108,45 +108,13 @@ const Index = () => {
           </p>
           
           <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-center">
-            <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
-              <DialogTrigger asChild>
-                <Button 
-                  size="lg" 
-                  className="bg-white text-accent hover:bg-gray-100 text-sm sm:text-base px-6 sm:px-8 py-3 sm:py-4 font-medium tracking-wide uppercase min-h-[48px] w-full sm:w-auto"
-                >
-                  Join Now
-                </Button>
-              </DialogTrigger>
-              <DialogContent className="sm:max-w-md">
-                <DialogHeader>
-                  <DialogTitle>Join the Lokal community!</DialogTitle>
-                </DialogHeader>
-                <div className="space-y-4">
-                  <p className="text-muted-foreground">
-                    Enter your email to get notified when we launch and be part of building something amazing for local businesses.
-                  </p>
-                  <div className="space-y-3">
-                    <Input
-                      type="email"
-                      placeholder="Enter your email address"
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
-                      onKeyDown={(e) => {
-                        if (e.key === 'Enter') {
-                          handleEmailSubmit();
-                        }
-                      }}
-                    />
-                    <Button 
-                      onClick={handleEmailSubmit}
-                      className="w-full bg-primary hover:bg-primary/90"
-                    >
-                      Count me in! <ArrowRight className="ml-2 w-4 h-4" />
-                    </Button>
-                  </div>
-                </div>
-              </DialogContent>
-            </Dialog>
+            <Button 
+              size="lg" 
+              className="bg-white text-accent hover:bg-gray-100 text-sm sm:text-base px-6 sm:px-8 py-3 sm:py-4 font-medium tracking-wide uppercase min-h-[48px] w-full sm:w-auto"
+              onClick={() => window.open('https://lokalv1.lovable.app/auth', '_blank')}
+            >
+              Try the App
+            </Button>
             <Button 
               size="lg" 
               className="bg-white text-accent hover:bg-gray-100 text-sm sm:text-base px-6 sm:px-8 py-3 sm:py-4 font-medium tracking-wide uppercase min-h-[48px] w-full sm:w-auto"
