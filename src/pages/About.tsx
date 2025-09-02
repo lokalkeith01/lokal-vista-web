@@ -41,7 +41,7 @@ const About = () => {
       name: "Sawyer",
       role: "designed it",
       description: "College trained eyes with a vision for how the newest generations interact.",
-      photo: "/lovable-uploads/1318bcb5-db6c-4aec-a3f7-9bb7b7253678.png"
+      photo: "/lovable-uploads/828e5cfc-ec10-4c62-b579-d6bc6f7da576.png"
     },
     {
       name: "Reagan",
