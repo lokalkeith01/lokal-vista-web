@@ -46,8 +46,8 @@ const About = () => {
     {
       name: "Reagan",
       role: "gave it a voice",
-      description: "A voice of the next generation with her pulse on what's next.",
-      photo: "/lovable-uploads/7341cd04-15d5-435d-9794-222feb698813.png"
+      description: "A pulse of the next generation and leading the Next. The social face of lokal, she's our mouthpiece. ",
+      photo: "/lovable-uploads/f522ba14-ee8f-4ddf-96e9-7cfb12c1d6d4.png"
     }
   ];
 
@@ -157,7 +157,7 @@ const About = () => {
                   <h3 className="text-xl font-semibold text-foreground mb-2">
                     {member.name}
                   </h3>
-                  <p className="text-muted-foreground font-medium mb-3">
+                  <p className="text-primary font-medium mb-3">
                     {member.role}
                   </p>
                   <p className="text-muted-foreground">
