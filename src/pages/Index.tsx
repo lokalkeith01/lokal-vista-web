@@ -168,7 +168,7 @@ const Index = () => {
       <section className="py-16 sm:py-20 bg-gray-50">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12 sm:mb-16">
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-light text-accent mb-4">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-light text-foreground mb-4">
               Our Values
             </h2>
           </div>
@@ -179,8 +179,8 @@ const Index = () => {
                   <Users className="w-8 h-8 text-primary" />
                 </div>
               </div>
-              <h3 className="text-xl font-medium text-accent mb-4">Neighbors helping neighbors</h3>
-              <p className="text-accent leading-relaxed">
+              <h3 className="text-xl font-medium text-foreground mb-4">Neighbors helping neighbors</h3>
+              <p className="text-foreground leading-relaxed">
                 Real recommendations from people who actually live here
               </p>
             </div>
@@ -190,8 +190,8 @@ const Index = () => {
                   <Heart className="w-8 h-8 text-primary" />
                 </div>
               </div>
-              <h3 className="text-xl font-medium text-accent mb-4">Good vibes only</h3>
-              <p className="text-accent leading-relaxed">
+              <h3 className="text-xl font-medium text-foreground mb-4">Good vibes only</h3>
+              <p className="text-foreground leading-relaxed">
                 Share the places that make you smile - keep it positive
               </p>
             </div>
@@ -201,8 +201,8 @@ const Index = () => {
                   <MapPin className="w-8 h-8 text-primary" />
                 </div>
               </div>
-              <h3 className="text-xl font-medium text-accent mb-4">Keep it real</h3>
-              <p className="text-accent leading-relaxed">
+              <h3 className="text-xl font-medium text-foreground mb-4">Keep it real</h3>
+              <p className="text-foreground leading-relaxed">
                 No fake reviews - just honest stories
               </p>
             </div>
@@ -213,10 +213,10 @@ const Index = () => {
       {/* Call to Action Section */}
       <section className="py-16 sm:py-20 bg-white">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-light text-accent mb-6">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-light text-foreground mb-6">
             Ready to Join?
           </h2>
-          <p className="text-lg sm:text-xl text-accent mb-8 sm:mb-12 max-w-2xl mx-auto px-4">
+          <p className="text-lg sm:text-xl text-foreground mb-8 sm:mb-12 max-w-2xl mx-auto px-4">
             Help your favorite local spots get discovered. Build community. Support what makes your neighborhood special.
           </p>
           
@@ -224,7 +224,7 @@ const Index = () => {
             {benefits.map((benefit, index) => (
               <div key={index} className="flex items-center justify-center md:justify-start">
                 <CheckCircle className="w-6 h-6 text-primary mr-4 flex-shrink-0" />
-                <span className="text-accent text-lg">{benefit}</span>
+                <span className="text-foreground text-lg">{benefit}</span>
               </div>
             ))}
           </div>
