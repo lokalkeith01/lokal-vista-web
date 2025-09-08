@@ -29,23 +29,23 @@ const HeroCarousel = () => {
   }, [api]);
 
   return (
-    <div className="absolute inset-0">
+    <div className="absolute inset-0 min-h-[500px] md:min-h-[600px] lg:min-h-[700px]">
       <Carousel
         setApi={setApi}
         opts={{
           align: "start",
           loop: true,
         }}
-        className="w-full h-full"
+        className="w-full h-full min-h-[500px] md:min-h-[600px] lg:min-h-[700px]"
       >
-        <CarouselContent className="h-full">
+        <CarouselContent className="h-full min-h-[500px] md:min-h-[600px] lg:min-h-[700px]">
           {heroImages.map((image, index) => (
-            <CarouselItem key={index} className="h-full">
-              <div className="relative w-full h-full">
+            <CarouselItem key={index} className="h-full min-h-[500px] md:min-h-[600px] lg:min-h-[700px]">
+              <div className="relative w-full h-full min-h-[500px] md:min-h-[600px] lg:min-h-[700px]">
                 <img 
                   src={image} 
                   alt={`Local business atmosphere ${index + 1}`}
-                  className="w-full h-full object-cover object-center transition-opacity duration-1000"
+                  className="w-full h-full min-h-[500px] md:min-h-[600px] lg:min-h-[700px] object-cover object-center transition-opacity duration-1000"
                 />
                 <div className="absolute inset-0 bg-black/40"></div>
               </div>
