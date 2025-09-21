@@ -28,13 +28,13 @@ const Discover = () => {
     },
     {
       id: 2,
-      name: "Corner Taco Stand",
-      type: "Mexican Food",
+      name: "Bakehouse 46",
+      type: "Bakery & Café",
       lat: 40.7614,
       lng: -73.9776,
       rating: 4.9,
       videos: 8,
-      description: "Authentic al pastor tacos"
+      description: "Artisan breads and fresh pastries daily"
     },
     {
       id: 3,
@@ -64,15 +64,15 @@ const Discover = () => {
     },
     {
       id: 2,
-      businessName: "Corner Taco Stand",
+      businessName: "Bakehouse 46",
       userName: "Mike K.",
       userAvatar: "MK",
-      thumbnail: "/api/placeholder/300/200",
-      vibe: "Quick Bite",
+      thumbnail: "/bakehouse-46-video.gif",
+      vibe: "Fresh Baked",
       views: 189,
       likes: 67,
       saved: false,
-      description: "These tacos will change your life!"
+      description: "Fresh croissants and sourdough every morning!"
     },
     {
       id: 3,
@@ -231,9 +231,17 @@ const Discover = () => {
             {featuredContent.map((content) => (
               <Card key={content.id} className="bg-card border border-border hover:shadow-lg transition-shadow">
                 <div className="relative">
-                  <div className="bg-muted aspect-video rounded-t-lg flex items-center justify-center">
-                    <Play className="w-12 h-12 text-primary" />
-                  </div>
+                  {content.thumbnail.endsWith('.gif') ? (
+                    <img 
+                      src={content.thumbnail} 
+                      alt={`${content.businessName} video`}
+                      className="aspect-video rounded-t-lg w-full object-cover"
+                    />
+                  ) : (
+                    <div className="bg-muted aspect-video rounded-t-lg flex items-center justify-center">
+                      <Play className="w-12 h-12 text-primary" />
+                    </div>
+                  )}
                   <Badge className="absolute top-3 left-3 bg-primary text-primary-foreground">
                     {content.vibe}
                   </Badge>
@@ -323,8 +331,8 @@ const Discover = () => {
                 </div>
                 <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 opacity-0 group-hover:opacity-100 transition-opacity">
                   <div className="bg-background border border-border rounded-lg p-3 shadow-lg whitespace-nowrap">
-                    <p className="font-semibold text-foreground text-sm">Corner Taco Stand</p>
-                    <p className="text-xs text-muted-foreground">Mike's quick bite favorite</p>
+                    <p className="font-semibold text-foreground text-sm">Bakehouse 46</p>
+                    <p className="text-xs text-muted-foreground">Mike's fresh baked favorite</p>
                   </div>
                 </div>
               </div>
