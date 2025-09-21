@@ -18,13 +18,13 @@ const Discover = () => {
   const sampleBusinesses = [
     {
       id: 1,
-      name: "Mama Rosa's Café",
-      type: "Coffee Shop",
+      name: "Inn at Bay Harbor",
+      type: "Adventure Tours",
       lat: 40.7589,
       lng: -73.9851,
       rating: 4.8,
       videos: 12,
-      description: "Best espresso in the neighborhood"
+      description: "Amazing hot air balloon experiences! Can't miss!!"
     },
     {
       id: 2,
@@ -52,15 +52,15 @@ const Discover = () => {
   const featuredContent = [
     {
       id: 1,
-      businessName: "Mama Rosa's Café",
+      businessName: "Inn at Bay Harbor",
       userName: "Sarah M.",
       userAvatar: "SM",
-      thumbnail: "/api/placeholder/300/200",
-      vibe: "Cozy Morning",
+      thumbnail: "/inn-bay-harbor-video.mov",
+      vibe: "Sky Adventure",
       views: 234,
       likes: 45,
       saved: true,
-      description: "Perfect spot for morning coffee and pastries"
+      description: "Amazing hot air balloon experiences! Can't miss!!"
     },
     {
       id: 2,
@@ -231,12 +231,23 @@ const Discover = () => {
             {featuredContent.map((content) => (
               <Card key={content.id} className="bg-card border border-border hover:shadow-lg transition-shadow">
                 <div className="relative">
-                  {content.thumbnail.endsWith('.gif') ? (
-                    <img 
-                      src={content.thumbnail} 
-                      alt={`${content.businessName} video`}
-                      className="aspect-video rounded-t-lg w-full object-cover"
-                    />
+                  {content.thumbnail.endsWith('.gif') || content.thumbnail.endsWith('.mov') ? (
+                    content.thumbnail.endsWith('.mov') ? (
+                      <video 
+                        src={content.thumbnail} 
+                        className="aspect-video rounded-t-lg w-full object-cover"
+                        autoPlay
+                        loop
+                        muted
+                        playsInline
+                      />
+                    ) : (
+                      <img 
+                        src={content.thumbnail} 
+                        alt={`${content.businessName} video`}
+                        className="aspect-video rounded-t-lg w-full object-cover"
+                      />
+                    )
                   ) : (
                     <div className="bg-muted aspect-video rounded-t-lg flex items-center justify-center">
                       <Play className="w-12 h-12 text-primary" />
@@ -317,8 +328,8 @@ const Discover = () => {
                 </div>
                 <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 opacity-0 group-hover:opacity-100 transition-opacity">
                   <div className="bg-background border border-border rounded-lg p-3 shadow-lg whitespace-nowrap">
-                    <p className="font-semibold text-foreground text-sm">Mama Rosa's Café</p>
-                    <p className="text-xs text-muted-foreground">Sarah's cozy morning spot</p>
+                    <p className="font-semibold text-foreground text-sm">Inn at Bay Harbor</p>
+                    <p className="text-xs text-muted-foreground">Sarah's sky adventure pick</p>
                   </div>
                 </div>
               </div>
