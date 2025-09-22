@@ -79,7 +79,7 @@ const Discover = () => {
       businessName: "LegaSea Aquarium & The Reptarium",
       userName: "Emma L.",
       userAvatar: "EL",
-      thumbnail: "/legasea-aquarium-image.jpeg",
+      thumbnail: "/legasea-aquarium-video.gif",
       vibe: "Ocean Life",
       views: 412,
       likes: 89,
