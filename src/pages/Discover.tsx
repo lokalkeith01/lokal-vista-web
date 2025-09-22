@@ -38,13 +38,13 @@ const Discover = () => {
     },
     {
       id: 3,
-      name: "Murphy's Irish Pub",
-      type: "Bar & Grill",
+      name: "LegaSea Aquarium & The Reptarium",
+      type: "Aquarium & Zoo",
       lat: 40.7505,
       lng: -73.9934,
       rating: 4.6,
       videos: 15,
-      description: "Great atmosphere and live music"
+      description: "Incredible marine life and reptile experiences"
     }
   ];
 
@@ -76,15 +76,15 @@ const Discover = () => {
     },
     {
       id: 3,
-      businessName: "Murphy's Irish Pub",
+      businessName: "LegaSea Aquarium & The Reptarium",
       userName: "Emma L.",
       userAvatar: "EL",
-      thumbnail: "/api/placeholder/300/200",
-      vibe: "Night Out",
+      thumbnail: "/legasea-aquarium-image.jpeg",
+      vibe: "Ocean Life",
       views: 412,
       likes: 89,
       saved: true,
-      description: "Amazing live music every Thursday"
+      description: "Incredible marine life and reptile experiences"
     }
   ];
 
@@ -356,8 +356,8 @@ const Discover = () => {
                 </div>
                 <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 opacity-0 group-hover:opacity-100 transition-opacity">
                   <div className="bg-background border border-border rounded-lg p-3 shadow-lg whitespace-nowrap">
-                    <p className="font-semibold text-foreground text-sm">Murphy's Irish Pub</p>
-                    <p className="text-xs text-muted-foreground">Emma's night out pick</p>
+                    <p className="font-semibold text-foreground text-sm">LegaSea Aquarium & The Reptarium</p>
+                    <p className="text-xs text-muted-foreground">Emma's ocean life pick</p>
                   </div>
                 </div>
               </div>
