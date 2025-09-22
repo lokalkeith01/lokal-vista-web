@@ -231,27 +231,25 @@ const Discover = () => {
             {featuredContent.map((content) => (
               <Card key={content.id} className="bg-card border border-border hover:shadow-lg transition-shadow">
                 <div className="relative">
-                  {content.thumbnail.endsWith('.gif') || content.thumbnail.endsWith('.mov') ? (
-                    content.thumbnail.endsWith('.mov') ? (
-                      <video 
-                        src={content.thumbnail} 
-                        className="aspect-video rounded-t-lg w-full object-cover"
-                        autoPlay
-                        loop
-                        muted
-                        playsInline
-                      />
-                    ) : (
-                      <img 
-                        src={content.thumbnail} 
-                        alt={`${content.businessName} video`}
-                        className="aspect-video rounded-t-lg w-full object-cover"
-                      />
-                    )
-                  ) : (
+                  {content.thumbnail.endsWith('.mov') ? (
+                    <video 
+                      src={content.thumbnail} 
+                      className="aspect-video rounded-t-lg w-full object-cover"
+                      autoPlay
+                      loop
+                      muted
+                      playsInline
+                    />
+                  ) : content.thumbnail.includes('/api/placeholder/') ? (
                     <div className="bg-muted aspect-video rounded-t-lg flex items-center justify-center">
                       <Play className="w-12 h-12 text-primary" />
                     </div>
+                  ) : (
+                    <img 
+                      src={content.thumbnail} 
+                      alt={`${content.businessName} content`}
+                      className="aspect-video rounded-t-lg w-full object-cover"
+                    />
                   )}
                   <Badge className="absolute top-3 left-3 bg-primary text-primary-foreground">
                     {content.vibe}
