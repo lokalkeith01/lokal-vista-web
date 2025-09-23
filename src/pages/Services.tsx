@@ -14,7 +14,7 @@ const Services = () => {
     {
       icon: <Building2 className="w-12 h-12 text-primary" />,
       title: "Chamber Partnership",
-      description: "Partner with Lokal to provide your members with a powerful platform to showcase their businesses through authentic video content.",
+      description: "Partner with Lokal to provide your members with a powerful platform to showcase their businesses through authentic video content. Generate revenue through lokal's profit sharing model.",
       features: ["Member spotlight videos", "Chamber-branded portal", "Business discovery tools", "Event promotion features"]
     },
     {
