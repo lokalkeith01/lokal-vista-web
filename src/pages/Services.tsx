@@ -52,7 +52,51 @@ const Services = () => {
     }
   ];
 
- ;
+  const packages = [
+    {
+      name: "Starter",
+      price: "$299",
+      duration: "month",
+      description: "Perfect for small chambers looking to get started",
+      popular: false,
+      features: [
+        "Up to 50 member businesses",
+        "Basic video creation tools", 
+        "Chamber-branded portal",
+        "Email support"
+      ]
+    },
+    {
+      name: "Professional", 
+      price: "$599",
+      duration: "month",
+      description: "Ideal for growing chambers with active member bases",
+      popular: true,
+      features: [
+        "Up to 200 member businesses",
+        "Advanced video templates",
+        "Custom branding options",
+        "Analytics dashboard",
+        "Priority phone support",
+        "Member networking features"
+      ]
+    },
+    {
+      name: "Enterprise",
+      price: "Custom",
+      duration: "month", 
+      description: "Full-featured solution for large chambers",
+      popular: false,
+      features: [
+        "Unlimited member businesses",
+        "White-label solution",
+        "Custom integrations",
+        "Dedicated account manager",
+        "Advanced analytics",
+        "24/7 support"
+      ]
+    }
+  ];
 
   return (
     <div className="min-h-screen bg-background">
