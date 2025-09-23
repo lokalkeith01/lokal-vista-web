@@ -52,50 +52,7 @@ const Services = () => {
     }
   ];
 
-  const packages = [
-    {
-      name: "Small Town",
-      price: "a little",
-      duration: "month",
-      description: "Perfect for smaller chambers looking to enhance member services",
-      features: [
-        "Up to 100 member businesses",
-        "Basic video creation tools",
-        "Chamber-branded portal",
-        "Monthly analytics report",
-        "Email support"
-      ]
-    },
-    {
-      name: "Mid Town",
-      price: "a bit more",
-      duration: "month",
-      description: "Ideal for growing chambers with active member engagement",
-      features: [
-        "Up to 300 member businesses",
-        "Advanced video features",
-        "Custom branding options",
-        "Influencer matching service",
-        "Bi-weekly strategy sessions",
-        "Priority support"
-      ],
-      popular: true
-    },
-    {
-      name: "Regional",
-      price: "reasonable value",
-      duration: "month",
-      description: "Comprehensive solution for large chambers and business networks",
-      features: [
-        "Unlimited member businesses",
-        "Full-service video production",
-        "White-label platform",
-        "Dedicated account manager",
-        "Custom integrations",
-        "24/7 support"
-      ]
-    }
-  ];
+ ;
 
   return (
     <div className="min-h-screen bg-background">
