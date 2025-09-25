@@ -47,8 +47,8 @@ const Services = () => {
     {
       icon: <TrendingUp className="w-12 h-12 text-primary" />,
       title: "Business Growth",
-      description: "Grow your business through the most trusted form of marketing - recommendations from real customers and community members.",
-      features: ["Organic growth", "Community-driven marketing", "Local SEO boost", "Customer loyalty programs"]
+      description: "Grow your business with real metrics. Connect to local customers through word-of-mouth. See real metrics of your efforts through foot traffic data.",
+      features: ["Organic Growth", "Local SEO boost", "Marketing Campaign Metrics", "Community Support"]
     }
   ];
 
