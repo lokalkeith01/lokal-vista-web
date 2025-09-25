@@ -147,45 +147,45 @@ const Metrics = () => {
       
       <div className="flex">
         {/* Sidebar */}
-        <aside className="w-64 bg-slate-900 text-white min-h-screen p-4">
-          <div className="text-xl font-bold mb-8 text-blue-400">
+        <aside className="w-64 bg-background border-r border-border min-h-screen p-4">
+          <div className="text-xl font-bold mb-8 text-foreground">
             Lokal Business
           </div>
           
           <nav>
             <ul className="space-y-2">
               <li>
-                <a href="#" className="flex items-center gap-3 p-3 rounded-lg bg-slate-800 text-white">
+                <a href="#" className="flex items-center gap-3 p-3 rounded-lg bg-muted text-foreground">
                   <BarChart3 size={20} />
                   Dashboard
                 </a>
               </li>
               <li>
-                <a href="#" className="flex items-center gap-3 p-3 rounded-lg text-slate-300 hover:bg-slate-800 hover:text-white transition-colors">
+                <a href="#" className="flex items-center gap-3 p-3 rounded-lg text-muted-foreground hover:bg-muted hover:text-foreground transition-colors">
                   <Target size={20} />
                   Campaigns
                 </a>
               </li>
               <li>
-                <a href="#" className="flex items-center gap-3 p-3 rounded-lg text-slate-300 hover:bg-slate-800 hover:text-white transition-colors">
+                <a href="#" className="flex items-center gap-3 p-3 rounded-lg text-muted-foreground hover:bg-muted hover:text-foreground transition-colors">
                   <MapPin size={20} />
                   Beacon Management
                 </a>
               </li>
               <li>
-                <a href="#" className="flex items-center gap-3 p-3 rounded-lg text-slate-300 hover:bg-slate-800 hover:text-white transition-colors">
+                <a href="#" className="flex items-center gap-3 p-3 rounded-lg text-muted-foreground hover:bg-muted hover:text-foreground transition-colors">
                   <Users size={20} />
                   Customers
                 </a>
               </li>
               <li>
-                <a href="#" className="flex items-center gap-3 p-3 rounded-lg text-slate-300 hover:bg-slate-800 hover:text-white transition-colors">
+                <a href="#" className="flex items-center gap-3 p-3 rounded-lg text-muted-foreground hover:bg-muted hover:text-foreground transition-colors">
                   <TrendingUp size={20} />
                   Reports
                 </a>
               </li>
               <li>
-                <a href="#" className="flex items-center gap-3 p-3 rounded-lg text-slate-300 hover:bg-slate-800 hover:text-white transition-colors">
+                <a href="#" className="flex items-center gap-3 p-3 rounded-lg text-muted-foreground hover:bg-muted hover:text-foreground transition-colors">
                   <Settings size={20} />
                   Settings
                 </a>
