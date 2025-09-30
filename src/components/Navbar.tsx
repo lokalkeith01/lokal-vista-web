@@ -16,6 +16,7 @@ const Navbar = () => {
     { path: '/about', label: 'Our Story' },
     { path: '/services', label: 'For Businesses' },
     { path: '/metrics', label: 'Metrics' },
+    { path: '/live-ble', label: 'Live BLE' },
     { path: '/contact', label: 'Join Lokal' },
   ];
 

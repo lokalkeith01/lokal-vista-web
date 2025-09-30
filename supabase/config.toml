@@ -44,3 +44,6 @@ inspector_port = 8083
 
 [functions.send-email]
 verify_jwt = false
+
+[functions.ble-simulator]
+verify_jwt = false
