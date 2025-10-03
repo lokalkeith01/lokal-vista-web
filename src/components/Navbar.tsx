@@ -38,8 +38,8 @@ const Navbar = () => {
               title="Scan QR Code"
             >
               <img 
-                src="/lovable-uploads/2ace7d65-8b16-4dd2-ac95-61df677c58e0.png"
-                alt="QR Code" 
+                src="/lovable-uploads/qr-code-sharelokal.png"
+                alt="QR Code - app.sharelokal.com" 
                 className="h-8 w-8"
               />
             </button>
