@@ -1,5 +1,5 @@
 
-import { ArrowRight, CheckCircle, Users, Target, Zap, Video, Heart, MapPin } from 'lucide-react';
+import { ArrowRight, CheckCircle, Users, Target, Zap, Video, Heart, MapPin, Shield } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
@@ -205,6 +205,41 @@ const Index = () => {
               <p className="text-foreground leading-relaxed">
                 No fake reviews - just honest stories
               </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Validation Banner Section */}
+      <section className="py-12 sm:py-16 bg-gradient-to-r from-blue-600 to-purple-600">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-8 sm:p-12 border border-white/20">
+            <div className="flex flex-col md:flex-row items-center justify-between gap-6">
+              <div className="flex-1 text-white">
+                <div className="flex items-center gap-3 mb-4">
+                  <Shield className="w-10 h-10" />
+                  <h2 className="text-2xl sm:text-3xl font-bold">
+                    Influencer Validation Platform
+                  </h2>
+                </div>
+                <p className="text-lg text-white/90 mb-2">
+                  AI-powered authenticity and local reach verification
+                </p>
+                <p className="text-white/80">
+                  Validate follower authenticity, detect bots, and verify regional engagement with advanced AI analysis
+                </p>
+              </div>
+              <div className="flex-shrink-0">
+                <Link to="/validation">
+                  <Button 
+                    size="lg"
+                    className="bg-white text-purple-600 hover:bg-white/90 text-base sm:text-lg px-8 py-4 font-semibold"
+                  >
+                    Explore Validation Pipeline
+                    <ArrowRight className="w-5 h-5 ml-2" />
+                  </Button>
+                </Link>
+              </div>
             </div>
           </div>
         </div>

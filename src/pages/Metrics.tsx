@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import { useNavigate } from "react-router-dom";
 import { 
   BarChart3, 
   Users, 
@@ -13,10 +14,13 @@ import {
   Target,
   Settings,
   FileText,
-  Activity
+  Activity,
+  Radio
 } from "lucide-react";
 
 const Metrics = () => {
+  const navigate = useNavigate();
+  
   const stats = [
     {
       title: "Today's Visitors",
@@ -189,6 +193,15 @@ const Metrics = () => {
                   <Settings size={20} />
                   Settings
                 </a>
+              </li>
+              <li>
+                <button 
+                  onClick={() => navigate('/live-ble')}
+                  className="flex items-center gap-3 p-3 rounded-lg text-muted-foreground hover:bg-muted hover:text-foreground transition-colors w-full text-left"
+                >
+                  <Radio size={20} />
+                  Live BLE Scanner
+                </button>
               </li>
             </ul>
           </nav>
