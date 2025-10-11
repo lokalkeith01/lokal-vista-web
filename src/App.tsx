@@ -12,6 +12,7 @@ import Contact from "./pages/Contact";
 import Metrics from "./pages/Metrics";
 import LiveBLE from "./pages/LiveBLE";
 import Validation from "./pages/Validation";
+import Marketplace from "./pages/Marketplace";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -31,6 +32,7 @@ const App = () => (
           <Route path="/metrics" element={<Metrics />} />
           <Route path="/live-ble" element={<LiveBLE />} />
           <Route path="/validation" element={<Validation />} />
+          <Route path="/marketplace" element={<Marketplace />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
