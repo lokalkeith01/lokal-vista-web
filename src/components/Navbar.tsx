@@ -15,7 +15,6 @@ const Navbar = () => {
     { path: '/discover', label: 'Discover' },
     { path: '/about', label: 'Our Story' },
     { path: '/services', label: 'For Businesses' },
-    { path: '/marketplace', label: 'Advertise' },
     { path: '/metrics', label: 'Metrics' },
     { path: '/contact', label: 'Join Lokal' },
   ];
