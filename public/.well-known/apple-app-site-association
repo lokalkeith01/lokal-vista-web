@@ -3,14 +3,9 @@
     "apps": [],
     "details": [
       {
-        "appID": "TEAMID.app.lovable.b1dff2bebc0146e4ba2e5a63e2953614",
-        "paths": ["*"]
+        "appID": "59xf97qmk4.com.keithondra.lokal",
+        "paths": ["/auth/callback", "/auth/*"]
       }
-    ]
-  },
-  "webcredentials": {
-    "apps": [
-      "TEAMID.app.lovable.b1dff2bebc0146e4ba2e5a63e2953614"
     ]
   }
 }
