@@ -77,8 +77,8 @@ const Footer = () => {
             © 2024 Lokal. Empowering small businesses, one video at a time.
           </p>
           <div className="flex space-x-6 mt-4 md:mt-0">
-            <a href="#" className="text-accent hover:text-white text-sm">Privacy Policy</a>
-            <a href="#" className="text-accent hover:text-white text-sm">Community Guidelines</a>
+            <Link to="/terms-of-service" className="text-accent hover:text-white text-sm">Terms of Service</Link>
+            <Link to="/privacy-policy" className="text-accent hover:text-white text-sm">Privacy Policy</Link>
           </div>
         </div>
       </div>

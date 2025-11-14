@@ -12,6 +12,8 @@ import Contact from "./pages/Contact";
 import Metrics from "./pages/Metrics";
 import LiveBLE from "./pages/LiveBLE";
 import Validation from "./pages/Validation";
+import TermsOfService from "./pages/TermsOfService";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -31,6 +33,8 @@ const App = () => (
           <Route path="/metrics" element={<Metrics />} />
           <Route path="/live-ble" element={<LiveBLE />} />
           <Route path="/validation" element={<Validation />} />
+          <Route path="/terms-of-service" element={<TermsOfService />} />
+          <Route path="/privacy-policy" element={<PrivacyPolicy />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
