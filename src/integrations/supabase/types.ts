@@ -14,6 +14,161 @@ export type Database = {
   }
   public: {
     Tables: {
+      ad_events: {
+        Row: {
+          ad_id: string
+          ad_type: string
+          campaign_id: string | null
+          device_fingerprint: string | null
+          event_metadata: Json | null
+          event_type: string
+          id: string
+          timestamp: string
+          user_id: string | null
+        }
+        Insert: {
+          ad_id: string
+          ad_type: string
+          campaign_id?: string | null
+          device_fingerprint?: string | null
+          event_metadata?: Json | null
+          event_type: string
+          id?: string
+          timestamp?: string
+          user_id?: string | null
+        }
+        Update: {
+          ad_id?: string
+          ad_type?: string
+          campaign_id?: string | null
+          device_fingerprint?: string | null
+          event_metadata?: Json | null
+          event_type?: string
+          id?: string
+          timestamp?: string
+          user_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "ad_events_campaign_id_fkey"
+            columns: ["campaign_id"]
+            isOneToOne: false
+            referencedRelation: "campaigns"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      ad_rate_limits: {
+        Row: {
+          ad_id: string
+          campaign_id: string | null
+          created_at: string | null
+          device_fingerprint: string
+          event_count: number | null
+          event_type: string
+          first_event_at: string | null
+          flagged_reason: string | null
+          id: string
+          ip_address: string | null
+          is_flagged: boolean | null
+          last_event_at: string | null
+        }
+        Insert: {
+          ad_id: string
+          campaign_id?: string | null
+          created_at?: string | null
+          device_fingerprint: string
+          event_count?: number | null
+          event_type: string
+          first_event_at?: string | null
+          flagged_reason?: string | null
+          id?: string
+          ip_address?: string | null
+          is_flagged?: boolean | null
+          last_event_at?: string | null
+        }
+        Update: {
+          ad_id?: string
+          campaign_id?: string | null
+          created_at?: string | null
+          device_fingerprint?: string
+          event_count?: number | null
+          event_type?: string
+          first_event_at?: string | null
+          flagged_reason?: string | null
+          id?: string
+          ip_address?: string | null
+          is_flagged?: boolean | null
+          last_event_at?: string | null
+        }
+        Relationships: []
+      }
+      banner_ads: {
+        Row: {
+          background_color: string | null
+          business_id: string
+          campaign_id: string
+          clicks: number | null
+          created_at: string
+          cta_text: string | null
+          description: string
+          id: string
+          image_url: string
+          impressions: number | null
+          is_active: boolean | null
+          link_url: string
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          background_color?: string | null
+          business_id: string
+          campaign_id: string
+          clicks?: number | null
+          created_at?: string
+          cta_text?: string | null
+          description: string
+          id?: string
+          image_url: string
+          impressions?: number | null
+          is_active?: boolean | null
+          link_url: string
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          background_color?: string | null
+          business_id?: string
+          campaign_id?: string
+          clicks?: number | null
+          created_at?: string
+          cta_text?: string | null
+          description?: string
+          id?: string
+          image_url?: string
+          impressions?: number | null
+          is_active?: boolean | null
+          link_url?: string
+          title?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "banner_ads_business_id_fkey"
+            columns: ["business_id"]
+            isOneToOne: false
+            referencedRelation: "businesses"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "banner_ads_campaign_id_fkey"
+            columns: ["campaign_id"]
+            isOneToOne: false
+            referencedRelation: "campaigns"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       beacon_detections: {
         Row: {
           beacon_id: string | null
@@ -112,6 +267,7 @@ export type Database = {
       businesses: {
         Row: {
           address: string | null
+          business_hours: Json | null
           business_type: string | null
           category: string | null
           content_count: number | null
@@ -124,6 +280,7 @@ export type Database = {
           logo_image_url: string | null
           longitude: number | null
           name: string
+          owner_id: string | null
           phone: string | null
           place_id: string
           price_level: number | null
@@ -136,6 +293,7 @@ export type Database = {
         }
         Insert: {
           address?: string | null
+          business_hours?: Json | null
           business_type?: string | null
           category?: string | null
           content_count?: number | null
@@ -148,6 +306,7 @@ export type Database = {
           logo_image_url?: string | null
           longitude?: number | null
           name: string
+          owner_id?: string | null
           phone?: string | null
           place_id: string
           price_level?: number | null
@@ -160,6 +319,7 @@ export type Database = {
         }
         Update: {
           address?: string | null
+          business_hours?: Json | null
           business_type?: string | null
           category?: string | null
           content_count?: number | null
@@ -172,6 +332,7 @@ export type Database = {
           logo_image_url?: string | null
           longitude?: number | null
           name?: string
+          owner_id?: string | null
           phone?: string | null
           place_id?: string
           price_level?: number | null
@@ -244,7 +405,13 @@ export type Database = {
       }
       campaigns: {
         Row: {
+          ad_format: string[] | null
+          budget_limit: number | null
+          budget_spent: number | null
+          business_id: string | null
           campaign_type: string
+          cost_per_click: number | null
+          cost_per_impression: number | null
           created_at: string | null
           created_by: string | null
           description: string | null
@@ -254,11 +421,25 @@ export type Database = {
           metadata: Json | null
           name: string
           start_date: string
+          status: string | null
+          target_area_codes: string[] | null
           target_beacons: string[] | null
+          target_location_lat: number | null
+          target_location_lng: number | null
+          target_radius_miles: number | null
+          targeting_criteria: Json | null
+          total_clicks: number | null
+          total_impressions: number | null
           updated_at: string | null
         }
         Insert: {
+          ad_format?: string[] | null
+          budget_limit?: number | null
+          budget_spent?: number | null
+          business_id?: string | null
           campaign_type: string
+          cost_per_click?: number | null
+          cost_per_impression?: number | null
           created_at?: string | null
           created_by?: string | null
           description?: string | null
@@ -268,11 +449,25 @@ export type Database = {
           metadata?: Json | null
           name: string
           start_date: string
+          status?: string | null
+          target_area_codes?: string[] | null
           target_beacons?: string[] | null
+          target_location_lat?: number | null
+          target_location_lng?: number | null
+          target_radius_miles?: number | null
+          targeting_criteria?: Json | null
+          total_clicks?: number | null
+          total_impressions?: number | null
           updated_at?: string | null
         }
         Update: {
+          ad_format?: string[] | null
+          budget_limit?: number | null
+          budget_spent?: number | null
+          business_id?: string | null
           campaign_type?: string
+          cost_per_click?: number | null
+          cost_per_impression?: number | null
           created_at?: string | null
           created_by?: string | null
           description?: string | null
@@ -282,26 +477,49 @@ export type Database = {
           metadata?: Json | null
           name?: string
           start_date?: string
+          status?: string | null
+          target_area_codes?: string[] | null
           target_beacons?: string[] | null
+          target_location_lat?: number | null
+          target_location_lng?: number | null
+          target_radius_miles?: number | null
+          targeting_criteria?: Json | null
+          total_clicks?: number | null
+          total_impressions?: number | null
           updated_at?: string | null
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "campaigns_business_id_fkey"
+            columns: ["business_id"]
+            isOneToOne: false
+            referencedRelation: "businesses"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       content: {
         Row: {
-          asset_id: string | null
+          campaign_id: string | null
           company_name: string
           created_at: string
           description: string | null
           duration: number | null
           file_size: number | null
           id: string
+          is_promoted: boolean | null
           latitude: number | null
+          likes_count: number
           location_data: string | null
           longitude: number | null
           place_name: string | null
-          playback_id: string | null
           preview_url: string | null
+          promotion_budget: number | null
+          promotion_clicks: number | null
+          promotion_end_date: string | null
+          promotion_impressions: number | null
+          promotion_start_date: string | null
+          shares_count: number
           status: string | null
           tags: string[] | null
           thumbnail_url: string | null
@@ -309,22 +527,30 @@ export type Database = {
           updated_at: string
           upload_id: string | null
           user_id: string
+          venue_type: string | null
           video_url: string
         }
         Insert: {
-          asset_id?: string | null
+          campaign_id?: string | null
           company_name: string
           created_at?: string
           description?: string | null
           duration?: number | null
           file_size?: number | null
           id?: string
+          is_promoted?: boolean | null
           latitude?: number | null
+          likes_count?: number
           location_data?: string | null
           longitude?: number | null
           place_name?: string | null
-          playback_id?: string | null
           preview_url?: string | null
+          promotion_budget?: number | null
+          promotion_clicks?: number | null
+          promotion_end_date?: string | null
+          promotion_impressions?: number | null
+          promotion_start_date?: string | null
+          shares_count?: number
           status?: string | null
           tags?: string[] | null
           thumbnail_url?: string | null
@@ -332,22 +558,30 @@ export type Database = {
           updated_at?: string
           upload_id?: string | null
           user_id: string
+          venue_type?: string | null
           video_url: string
         }
         Update: {
-          asset_id?: string | null
+          campaign_id?: string | null
           company_name?: string
           created_at?: string
           description?: string | null
           duration?: number | null
           file_size?: number | null
           id?: string
+          is_promoted?: boolean | null
           latitude?: number | null
+          likes_count?: number
           location_data?: string | null
           longitude?: number | null
           place_name?: string | null
-          playback_id?: string | null
           preview_url?: string | null
+          promotion_budget?: number | null
+          promotion_clicks?: number | null
+          promotion_end_date?: string | null
+          promotion_impressions?: number | null
+          promotion_start_date?: string | null
+          shares_count?: number
           status?: string | null
           tags?: string[] | null
           thumbnail_url?: string | null
@@ -355,9 +589,25 @@ export type Database = {
           updated_at?: string
           upload_id?: string | null
           user_id?: string
+          venue_type?: string | null
           video_url?: string
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "content_campaign_id_fkey"
+            columns: ["campaign_id"]
+            isOneToOne: false
+            referencedRelation: "campaigns"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "content_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["user_id"]
+          },
+        ]
       }
       detection_approvals: {
         Row: {
@@ -396,9 +646,9 @@ export type Database = {
       }
       drafts: {
         Row: {
-          asset_id: string | null
           company_name: string
           created_at: string
+          description: string | null
           duration: number | null
           file_size: number | null
           id: string
@@ -406,19 +656,19 @@ export type Database = {
           location_data: string | null
           longitude: number | null
           place_name: string | null
-          playback_id: string | null
           status: string | null
           tags: string[] | null
           thumbnail_url: string | null
           title: string
           updated_at: string
           user_id: string
+          venue_type: string | null
           video_url: string
         }
         Insert: {
-          asset_id?: string | null
           company_name: string
           created_at?: string
+          description?: string | null
           duration?: number | null
           file_size?: number | null
           id?: string
@@ -426,19 +676,19 @@ export type Database = {
           location_data?: string | null
           longitude?: number | null
           place_name?: string | null
-          playback_id?: string | null
           status?: string | null
           tags?: string[] | null
           thumbnail_url?: string | null
           title: string
           updated_at?: string
           user_id: string
+          venue_type?: string | null
           video_url: string
         }
         Update: {
-          asset_id?: string | null
           company_name?: string
           created_at?: string
+          description?: string | null
           duration?: number | null
           file_size?: number | null
           id?: string
@@ -446,13 +696,13 @@ export type Database = {
           location_data?: string | null
           longitude?: number | null
           place_name?: string | null
-          playback_id?: string | null
           status?: string | null
           tags?: string[] | null
           thumbnail_url?: string | null
           title?: string
           updated_at?: string
           user_id?: string
+          venue_type?: string | null
           video_url?: string
         }
         Relationships: []
@@ -475,6 +725,129 @@ export type Database = {
           follower_id?: string
           following_id?: string
           id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "follows_follower_fk"
+            columns: ["follower_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["user_id"]
+          },
+          {
+            foreignKeyName: "follows_following_fk"
+            columns: ["following_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["user_id"]
+          },
+        ]
+      }
+      influencer_profiles: {
+        Row: {
+          audience_age_range: string | null
+          audience_gender: string | null
+          audience_locations: string | null
+          bio: string
+          content_formats: string[] | null
+          created_at: string | null
+          email: string
+          excluded_industries: string | null
+          full_name: string
+          id: string
+          instagram: string | null
+          instagram_followers: number | null
+          is_active: boolean | null
+          languages: string | null
+          location: string
+          phone: string | null
+          primary_categories: string[]
+          profile_completion: number | null
+          profile_photo_url: string | null
+          reels_price: string | null
+          services_offered: string[]
+          sponsored_post_price: string | null
+          stories_price: string | null
+          tiktok: string | null
+          tiktok_followers: number | null
+          turnaround_time: string | null
+          twitter: string | null
+          twitter_followers: number | null
+          updated_at: string | null
+          user_id: string
+          video_price: string | null
+          youtube: string | null
+          youtube_followers: number | null
+        }
+        Insert: {
+          audience_age_range?: string | null
+          audience_gender?: string | null
+          audience_locations?: string | null
+          bio: string
+          content_formats?: string[] | null
+          created_at?: string | null
+          email: string
+          excluded_industries?: string | null
+          full_name: string
+          id?: string
+          instagram?: string | null
+          instagram_followers?: number | null
+          is_active?: boolean | null
+          languages?: string | null
+          location: string
+          phone?: string | null
+          primary_categories?: string[]
+          profile_completion?: number | null
+          profile_photo_url?: string | null
+          reels_price?: string | null
+          services_offered?: string[]
+          sponsored_post_price?: string | null
+          stories_price?: string | null
+          tiktok?: string | null
+          tiktok_followers?: number | null
+          turnaround_time?: string | null
+          twitter?: string | null
+          twitter_followers?: number | null
+          updated_at?: string | null
+          user_id: string
+          video_price?: string | null
+          youtube?: string | null
+          youtube_followers?: number | null
+        }
+        Update: {
+          audience_age_range?: string | null
+          audience_gender?: string | null
+          audience_locations?: string | null
+          bio?: string
+          content_formats?: string[] | null
+          created_at?: string | null
+          email?: string
+          excluded_industries?: string | null
+          full_name?: string
+          id?: string
+          instagram?: string | null
+          instagram_followers?: number | null
+          is_active?: boolean | null
+          languages?: string | null
+          location?: string
+          phone?: string | null
+          primary_categories?: string[]
+          profile_completion?: number | null
+          profile_photo_url?: string | null
+          reels_price?: string | null
+          services_offered?: string[]
+          sponsored_post_price?: string | null
+          stories_price?: string | null
+          tiktok?: string | null
+          tiktok_followers?: number | null
+          turnaround_time?: string | null
+          twitter?: string | null
+          twitter_followers?: number | null
+          updated_at?: string | null
+          user_id?: string
+          video_price?: string | null
+          youtube?: string | null
+          youtube_followers?: number | null
         }
         Relationships: []
       }
@@ -578,7 +951,16 @@ export type Database = {
           avatar_url: string | null
           bio: string | null
           created_at: string
+          followers_count: number | null
+          following_count: number | null
+          geofence_formatted_address: string | null
+          geofence_latitude: number | null
+          geofence_longitude: number | null
+          geofence_place_id: string | null
+          geofence_place_name: string | null
+          geofence_radius: number | null
           id: string
+          is_profile_public: boolean | null
           location_privacy_public: boolean | null
           updated_at: string
           user_id: string
@@ -588,7 +970,16 @@ export type Database = {
           avatar_url?: string | null
           bio?: string | null
           created_at?: string
+          followers_count?: number | null
+          following_count?: number | null
+          geofence_formatted_address?: string | null
+          geofence_latitude?: number | null
+          geofence_longitude?: number | null
+          geofence_place_id?: string | null
+          geofence_place_name?: string | null
+          geofence_radius?: number | null
           id?: string
+          is_profile_public?: boolean | null
           location_privacy_public?: boolean | null
           updated_at?: string
           user_id: string
@@ -598,7 +989,16 @@ export type Database = {
           avatar_url?: string | null
           bio?: string | null
           created_at?: string
+          followers_count?: number | null
+          following_count?: number | null
+          geofence_formatted_address?: string | null
+          geofence_latitude?: number | null
+          geofence_longitude?: number | null
+          geofence_place_id?: string | null
+          geofence_place_name?: string | null
+          geofence_radius?: number | null
           id?: string
+          is_profile_public?: boolean | null
           location_privacy_public?: boolean | null
           updated_at?: string
           user_id?: string
@@ -641,6 +1041,110 @@ export type Database = {
           },
         ]
       }
+      shares: {
+        Row: {
+          content_id: string
+          id: string
+          share_method: string | null
+          shared_at: string
+          user_id: string | null
+        }
+        Insert: {
+          content_id: string
+          id?: string
+          share_method?: string | null
+          shared_at?: string
+          user_id?: string | null
+        }
+        Update: {
+          content_id?: string
+          id?: string
+          share_method?: string | null
+          shared_at?: string
+          user_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "shares_content_id_fkey"
+            columns: ["content_id"]
+            isOneToOne: false
+            referencedRelation: "content"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      sponsored_cards: {
+        Row: {
+          badge_text: string | null
+          business_id: string
+          campaign_id: string
+          card_type: string
+          clicks: number | null
+          created_at: string
+          cta_text: string | null
+          description: string
+          id: string
+          image_url: string
+          impressions: number | null
+          is_active: boolean | null
+          link_url: string
+          show_rating: boolean | null
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          badge_text?: string | null
+          business_id: string
+          campaign_id: string
+          card_type: string
+          clicks?: number | null
+          created_at?: string
+          cta_text?: string | null
+          description: string
+          id?: string
+          image_url: string
+          impressions?: number | null
+          is_active?: boolean | null
+          link_url: string
+          show_rating?: boolean | null
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          badge_text?: string | null
+          business_id?: string
+          campaign_id?: string
+          card_type?: string
+          clicks?: number | null
+          created_at?: string
+          cta_text?: string | null
+          description?: string
+          id?: string
+          image_url?: string
+          impressions?: number | null
+          is_active?: boolean | null
+          link_url?: string
+          show_rating?: boolean | null
+          title?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "sponsored_cards_business_id_fkey"
+            columns: ["business_id"]
+            isOneToOne: false
+            referencedRelation: "businesses"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "sponsored_cards_campaign_id_fkey"
+            columns: ["campaign_id"]
+            isOneToOne: false
+            referencedRelation: "campaigns"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       user_roles: {
         Row: {
           created_at: string
@@ -664,7 +1168,6 @@ export type Database = {
       }
       videos: {
         Row: {
-          asset_id: string | null
           company_name: string
           created_at: string
           duration: number | null
@@ -674,7 +1177,6 @@ export type Database = {
           location_data: string | null
           longitude: number | null
           place_name: string | null
-          playback_id: string | null
           preview_url: string | null
           status: string | null
           tags: string[] | null
@@ -682,10 +1184,10 @@ export type Database = {
           title: string
           updated_at: string
           user_id: string
+          venue_type: string | null
           video_url: string
         }
         Insert: {
-          asset_id?: string | null
           company_name: string
           created_at?: string
           duration?: number | null
@@ -695,7 +1197,6 @@ export type Database = {
           location_data?: string | null
           longitude?: number | null
           place_name?: string | null
-          playback_id?: string | null
           preview_url?: string | null
           status?: string | null
           tags?: string[] | null
@@ -703,10 +1204,10 @@ export type Database = {
           title: string
           updated_at?: string
           user_id: string
+          venue_type?: string | null
           video_url: string
         }
         Update: {
-          asset_id?: string | null
           company_name?: string
           created_at?: string
           duration?: number | null
@@ -716,7 +1217,6 @@ export type Database = {
           location_data?: string | null
           longitude?: number | null
           place_name?: string | null
-          playback_id?: string | null
           preview_url?: string | null
           status?: string | null
           tags?: string[] | null
@@ -724,6 +1224,7 @@ export type Database = {
           title?: string
           updated_at?: string
           user_id?: string
+          venue_type?: string | null
           video_url?: string
         }
         Relationships: []
@@ -790,19 +1291,89 @@ export type Database = {
       }
     }
     Views: {
-      [_ in never]: never
+      public_influencer_profiles: {
+        Row: {
+          audience_age_range: string | null
+          audience_gender: string | null
+          audience_locations: string | null
+          bio: string | null
+          content_formats: string[] | null
+          created_at: string | null
+          full_name: string | null
+          id: string | null
+          instagram_followers: number | null
+          is_active: boolean | null
+          location: string | null
+          primary_categories: string[] | null
+          profile_completion: number | null
+          profile_photo_url: string | null
+          services_offered: string[] | null
+          tiktok_followers: number | null
+          twitter_followers: number | null
+          updated_at: string | null
+          user_id: string | null
+          youtube_followers: number | null
+        }
+        Insert: {
+          audience_age_range?: string | null
+          audience_gender?: string | null
+          audience_locations?: string | null
+          bio?: string | null
+          content_formats?: string[] | null
+          created_at?: string | null
+          full_name?: string | null
+          id?: string | null
+          instagram_followers?: number | null
+          is_active?: boolean | null
+          location?: string | null
+          primary_categories?: string[] | null
+          profile_completion?: number | null
+          profile_photo_url?: string | null
+          services_offered?: string[] | null
+          tiktok_followers?: number | null
+          twitter_followers?: number | null
+          updated_at?: string | null
+          user_id?: string | null
+          youtube_followers?: number | null
+        }
+        Update: {
+          audience_age_range?: string | null
+          audience_gender?: string | null
+          audience_locations?: string | null
+          bio?: string | null
+          content_formats?: string[] | null
+          created_at?: string | null
+          full_name?: string | null
+          id?: string | null
+          instagram_followers?: number | null
+          is_active?: boolean | null
+          location?: string | null
+          primary_categories?: string[] | null
+          profile_completion?: number | null
+          profile_photo_url?: string | null
+          services_offered?: string[] | null
+          tiktok_followers?: number | null
+          twitter_followers?: number | null
+          updated_at?: string | null
+          user_id?: string | null
+          youtube_followers?: number | null
+        }
+        Relationships: []
+      }
     }
     Functions: {
       can_view_location: {
         Args: { requesting_user_id: string; video_user_id: string }
         Returns: boolean
       }
+      cleanup_old_rate_limits: { Args: never; Returns: undefined }
       generate_business_slug: {
         Args: { business_name: string }
         Returns: string
       }
+      get_best_venue_type: { Args: { types: string[] }; Returns: string }
       get_videos_with_privacy: {
-        Args: Record<PropertyKey, never>
+        Args: never
         Returns: {
           company_name: string
           created_at: string
