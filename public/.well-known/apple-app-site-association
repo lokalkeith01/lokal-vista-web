@@ -3,9 +3,12 @@
     "apps": [],
     "details": [
       {
-        "appID": "59xf97qmk4.com.keithondra.lokal",
-        "paths": ["/auth/callback", "/auth/*"]
+        "appID": "A4LK73RJS6.com.keithondra.lokal",
+        "paths": ["/auth/callback", "/auth/*", "/*"]
       }
     ]
+  },
+  "webcredentials": {
+    "apps": ["A4LK73RJS6.com.keithondra.lokal"]
   }
 }
