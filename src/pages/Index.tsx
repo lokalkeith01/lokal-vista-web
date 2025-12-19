@@ -111,7 +111,7 @@ const Index = () => {
             <Button 
               size="lg" 
               className="bg-white text-accent hover:bg-gray-100 text-sm sm:text-base px-6 sm:px-8 py-3 sm:py-4 font-medium tracking-wide uppercase min-h-[48px] w-full sm:w-auto"
-              onClick={() => window.open('https://app.sharelokal.com/auth', '_blank')}
+              onClick={() => window.open('https://testflight.apple.com/join/9yvKr1GD', '_blank')}
             >
               Try the App
             </Button>
@@ -267,7 +267,7 @@ const Index = () => {
           <Button 
             size="lg"
             className="bg-primary hover:bg-primary/90 text-white text-base sm:text-lg px-8 sm:px-12 py-4 font-medium tracking-wide uppercase min-h-[48px] w-full sm:w-auto max-w-xs sm:max-w-none"
-            onClick={() => window.open('https://app.sharelokal.com/', '_blank')}
+            onClick={() => window.open('https://testflight.apple.com/join/9yvKr1GD', '_blank')}
           >
             Try the App
           </Button>
