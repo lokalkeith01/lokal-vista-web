@@ -32,7 +32,7 @@ const Navbar = () => {
               />
             </Link>
             <button 
-              onClick={() => window.open('https://app.sharelokal.com/', '_blank')}
+              onClick={() => window.open('https://testflight.apple.com/join/9yvKr1GD', '_blank')}
               className="p-1 hover:bg-muted rounded transition-colors"
               title="Scan QR Code"
             >
