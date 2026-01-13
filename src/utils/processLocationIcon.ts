@@ -13,6 +13,6 @@ export const processLocationIcon = async (): Promise<string> => {
   } catch (error) {
     console.error('Failed to process location icon:', error);
     // Fallback to original image
-    return '/lovable-uploads/b4f684d4-4f52-4ee4-bbf0-c161100391ca.png';
+    return '/lokal-app-icon.png';
   }
 };

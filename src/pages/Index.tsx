@@ -17,7 +17,7 @@ const Index = () => {
   const { toast } = useToast();
   const [email, setEmail] = useState('');
   const [isDialogOpen, setIsDialogOpen] = useState(false);
-  const [locationIconUrl, setLocationIconUrl] = useState('/lovable-uploads/b4f684d4-4f52-4ee4-bbf0-c161100391ca.png');
+  const [locationIconUrl, setLocationIconUrl] = useState('/lokal-app-icon.png');
 
   useEffect(() => {
     const processIcon = async () => {
@@ -97,7 +97,7 @@ const Index = () => {
           <div className="flex items-center justify-center mb-6">
             <div className="flex items-center justify-center">
               <img 
-                src="/lovable-uploads/839eba6f-dab6-49a3-96c3-65ac0df2f38e.png"
+                src="/lokal-app-icon.png"
                 alt="Lokal logo"
                 className="w-32 h-32 sm:w-48 sm:h-48 md:w-64 md:h-64"
               />

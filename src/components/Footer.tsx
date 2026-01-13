@@ -11,7 +11,7 @@ const Footer = () => {
           <div className="col-span-1 md:col-span-2">
             <div className="flex items-center space-x-2 mb-4">
               <img 
-                src="/lovable-uploads/f37053d8-488f-4961-b4ae-38f46b121569.png"
+                src="/lokal-app-icon.png"
                 alt="Lokal location pin"
                 className="w-8 h-8"
               />
