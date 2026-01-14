@@ -469,13 +469,19 @@ export type Database = {
           is_active: boolean | null
           metadata: Json | null
           name: string
+          searchable_fee: number | null
           start_date: string
           status: string | null
+          surrounding_communities_fee: number | null
+          surrounding_zip_codes: string[] | null
           target_area_codes: string[] | null
           target_beacons: string[] | null
           target_location_lat: number | null
           target_location_lng: number | null
           target_radius_miles: number | null
+          target_searchable: boolean | null
+          target_surrounding_communities: boolean | null
+          target_zip_code: string | null
           targeting_criteria: Json | null
           total_clicks: number | null
           total_impressions: number | null
@@ -497,13 +503,19 @@ export type Database = {
           is_active?: boolean | null
           metadata?: Json | null
           name: string
+          searchable_fee?: number | null
           start_date: string
           status?: string | null
+          surrounding_communities_fee?: number | null
+          surrounding_zip_codes?: string[] | null
           target_area_codes?: string[] | null
           target_beacons?: string[] | null
           target_location_lat?: number | null
           target_location_lng?: number | null
           target_radius_miles?: number | null
+          target_searchable?: boolean | null
+          target_surrounding_communities?: boolean | null
+          target_zip_code?: string | null
           targeting_criteria?: Json | null
           total_clicks?: number | null
           total_impressions?: number | null
@@ -525,13 +537,19 @@ export type Database = {
           is_active?: boolean | null
           metadata?: Json | null
           name?: string
+          searchable_fee?: number | null
           start_date?: string
           status?: string | null
+          surrounding_communities_fee?: number | null
+          surrounding_zip_codes?: string[] | null
           target_area_codes?: string[] | null
           target_beacons?: string[] | null
           target_location_lat?: number | null
           target_location_lng?: number | null
           target_radius_miles?: number | null
+          target_searchable?: boolean | null
+          target_surrounding_communities?: boolean | null
+          target_zip_code?: string | null
           targeting_criteria?: Json | null
           total_clicks?: number | null
           total_impressions?: number | null
@@ -592,6 +610,7 @@ export type Database = {
           created_at: string
           description: string | null
           duration: number | null
+          event_date: string | null
           file_size: number | null
           id: string
           is_promoted: boolean | null
@@ -601,6 +620,7 @@ export type Database = {
           longitude: number | null
           music_credit_name: string | null
           music_credit_url: string | null
+          persona_id: string | null
           place_name: string | null
           preview_url: string | null
           promotion_budget: number | null
@@ -629,6 +649,7 @@ export type Database = {
           created_at?: string
           description?: string | null
           duration?: number | null
+          event_date?: string | null
           file_size?: number | null
           id?: string
           is_promoted?: boolean | null
@@ -638,6 +659,7 @@ export type Database = {
           longitude?: number | null
           music_credit_name?: string | null
           music_credit_url?: string | null
+          persona_id?: string | null
           place_name?: string | null
           preview_url?: string | null
           promotion_budget?: number | null
@@ -666,6 +688,7 @@ export type Database = {
           created_at?: string
           description?: string | null
           duration?: number | null
+          event_date?: string | null
           file_size?: number | null
           id?: string
           is_promoted?: boolean | null
@@ -675,6 +698,7 @@ export type Database = {
           longitude?: number | null
           music_credit_name?: string | null
           music_credit_url?: string | null
+          persona_id?: string | null
           place_name?: string | null
           preview_url?: string | null
           promotion_budget?: number | null
@@ -701,6 +725,13 @@ export type Database = {
             columns: ["campaign_id"]
             isOneToOne: false
             referencedRelation: "campaigns"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "content_persona_id_fkey"
+            columns: ["persona_id"]
+            isOneToOne: false
+            referencedRelation: "user_personas"
             referencedColumns: ["id"]
           },
           {
@@ -754,6 +785,90 @@ export type Database = {
           },
         ]
       }
+      daily_analytics: {
+        Row: {
+          avg_scroll_depth: number | null
+          avg_session_duration_seconds: number | null
+          avg_video_completion_rate: number | null
+          avg_videos_watched: number | null
+          created_at: string
+          daily_active_users: number | null
+          date: string
+          id: string
+          total_sessions: number | null
+          total_video_views: number | null
+          updated_at: string
+        }
+        Insert: {
+          avg_scroll_depth?: number | null
+          avg_session_duration_seconds?: number | null
+          avg_video_completion_rate?: number | null
+          avg_videos_watched?: number | null
+          created_at?: string
+          daily_active_users?: number | null
+          date: string
+          id?: string
+          total_sessions?: number | null
+          total_video_views?: number | null
+          updated_at?: string
+        }
+        Update: {
+          avg_scroll_depth?: number | null
+          avg_session_duration_seconds?: number | null
+          avg_video_completion_rate?: number | null
+          avg_videos_watched?: number | null
+          created_at?: string
+          daily_active_users?: number | null
+          date?: string
+          id?: string
+          total_sessions?: number | null
+          total_video_views?: number | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      daily_page_analytics: {
+        Row: {
+          avg_scroll_depth: number | null
+          avg_time_on_page_seconds: number | null
+          created_at: string
+          date: string
+          id: string
+          page_name: string
+          total_ad_clicks: number | null
+          total_ad_impressions: number | null
+          total_visits: number | null
+          unique_visitors: number | null
+          updated_at: string
+        }
+        Insert: {
+          avg_scroll_depth?: number | null
+          avg_time_on_page_seconds?: number | null
+          created_at?: string
+          date: string
+          id?: string
+          page_name: string
+          total_ad_clicks?: number | null
+          total_ad_impressions?: number | null
+          total_visits?: number | null
+          unique_visitors?: number | null
+          updated_at?: string
+        }
+        Update: {
+          avg_scroll_depth?: number | null
+          avg_time_on_page_seconds?: number | null
+          created_at?: string
+          date?: string
+          id?: string
+          page_name?: string
+          total_ad_clicks?: number | null
+          total_ad_impressions?: number | null
+          total_visits?: number | null
+          unique_visitors?: number | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
       detection_approvals: {
         Row: {
           approved_at: string
@@ -802,6 +917,7 @@ export type Database = {
           longitude: number | null
           music_credit_name: string | null
           music_credit_url: string | null
+          persona_id: string | null
           place_name: string | null
           status: string | null
           tags: string[] | null
@@ -825,6 +941,7 @@ export type Database = {
           longitude?: number | null
           music_credit_name?: string | null
           music_credit_url?: string | null
+          persona_id?: string | null
           place_name?: string | null
           status?: string | null
           tags?: string[] | null
@@ -848,6 +965,7 @@ export type Database = {
           longitude?: number | null
           music_credit_name?: string | null
           music_credit_url?: string | null
+          persona_id?: string | null
           place_name?: string | null
           status?: string | null
           tags?: string[] | null
@@ -860,6 +978,13 @@ export type Database = {
           video_url?: string
         }
         Relationships: [
+          {
+            foreignKeyName: "drafts_persona_id_fkey"
+            columns: ["persona_id"]
+            isOneToOne: false
+            referencedRelation: "user_personas"
+            referencedColumns: ["id"]
+          },
           {
             foreignKeyName: "drafts_track_id_fkey"
             columns: ["track_id"]
@@ -1676,6 +1801,45 @@ export type Database = {
         }
         Relationships: []
       }
+      page_views: {
+        Row: {
+          ad_clicks: number | null
+          ad_impressions: number | null
+          device_type: string | null
+          id: string
+          page_name: string
+          scroll_depth: number | null
+          session_id: string
+          time_on_page_seconds: number | null
+          user_id: string
+          visited_at: string
+        }
+        Insert: {
+          ad_clicks?: number | null
+          ad_impressions?: number | null
+          device_type?: string | null
+          id?: string
+          page_name: string
+          scroll_depth?: number | null
+          session_id: string
+          time_on_page_seconds?: number | null
+          user_id: string
+          visited_at?: string
+        }
+        Update: {
+          ad_clicks?: number | null
+          ad_impressions?: number | null
+          device_type?: string | null
+          id?: string
+          page_name?: string
+          scroll_depth?: number | null
+          session_id?: string
+          time_on_page_seconds?: number | null
+          user_id?: string
+          visited_at?: string
+        }
+        Relationships: []
+      }
       password_reset_limits: {
         Row: {
           attempt_count: number | null
@@ -1772,6 +1936,7 @@ export type Database = {
           id: string
           is_liked: boolean
           is_saved: boolean
+          persona_id: string | null
           user_id: string
           video_id: string
         }
@@ -1780,6 +1945,7 @@ export type Database = {
           id?: string
           is_liked?: boolean
           is_saved?: boolean
+          persona_id?: string | null
           user_id: string
           video_id: string
         }
@@ -1788,10 +1954,18 @@ export type Database = {
           id?: string
           is_liked?: boolean
           is_saved?: boolean
+          persona_id?: string | null
           user_id?: string
           video_id?: string
         }
         Relationships: [
+          {
+            foreignKeyName: "saved_videos_persona_id_fkey"
+            columns: ["persona_id"]
+            isOneToOne: false
+            referencedRelation: "user_personas"
+            referencedColumns: ["id"]
+          },
           {
             foreignKeyName: "saved_videos_video_id_fkey"
             columns: ["video_id"]
@@ -2010,6 +2184,86 @@ export type Database = {
           },
         ]
       }
+      user_personas: {
+        Row: {
+          avatar_url: string | null
+          bio: string | null
+          business_id: string | null
+          created_at: string | null
+          display_name: string | null
+          followers_count: number | null
+          following_count: number | null
+          id: string
+          influencer_profile_id: string | null
+          is_active: boolean | null
+          musician_profile_id: string | null
+          persona_type: Database["public"]["Enums"]["persona_type"]
+          updated_at: string | null
+          user_id: string
+        }
+        Insert: {
+          avatar_url?: string | null
+          bio?: string | null
+          business_id?: string | null
+          created_at?: string | null
+          display_name?: string | null
+          followers_count?: number | null
+          following_count?: number | null
+          id?: string
+          influencer_profile_id?: string | null
+          is_active?: boolean | null
+          musician_profile_id?: string | null
+          persona_type: Database["public"]["Enums"]["persona_type"]
+          updated_at?: string | null
+          user_id: string
+        }
+        Update: {
+          avatar_url?: string | null
+          bio?: string | null
+          business_id?: string | null
+          created_at?: string | null
+          display_name?: string | null
+          followers_count?: number | null
+          following_count?: number | null
+          id?: string
+          influencer_profile_id?: string | null
+          is_active?: boolean | null
+          musician_profile_id?: string | null
+          persona_type?: Database["public"]["Enums"]["persona_type"]
+          updated_at?: string | null
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "user_personas_business_id_fkey"
+            columns: ["business_id"]
+            isOneToOne: false
+            referencedRelation: "businesses"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "user_personas_influencer_profile_id_fkey"
+            columns: ["influencer_profile_id"]
+            isOneToOne: false
+            referencedRelation: "influencer_profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "user_personas_influencer_profile_id_fkey"
+            columns: ["influencer_profile_id"]
+            isOneToOne: false
+            referencedRelation: "public_influencer_profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "user_personas_musician_profile_id_fkey"
+            columns: ["musician_profile_id"]
+            isOneToOne: false
+            referencedRelation: "musician_profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       user_roles: {
         Row: {
           created_at: string
@@ -2028,6 +2282,48 @@ export type Database = {
           id?: string
           role?: Database["public"]["Enums"]["app_role"]
           user_id?: string
+        }
+        Relationships: []
+      }
+      user_sessions: {
+        Row: {
+          created_at: string
+          device_fingerprint: string | null
+          device_type: string | null
+          duration_seconds: number | null
+          ended_at: string | null
+          id: string
+          max_scroll_depth: number | null
+          session_id: string
+          started_at: string
+          user_id: string
+          videos_watched: number | null
+        }
+        Insert: {
+          created_at?: string
+          device_fingerprint?: string | null
+          device_type?: string | null
+          duration_seconds?: number | null
+          ended_at?: string | null
+          id?: string
+          max_scroll_depth?: number | null
+          session_id: string
+          started_at?: string
+          user_id: string
+          videos_watched?: number | null
+        }
+        Update: {
+          created_at?: string
+          device_fingerprint?: string | null
+          device_type?: string | null
+          duration_seconds?: number | null
+          ended_at?: string | null
+          id?: string
+          max_scroll_depth?: number | null
+          session_id?: string
+          started_at?: string
+          user_id?: string
+          videos_watched?: number | null
         }
         Relationships: []
       }
@@ -2153,6 +2449,54 @@ export type Database = {
             referencedColumns: ["id"]
           },
         ]
+      }
+      zip_codes: {
+        Row: {
+          adjacent_zip_codes: string[] | null
+          city: string
+          county: string | null
+          created_at: string | null
+          id: string
+          is_active: boolean | null
+          latitude: number
+          longitude: number
+          population: number | null
+          state: string | null
+          timezone: string | null
+          updated_at: string | null
+          zip_code: string
+        }
+        Insert: {
+          adjacent_zip_codes?: string[] | null
+          city: string
+          county?: string | null
+          created_at?: string | null
+          id?: string
+          is_active?: boolean | null
+          latitude: number
+          longitude: number
+          population?: number | null
+          state?: string | null
+          timezone?: string | null
+          updated_at?: string | null
+          zip_code: string
+        }
+        Update: {
+          adjacent_zip_codes?: string[] | null
+          city?: string
+          county?: string | null
+          created_at?: string | null
+          id?: string
+          is_active?: boolean | null
+          latitude?: number
+          longitude?: number
+          population?: number | null
+          state?: string | null
+          timezone?: string | null
+          updated_at?: string | null
+          zip_code?: string
+        }
+        Relationships: []
       }
     }
     Views: {
@@ -2396,6 +2740,10 @@ export type Database = {
             }
             Returns: string
           }
+      calculate_distance_miles: {
+        Args: { lat1: number; lat2: number; lng1: number; lng2: number }
+        Returns: number
+      }
       can_view_location: {
         Args: { requesting_user_id: string; video_user_id: string }
         Returns: boolean
@@ -2435,6 +2783,14 @@ export type Database = {
         | { Args: { table_name: string }; Returns: string }
       enablelongtransactions: { Args: never; Returns: string }
       equals: { Args: { geom1: unknown; geom2: unknown }; Returns: boolean }
+      find_adjacent_zip_codes: {
+        Args: { radius_miles?: number; target_zip: string }
+        Returns: string[]
+      }
+      find_cardinal_adjacent_zip_codes: {
+        Args: { max_distance_miles?: number; target_zip: string }
+        Returns: string[]
+      }
       generate_business_slug: {
         Args: { business_name: string }
         Returns: string
@@ -2537,6 +2893,7 @@ export type Database = {
         Returns: boolean
       }
       geomfromewkt: { Args: { "": string }; Returns: unknown }
+      get_active_persona: { Args: { p_user_id: string }; Returns: string }
       get_best_venue_type: { Args: { types: string[] }; Returns: string }
       get_content_within_radius: {
         Args: {
@@ -3225,7 +3582,15 @@ export type Database = {
         Args: { geom: unknown; move: number; wrap: number }
         Returns: unknown
       }
+      switch_persona: {
+        Args: { p_persona_id: string; p_user_id: string }
+        Returns: boolean
+      }
       unlockrows: { Args: { "": string }; Returns: number }
+      update_daily_analytics: {
+        Args: { target_date: string }
+        Returns: undefined
+      }
       updategeometrysrid: {
         Args: {
           catalogn_name: string
@@ -3239,6 +3604,7 @@ export type Database = {
     }
     Enums: {
       app_role: "admin" | "moderator" | "user"
+      persona_type: "user" | "business_owner" | "influencer" | "musician"
     }
     CompositeTypes: {
       geometry_dump: {
@@ -3375,6 +3741,7 @@ export const Constants = {
   public: {
     Enums: {
       app_role: ["admin", "moderator", "user"],
+      persona_type: ["user", "business_owner", "influencer", "musician"],
     },
   },
 } as const
