@@ -1,66 +1,85 @@
-import { Building2, Facebook, Twitter, Linkedin, Instagram } from "lucide-react";
+
+import { Link } from 'react-router-dom';
+import { Mail, Phone, MapPin, Video } from 'lucide-react';
 
 const Footer = () => {
   return (
-    <footer className="bg-foreground text-background py-12">
-      <div className="container mx-auto px-4">
-        <div className="grid md:grid-cols-4 gap-8 mb-8">
-          <div className="space-y-4">
-            <div className="flex items-center gap-2">
-              <div className="w-10 h-10 rounded-lg bg-primary flex items-center justify-center">
-                <Building2 className="w-6 h-6 text-primary-foreground" />
+    <footer className="bg-gray-900 text-white">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+          {/* Company Info */}
+          <div className="col-span-1 md:col-span-2">
+            <div className="flex items-center space-x-2 mb-4">
+              <img 
+                src="/lovable-uploads/f37053d8-488f-4961-b4ae-38f46b121569.png"
+                alt="Lokal location pin"
+                className="w-8 h-8"
+              />
+              <span className="text-2xl font-bold">Lokal</span>
+            </div>
+            <p className="text-accent mb-4 max-w-md">
+              Giving a voice to small businesses through authentic, crowd-sourced video experiences. 
+              Share what you love and discover your city like never before.
+            </p>
+            <div className="flex space-x-4">
+              <div className="flex items-center space-x-2 text-accent">
+                <Mail size={16} />
+                <span>keith@sharelokal.com</span>
               </div>
-              <span className="text-lg font-bold">Chamber</span>
+              <div className="flex items-center space-x-2 text-accent">
+                <Video size={16} />
+                <span>Share Your Story</span>
+              </div>
             </div>
-            <p className="text-background/80 text-sm">
-              Empowering businesses to thrive through collaboration, advocacy, and community engagement.
-            </p>
           </div>
-          
+
+          {/* Quick Links */}
           <div>
-            <h3 className="font-semibold mb-4">Quick Links</h3>
-            <ul className="space-y-2 text-sm text-background/80">
-              <li><a href="#" className="hover:text-background transition-colors">About Us</a></li>
-              <li><a href="#" className="hover:text-background transition-colors">Membership</a></li>
-              <li><a href="#" className="hover:text-background transition-colors">Events</a></li>
-              <li><a href="#" className="hover:text-background transition-colors">Resources</a></li>
+            <h3 className="text-lg font-semibold mb-4">Explore</h3>
+            <ul className="space-y-2">
+              <li>
+                <Link to="/" className="text-accent hover:text-white transition-colors">
+                  Home
+                </Link>
+              </li>
+              <li>
+                <Link to="/about" className="text-accent hover:text-white transition-colors">
+                  Our Story
+                </Link>
+              </li>
+              <li>
+                <Link to="/services" className="text-accent hover:text-white transition-colors">
+                  For Businesses
+                </Link>
+              </li>
+              <li>
+                <Link to="/contact" className="text-accent hover:text-white transition-colors">
+                  Join Lokal
+                </Link>
+              </li>
             </ul>
           </div>
-          
+
+          {/* Community */}
           <div>
-            <h3 className="font-semibold mb-4">Services</h3>
-            <ul className="space-y-2 text-sm text-background/80">
-              <li><a href="#" className="hover:text-background transition-colors">Networking</a></li>
-              <li><a href="#" className="hover:text-background transition-colors">Business Support</a></li>
-              <li><a href="#" className="hover:text-background transition-colors">Advocacy</a></li>
-              <li><a href="#" className="hover:text-background transition-colors">Education</a></li>
+            <h3 className="text-lg font-semibold mb-4">Community</h3>
+            <ul className="space-y-2 text-accent">
+              <li>Video Guidelines</li>
+              <li>Local Ambassadors</li>
+              <li>Business Partners</li>
+              <li>Success Stories</li>
             </ul>
-          </div>
-          
-          <div>
-            <h3 className="font-semibold mb-4">Connect With Us</h3>
-            <div className="flex gap-3 mb-4">
-              <a href="#" className="w-9 h-9 rounded-lg bg-background/10 hover:bg-primary flex items-center justify-center transition-colors">
-                <Facebook className="w-4 h-4" />
-              </a>
-              <a href="#" className="w-9 h-9 rounded-lg bg-background/10 hover:bg-primary flex items-center justify-center transition-colors">
-                <Twitter className="w-4 h-4" />
-              </a>
-              <a href="#" className="w-9 h-9 rounded-lg bg-background/10 hover:bg-primary flex items-center justify-center transition-colors">
-                <Linkedin className="w-4 h-4" />
-              </a>
-              <a href="#" className="w-9 h-9 rounded-lg bg-background/10 hover:bg-primary flex items-center justify-center transition-colors">
-                <Instagram className="w-4 h-4" />
-              </a>
-            </div>
-            <p className="text-sm text-background/80">
-              Stay updated with our latest news and events.
-            </p>
           </div>
         </div>
-        
-        <div className="border-t border-background/20 pt-8 text-center text-sm text-background/60">
-          <p>&copy; 2024 Chamber of Commerce. All rights reserved.</p>
+
+        <div className="border-t border-gray-700 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center">
+          <p className="text-accent text-sm">
+            © 2024 Lokal. Empowering small businesses, one video at a time.
+          </p>
+          <div className="flex space-x-6 mt-4 md:mt-0">
+            <Link to="/terms-of-service" className="text-accent hover:text-white text-sm">Terms of Service</Link>
+            <Link to="/privacy-policy" className="text-accent hover:text-white text-sm">Privacy Policy</Link>
+          </div>
         </div>
       </div>
     </footer>
