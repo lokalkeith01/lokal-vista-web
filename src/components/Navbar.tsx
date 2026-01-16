@@ -26,9 +26,9 @@ const Navbar = () => {
           <div className="flex items-center space-x-3">
             <Link to="/" className="flex items-center space-x-2">
               <img 
-                src="/lovable-uploads/b7722a35-1baf-4098-90ff-d19627107903.png" 
+                src="/lovable-uploads/lokal-logo-dark.png" 
                 alt="Lokal" 
-                className="h-8 w-auto"
+                className="h-8 w-auto rounded-lg"
               />
             </Link>
             <button 
