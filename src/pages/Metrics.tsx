@@ -1,3 +1,4 @@
+import { useState } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { useAuth } from "@/contexts/AuthContext";
@@ -5,11 +6,35 @@ import { isAdminEmail } from "@/config/adminConfig";
 import MetricsSidebar from "@/components/metrics/MetricsSidebar";
 import AdminMetricsDashboard from "@/components/metrics/AdminMetricsDashboard";
 import UserMetricsDashboard from "@/components/metrics/UserMetricsDashboard";
+import BusinessMetricsDashboard from "@/components/metrics/BusinessMetricsDashboard";
+import InfluencerMetricsDashboard from "@/components/metrics/InfluencerMetricsDashboard";
+import MusicianMetricsDashboard from "@/components/metrics/MusicianMetricsDashboard";
+import PersonaSelector, { PersonaType } from "@/components/metrics/PersonaSelector";
 import { Badge } from "@/components/ui/badge";
 
 const Metrics = () => {
   const { user } = useAuth();
   const isAdmin = isAdminEmail(user?.email);
+  const [selectedPersona, setSelectedPersona] = useState<PersonaType>('admin');
+
+  const renderDashboard = () => {
+    if (!isAdmin) {
+      return <UserMetricsDashboard />;
+    }
+
+    switch (selectedPersona) {
+      case 'admin':
+        return <AdminMetricsDashboard />;
+      case 'business':
+        return <BusinessMetricsDashboard />;
+      case 'influencer':
+        return <InfluencerMetricsDashboard />;
+      case 'musician':
+        return <MusicianMetricsDashboard />;
+      default:
+        return <AdminMetricsDashboard />;
+    }
+  };
 
   return (
     <div className="min-h-screen bg-background">
@@ -33,9 +58,17 @@ const Metrics = () => {
                   </Badge>
                 )}
               </div>
-              <div className="flex items-center gap-2 px-4 py-2 bg-green-50 text-green-800 rounded-lg text-sm font-medium">
-                <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
-                Live Data
+              <div className="flex items-center gap-4">
+                <div className="flex items-center gap-2 px-4 py-2 bg-green-50 text-green-800 rounded-lg text-sm font-medium">
+                  <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+                  Live Data
+                </div>
+                {isAdmin && (
+                  <PersonaSelector 
+                    value={selectedPersona} 
+                    onChange={setSelectedPersona} 
+                  />
+                )}
               </div>
             </div>
             <div className="flex items-center gap-2 text-sm text-muted-foreground">
@@ -44,7 +77,7 @@ const Metrics = () => {
           </header>
 
           {/* Conditional Dashboard */}
-          {isAdmin ? <AdminMetricsDashboard /> : <UserMetricsDashboard />}
+          {renderDashboard()}
         </main>
       </div>
       
