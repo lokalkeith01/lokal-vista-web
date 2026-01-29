@@ -47,6 +47,101 @@ export const useBusinessMetrics = () => {
   });
 };
 
+// Owner-specific business metrics (for logged-in business owners)
+export interface OwnerBusinessMetrics {
+  business: {
+    id: string;
+    name: string;
+    address: string | null;
+    category: string | null;
+    followers_count: number | null;
+    content_count: number | null;
+    rating: number | null;
+    is_claimed: boolean | null;
+    verification_status: string | null;
+    phone: string | null;
+    website: string | null;
+    description: string | null;
+  } | null;
+  followers: number;
+  contentViews: number;
+  recentContent: Array<{
+    id: string;
+    title: string;
+    views: number | null;
+    likes_count: number;
+    created_at: string;
+  }>;
+  campaignStats: {
+    active: number;
+    totalImpressions: number;
+    totalClicks: number;
+  };
+}
+
+export const useOwnerBusinessMetrics = () => {
+  return useQuery({
+    queryKey: ['owner-business-metrics'],
+    queryFn: async (): Promise<OwnerBusinessMetrics> => {
+      // Get current user
+      const { data: { user } } = await supabase.auth.getUser();
+      if (!user) throw new Error('Not authenticated');
+
+      // Fetch the business owned by this user
+      const { data: business, error: bizError } = await supabase
+        .from('businesses')
+        .select('id, name, address, category, followers_count, content_count, rating, is_claimed, verification_status, phone, website, description')
+        .eq('owner_id', user.id)
+        .single();
+
+      if (bizError && bizError.code !== 'PGRST116') throw bizError;
+
+      if (!business) {
+        return {
+          business: null,
+          followers: 0,
+          contentViews: 0,
+          recentContent: [],
+          campaignStats: { active: 0, totalImpressions: 0, totalClicks: 0 },
+        };
+      }
+
+      // Fetch content for this business
+      const { data: content } = await supabase
+        .from('content')
+        .select('id, title, views, likes_count, created_at')
+        .eq('company_name', business.name)
+        .order('created_at', { ascending: false })
+        .limit(10);
+
+      // Fetch campaigns for this business
+      const { data: campaigns } = await supabase
+        .from('campaigns')
+        .select('id, is_active, total_impressions, total_clicks')
+        .eq('business_id', business.id);
+
+      const activeCampaigns = campaigns?.filter(c => c.is_active) || [];
+      const totalImpressions = campaigns?.reduce((sum, c) => sum + (c.total_impressions || 0), 0) || 0;
+      const totalClicks = campaigns?.reduce((sum, c) => sum + (c.total_clicks || 0), 0) || 0;
+
+      const contentViews = content?.reduce((sum, c) => sum + (c.views || 0), 0) || 0;
+
+      return {
+        business,
+        followers: business.followers_count || 0,
+        contentViews,
+        recentContent: content || [],
+        campaignStats: {
+          active: activeCampaigns.length,
+          totalImpressions,
+          totalClicks,
+        },
+      };
+    },
+    refetchInterval: 30000,
+  });
+};
+
 // Influencer metrics
 export interface InfluencerMetrics {
   totalInfluencers: number;
