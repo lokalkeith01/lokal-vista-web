@@ -9,12 +9,25 @@ import {
   Radio
 } from "lucide-react";
 
+export type SectionType = 'dashboard' | 'content' | 'campaigns' | 'beacons' | 'reports' | 'settings';
+
 interface MetricsSidebarProps {
   isAdmin: boolean;
+  activeSection: SectionType;
+  onSectionChange: (section: SectionType) => void;
 }
 
-const MetricsSidebar = ({ isAdmin }: MetricsSidebarProps) => {
+const MetricsSidebar = ({ isAdmin, activeSection, onSectionChange }: MetricsSidebarProps) => {
   const navigate = useNavigate();
+
+  const menuItems = [
+    { id: 'dashboard' as SectionType, label: 'Dashboard', icon: BarChart3, adminOnly: false },
+    { id: 'content' as SectionType, label: 'My Content', icon: Video, adminOnly: false },
+    { id: 'campaigns' as SectionType, label: 'Campaigns', icon: Target, adminOnly: true },
+    { id: 'beacons' as SectionType, label: 'Beacon Management', icon: MapPin, adminOnly: true },
+    { id: 'reports' as SectionType, label: 'Reports', icon: TrendingUp, adminOnly: true },
+    { id: 'settings' as SectionType, label: 'Settings', icon: Settings, adminOnly: false },
+  ];
 
   return (
     <aside className="w-64 bg-background border-r border-border min-h-screen p-4 hidden lg:block">
@@ -24,46 +37,30 @@ const MetricsSidebar = ({ isAdmin }: MetricsSidebarProps) => {
       
       <nav>
         <ul className="space-y-2">
-          <li>
-            <a href="#" className="flex items-center gap-3 p-3 rounded-lg bg-muted text-foreground">
-              <BarChart3 size={20} />
-              Dashboard
-            </a>
-          </li>
-          <li>
-            <a href="#" className="flex items-center gap-3 p-3 rounded-lg text-muted-foreground hover:bg-muted hover:text-foreground transition-colors">
-              <Video size={20} />
-              My Content
-            </a>
-          </li>
-          {isAdmin && (
-            <>
-              <li>
-                <a href="#" className="flex items-center gap-3 p-3 rounded-lg text-muted-foreground hover:bg-muted hover:text-foreground transition-colors">
-                  <Target size={20} />
-                  Campaigns
-                </a>
+          {menuItems.map((item) => {
+            // Skip admin-only items for non-admins
+            if (item.adminOnly && !isAdmin) return null;
+            
+            const Icon = item.icon;
+            const isActive = activeSection === item.id;
+            
+            return (
+              <li key={item.id}>
+                <button
+                  onClick={() => onSectionChange(item.id)}
+                  className={`flex items-center gap-3 p-3 rounded-lg w-full text-left transition-colors ${
+                    isActive 
+                      ? 'bg-muted text-foreground' 
+                      : 'text-muted-foreground hover:bg-muted hover:text-foreground'
+                  }`}
+                >
+                  <Icon size={20} />
+                  {item.label}
+                </button>
               </li>
-              <li>
-                <a href="#" className="flex items-center gap-3 p-3 rounded-lg text-muted-foreground hover:bg-muted hover:text-foreground transition-colors">
-                  <MapPin size={20} />
-                  Beacon Management
-                </a>
-              </li>
-              <li>
-                <a href="#" className="flex items-center gap-3 p-3 rounded-lg text-muted-foreground hover:bg-muted hover:text-foreground transition-colors">
-                  <TrendingUp size={20} />
-                  Reports
-                </a>
-              </li>
-            </>
-          )}
-          <li>
-            <a href="#" className="flex items-center gap-3 p-3 rounded-lg text-muted-foreground hover:bg-muted hover:text-foreground transition-colors">
-              <Settings size={20} />
-              Settings
-            </a>
-          </li>
+            );
+          })}
+          
           {isAdmin && (
             <li>
               <button 
