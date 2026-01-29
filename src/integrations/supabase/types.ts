@@ -613,6 +613,7 @@ export type Database = {
           event_date: string | null
           file_size: number | null
           id: string
+          is_flagged: boolean | null
           is_promoted: boolean | null
           latitude: number | null
           likes_count: number
@@ -652,6 +653,7 @@ export type Database = {
           event_date?: string | null
           file_size?: number | null
           id?: string
+          is_flagged?: boolean | null
           is_promoted?: boolean | null
           latitude?: number | null
           likes_count?: number
@@ -691,6 +693,7 @@ export type Database = {
           event_date?: string | null
           file_size?: number | null
           id?: string
+          is_flagged?: boolean | null
           is_promoted?: boolean | null
           latitude?: number | null
           likes_count?: number
@@ -747,6 +750,50 @@ export type Database = {
             isOneToOne: false
             referencedRelation: "profiles"
             referencedColumns: ["user_id"]
+          },
+        ]
+      }
+      content_reports: {
+        Row: {
+          content_id: string
+          created_at: string
+          id: string
+          notes: string | null
+          reason: string | null
+          reporter_id: string
+          reviewed_at: string | null
+          reviewed_by: string | null
+          status: string
+        }
+        Insert: {
+          content_id: string
+          created_at?: string
+          id?: string
+          notes?: string | null
+          reason?: string | null
+          reporter_id: string
+          reviewed_at?: string | null
+          reviewed_by?: string | null
+          status?: string
+        }
+        Update: {
+          content_id?: string
+          created_at?: string
+          id?: string
+          notes?: string | null
+          reason?: string | null
+          reporter_id?: string
+          reviewed_at?: string | null
+          reviewed_by?: string | null
+          status?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "content_reports_content_id_fkey"
+            columns: ["content_id"]
+            isOneToOne: false
+            referencedRelation: "content"
+            referencedColumns: ["id"]
           },
         ]
       }
