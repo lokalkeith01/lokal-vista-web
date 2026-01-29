@@ -9,6 +9,7 @@ import UserMetricsDashboard from "@/components/metrics/UserMetricsDashboard";
 import BusinessMetricsDashboard from "@/components/metrics/BusinessMetricsDashboard";
 import InfluencerMetricsDashboard from "@/components/metrics/InfluencerMetricsDashboard";
 import MusicianMetricsDashboard from "@/components/metrics/MusicianMetricsDashboard";
+import OwnerBusinessDashboard from "@/components/metrics/OwnerBusinessDashboard";
 import PersonaSelector, { PersonaType } from "@/components/metrics/PersonaSelector";
 import MyContentSection from "@/components/metrics/sections/MyContentSection";
 import CampaignsSection from "@/components/metrics/sections/CampaignsSection";
@@ -16,6 +17,8 @@ import BeaconManagementSection from "@/components/metrics/sections/BeaconManagem
 import ReportsSection from "@/components/metrics/sections/ReportsSection";
 import SettingsSection from "@/components/metrics/sections/SettingsSection";
 import { Badge } from "@/components/ui/badge";
+import { useQuery } from "@tanstack/react-query";
+import { supabase } from "@/integrations/supabase/client";
 
 const Metrics = () => {
   const { user } = useAuth();
@@ -23,11 +26,35 @@ const Metrics = () => {
   const [selectedPersona, setSelectedPersona] = useState<PersonaType>('admin');
   const [activeSection, setActiveSection] = useState<SectionType>('dashboard');
 
+  // Check if user is a business owner
+  const { data: ownedBusiness } = useQuery({
+    queryKey: ['user-owned-business', user?.id],
+    queryFn: async () => {
+      if (!user?.id) return null;
+      const { data } = await supabase
+        .from('businesses')
+        .select('id, name')
+        .eq('owner_id', user.id)
+        .single();
+      return data;
+    },
+    enabled: !!user?.id,
+  });
+
+  const isBusinessOwner = !!ownedBusiness;
+
   const renderDashboard = () => {
+    // If user is a business owner (not admin), show their business dashboard
+    if (isBusinessOwner && !isAdmin) {
+      return <OwnerBusinessDashboard />;
+    }
+
+    // If not admin and not business owner, show regular user dashboard
     if (!isAdmin) {
       return <UserMetricsDashboard />;
     }
 
+    // Admin persona switching
     switch (selectedPersona) {
       case 'admin':
         return <AdminMetricsDashboard />;
@@ -52,11 +79,19 @@ const Metrics = () => {
               <div>
                 <div className="flex items-center gap-3 mb-2">
                   <h1 className="text-2xl md:text-3xl font-semibold text-foreground">
-                    Welcome back{user?.email ? `, ${user.email.split('@')[0]}` : ''}!
+                    {isBusinessOwner && !isAdmin 
+                      ? `Welcome back, ${ownedBusiness?.name}!`
+                      : `Welcome back${user?.email ? `, ${user.email.split('@')[0]}` : ''}!`
+                    }
                   </h1>
                   {isAdmin && (
                     <Badge variant="secondary" className="bg-primary/10 text-primary">
                       Admin
+                    </Badge>
+                  )}
+                  {isBusinessOwner && !isAdmin && (
+                    <Badge variant="secondary" className="bg-green-100 text-green-700">
+                      Business Owner
                     </Badge>
                   )}
                 </div>
