@@ -1,12 +1,14 @@
-
 import { useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
-import { Menu, X } from 'lucide-react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Menu, X, LogOut } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { useAuth } from '@/contexts/AuthContext';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
+  const navigate = useNavigate();
+  const { user, signOut } = useAuth();
 
   const isActive = (path: string) => location.pathname === path;
 
@@ -59,9 +61,36 @@ const Navbar = () => {
                 {link.label}
               </Link>
             ))}
-            <Button className="bg-primary hover:bg-primary/90 text-primary-foreground">
-              Share Your Story
-            </Button>
+            {user ? (
+              <div className="flex items-center gap-2">
+                <span className="text-sm text-muted-foreground">{user.email}</span>
+                <Button 
+                  variant="ghost" 
+                  size="sm" 
+                  onClick={() => signOut()}
+                  className="text-blue hover:text-blue/80"
+                >
+                  <LogOut className="w-4 h-4 mr-1" />
+                  Sign Out
+                </Button>
+              </div>
+            ) : (
+              <div className="flex items-center gap-2">
+                <Button 
+                  variant="ghost"
+                  onClick={() => navigate('/sign-in')}
+                  className="text-blue hover:text-blue/80"
+                >
+                  Sign In
+                </Button>
+                <Button 
+                  className="bg-primary hover:bg-primary/90 text-primary-foreground"
+                  onClick={() => navigate('/sign-up')}
+                >
+                  Sign Up
+                </Button>
+              </div>
+            )}
           </div>
 
           {/* Mobile Menu Button */}
@@ -94,9 +123,30 @@ const Navbar = () => {
                   {link.label}
                 </Link>
               ))}
-              <Button className="mt-2 bg-primary hover:bg-primary/90 text-primary-foreground">
-                Share Your Story
-              </Button>
+              {user ? (
+                <Button 
+                  className="mt-2 bg-destructive hover:bg-destructive/90 text-destructive-foreground"
+                  onClick={() => { signOut(); setIsOpen(false); }}
+                >
+                  <LogOut className="w-4 h-4 mr-2" />
+                  Sign Out
+                </Button>
+              ) : (
+                <div className="flex flex-col gap-2 mt-2">
+                  <Button 
+                    variant="outline"
+                    onClick={() => { navigate('/sign-in'); setIsOpen(false); }}
+                  >
+                    Sign In
+                  </Button>
+                  <Button 
+                    className="bg-primary hover:bg-primary/90 text-primary-foreground"
+                    onClick={() => { navigate('/sign-up'); setIsOpen(false); }}
+                  >
+                    Sign Up
+                  </Button>
+                </div>
+              )}
             </div>
           </div>
         )}
