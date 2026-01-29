@@ -5,6 +5,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { AuthProvider } from "@/contexts/AuthContext";
+import ProtectedRoute from "@/components/ProtectedRoute";
 import Index from "./pages/Index";
 import Discover from "./pages/Discover";
 import About from "./pages/About";
@@ -34,8 +35,8 @@ const App = () => (
             <Route path="/about" element={<About />} />
             <Route path="/services" element={<Services />} />
             <Route path="/contact" element={<Contact />} />
-            <Route path="/metrics" element={<Metrics />} />
-            <Route path="/live-ble" element={<LiveBLE />} />
+            <Route path="/metrics" element={<ProtectedRoute><Metrics /></ProtectedRoute>} />
+            <Route path="/live-ble" element={<ProtectedRoute><LiveBLE /></ProtectedRoute>} />
             <Route path="/validation" element={<Validation />} />
             <Route path="/terms-of-service" element={<TermsOfService />} />
             <Route path="/privacy-policy" element={<PrivacyPolicy />} />

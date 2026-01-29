@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -16,6 +16,10 @@ const SignIn = () => {
   const { signIn } = useAuth();
   const { toast } = useToast();
   const navigate = useNavigate();
+  const location = useLocation();
+  
+  // Get the redirect destination from location state, or default to /metrics
+  const from = (location.state as { from?: string })?.from || '/metrics';
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -34,7 +38,7 @@ const SignIn = () => {
         title: 'Welcome back!',
         description: 'You have successfully signed in.',
       });
-      navigate('/');
+      navigate(from);
     }
 
     setLoading(false);
