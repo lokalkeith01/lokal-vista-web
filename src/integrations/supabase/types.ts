@@ -264,6 +264,47 @@ export type Database = {
         }
         Relationships: []
       }
+      business_claim_requests: {
+        Row: {
+          business_id: string
+          created_at: string | null
+          email: string
+          id: string
+          status: string
+          token: string | null
+          user_id: string | null
+          verified_at: string | null
+        }
+        Insert: {
+          business_id: string
+          created_at?: string | null
+          email: string
+          id?: string
+          status?: string
+          token?: string | null
+          user_id?: string | null
+          verified_at?: string | null
+        }
+        Update: {
+          business_id?: string
+          created_at?: string | null
+          email?: string
+          id?: string
+          status?: string
+          token?: string | null
+          user_id?: string | null
+          verified_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "business_claim_requests_business_id_fkey"
+            columns: ["business_id"]
+            isOneToOne: false
+            referencedRelation: "businesses"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       business_follows: {
         Row: {
           business_id: string
@@ -2797,6 +2838,7 @@ export type Database = {
       }
       cleanup_old_password_reset_limits: { Args: never; Returns: undefined }
       cleanup_old_rate_limits: { Args: never; Returns: undefined }
+      complete_business_claim: { Args: { claim_token: string }; Returns: Json }
       disablelongtransactions: { Args: never; Returns: string }
       dropgeometrycolumn:
         | {
