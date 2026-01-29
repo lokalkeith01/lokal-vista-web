@@ -75,21 +75,12 @@ const Navbar = () => {
                 </Button>
               </div>
             ) : (
-              <div className="flex items-center gap-2">
-                <Button 
-                  variant="ghost"
-                  onClick={() => navigate('/sign-in')}
-                  className="text-blue hover:text-blue/80"
-                >
-                  Sign In
-                </Button>
-                <Button 
-                  className="bg-primary hover:bg-primary/90 text-primary-foreground"
-                  onClick={() => navigate('/sign-up')}
-                >
-                  Sign Up
-                </Button>
-              </div>
+              <Button 
+                className="bg-primary hover:bg-primary/90 text-primary-foreground"
+                onClick={() => navigate('/sign-in')}
+              >
+                Sign In
+              </Button>
             )}
           </div>
 
@@ -132,20 +123,12 @@ const Navbar = () => {
                   Sign Out
                 </Button>
               ) : (
-                <div className="flex flex-col gap-2 mt-2">
-                  <Button 
-                    variant="outline"
-                    onClick={() => { navigate('/sign-in'); setIsOpen(false); }}
-                  >
-                    Sign In
-                  </Button>
-                  <Button 
-                    className="bg-primary hover:bg-primary/90 text-primary-foreground"
-                    onClick={() => { navigate('/sign-up'); setIsOpen(false); }}
-                  >
-                    Sign Up
-                  </Button>
-                </div>
+                <Button 
+                  className="bg-primary hover:bg-primary/90 text-primary-foreground mt-2"
+                  onClick={() => { navigate('/sign-in'); setIsOpen(false); }}
+                >
+                  Sign In
+                </Button>
               )}
             </div>
           </div>
