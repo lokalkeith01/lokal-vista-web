@@ -16,6 +16,7 @@ import CampaignsSection from "@/components/metrics/sections/CampaignsSection";
 import BeaconManagementSection from "@/components/metrics/sections/BeaconManagementSection";
 import ReportsSection from "@/components/metrics/sections/ReportsSection";
 import SettingsSection from "@/components/metrics/sections/SettingsSection";
+import { LokalSystemHealth } from "@/components/LokalSystemHealth";
 import { Badge } from "@/components/ui/badge";
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
@@ -115,6 +116,13 @@ const Metrics = () => {
 
             {/* Conditional Dashboard */}
             {renderDashboard()}
+
+            {/* System Health - Admin only */}
+            {isAdmin && (
+              <div className="mt-8">
+                <LokalSystemHealth />
+              </div>
+            )}
           </>
         );
       case 'content':
