@@ -16,7 +16,7 @@ import CampaignsSection from "@/components/metrics/sections/CampaignsSection";
 import BeaconManagementSection from "@/components/metrics/sections/BeaconManagementSection";
 import ReportsSection from "@/components/metrics/sections/ReportsSection";
 import SettingsSection from "@/components/metrics/sections/SettingsSection";
-import { BetterStackHealth } from "@/components/BetterStackHealth";
+import { SystemHealthDashboard } from "@/components/SystemHealthDashboard";
 import { Badge } from "@/components/ui/badge";
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
@@ -75,10 +75,10 @@ const Metrics = () => {
       case 'dashboard':
         return (
           <>
-            {/* System Health - Admin only - At top */}
+            {/* System Health Dashboard - Admin only */}
             {isAdmin && (
               <div className="mb-8">
-                <BetterStackHealth />
+                <SystemHealthDashboard />
               </div>
             )}
 
