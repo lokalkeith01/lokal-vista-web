@@ -45,6 +45,20 @@ interface Incident {
   isResolved: boolean;
 }
 
+interface R2StorageData {
+  bucketName?: string;
+  totalObjects?: number;
+  totalSize?: number;
+  totalSizeMB?: number;
+  folders?: Array<{
+    name: string;
+    files: number;
+    size: number;
+    sizeMB: number;
+  }>;
+  error?: string;
+}
+
 interface SystemMetricsData {
   uptime: {
     status: "healthy" | "degraded" | "down";
@@ -75,6 +89,7 @@ interface SystemMetricsData {
     };
     error?: string;
   };
+  r2Storage?: R2StorageData;
   userActivity: {
     data: Array<{
       date: string;
@@ -342,7 +357,11 @@ export function SystemHealthDashboard() {
               </TabsContent>
 
               <TabsContent value="storage" className="mt-4">
-                <StorageMetrics data={data?.storage || null} loading={loading && !data} />
+                <StorageMetrics 
+                  data={data?.storage || null} 
+                  r2Data={data?.r2Storage || null}
+                  loading={loading && !data} 
+                />
               </TabsContent>
 
               <TabsContent value="users" className="mt-4">

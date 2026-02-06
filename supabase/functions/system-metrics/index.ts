@@ -76,6 +76,7 @@ serve(async (req) => {
       dailyAnalytics,
       userStats,
       edgeFunctionLogs,
+      r2StorageData,
     ] = await Promise.all([
       // BetterStack monitors
       fetch("https://uptime.betterstack.com/api/v2/monitors", {
@@ -99,6 +100,8 @@ serve(async (req) => {
       getUserStats(supabase),
       // Edge function error rates
       getEdgeFunctionMetrics(supabase),
+      // Cloudflare R2 storage
+      getR2StorageMetrics(),
     ]);
 
     if (!monitorsRes.ok) {
@@ -211,6 +214,7 @@ serve(async (req) => {
           incidents,
         },
         storage: storageData,
+        r2Storage: r2StorageData,
         userActivity: dailyAnalytics,
         platformStats: userStats,
         errors: edgeFunctionLogs,
@@ -379,4 +383,207 @@ async function getEdgeFunctionMetrics(_supabase: ReturnType<typeof createClient>
     errorRate: 0,
     note: "Edge function logs available in Supabase dashboard",
   };
+}
+
+async function getR2StorageMetrics() {
+  const accessKeyId = Deno.env.get("CLOUDFLARE_R2_ACCESS_KEY_ID");
+  const secretAccessKey = Deno.env.get("CLOUDFLARE_R2_SECRET_ACCESS_KEY");
+  const accountId = Deno.env.get("CLOUDFLARE_R2_ACCOUNT_ID");
+  const bucketName = Deno.env.get("CLOUDFLARE_R2_BUCKET_NAME");
+
+  if (!accessKeyId || !secretAccessKey || !accountId || !bucketName) {
+    return { error: "R2 credentials not configured", objects: [], totalSize: 0, totalObjects: 0 };
+  }
+
+  try {
+    // R2 uses S3-compatible API
+    const endpoint = `https://${accountId}.r2.cloudflarestorage.com`;
+    const date = new Date().toUTCString();
+    const method = "GET";
+    const path = `/${bucketName}?list-type=2`;
+
+    // Create AWS Signature v4 for R2
+    const signature = await createAwsSignature(
+      method,
+      path,
+      endpoint,
+      accessKeyId,
+      secretAccessKey,
+      accountId
+    );
+
+    const response = await fetch(`${endpoint}${path}`, {
+      method,
+      headers: {
+        ...signature.headers,
+        "x-amz-date": signature.amzDate,
+        "Authorization": signature.authHeader,
+      },
+    });
+
+    if (!response.ok) {
+      const errorText = await response.text();
+      console.error("R2 API error:", response.status, errorText);
+      return { error: `R2 API error: ${response.status}`, objects: [], totalSize: 0, totalObjects: 0 };
+    }
+
+    const xmlText = await response.text();
+    
+    // Parse XML response
+    const objects = parseR2ListResponse(xmlText);
+    const totalSize = objects.reduce((sum, obj) => sum + (obj.size || 0), 0);
+    
+    // Group by prefix/folder
+    const folders: Record<string, { files: number; size: number }> = {};
+    objects.forEach((obj) => {
+      const parts = obj.key.split("/");
+      const folder = parts.length > 1 ? parts[0] : "root";
+      if (!folders[folder]) {
+        folders[folder] = { files: 0, size: 0 };
+      }
+      folders[folder].files++;
+      folders[folder].size += obj.size || 0;
+    });
+
+    return {
+      bucketName,
+      totalObjects: objects.length,
+      totalSize,
+      totalSizeMB: Math.round(totalSize / (1024 * 1024) * 100) / 100,
+      folders: Object.entries(folders).map(([name, data]) => ({
+        name,
+        files: data.files,
+        size: data.size,
+        sizeMB: Math.round(data.size / (1024 * 1024) * 100) / 100,
+      })),
+    };
+  } catch (error) {
+    console.error("R2 storage metrics error:", error);
+    return { error: String(error), objects: [], totalSize: 0, totalObjects: 0 };
+  }
+}
+
+function parseR2ListResponse(xml: string): Array<{ key: string; size: number; lastModified: string }> {
+  const objects: Array<{ key: string; size: number; lastModified: string }> = [];
+  
+  // Simple XML parsing for S3 ListObjectsV2 response
+  const contentMatches = xml.matchAll(/<Contents>([\s\S]*?)<\/Contents>/g);
+  
+  for (const match of contentMatches) {
+    const content = match[1];
+    const keyMatch = content.match(/<Key>(.*?)<\/Key>/);
+    const sizeMatch = content.match(/<Size>(\d+)<\/Size>/);
+    const lastModifiedMatch = content.match(/<LastModified>(.*?)<\/LastModified>/);
+    
+    if (keyMatch) {
+      objects.push({
+        key: keyMatch[1],
+        size: sizeMatch ? parseInt(sizeMatch[1], 10) : 0,
+        lastModified: lastModifiedMatch ? lastModifiedMatch[1] : "",
+      });
+    }
+  }
+  
+  return objects;
+}
+
+async function createAwsSignature(
+  method: string,
+  path: string,
+  endpoint: string,
+  accessKeyId: string,
+  secretAccessKey: string,
+  accountId: string
+) {
+  const service = "s3";
+  const region = "auto";
+  const host = `${accountId}.r2.cloudflarestorage.com`;
+  
+  const now = new Date();
+  const amzDate = now.toISOString().replace(/[:-]|\.\d{3}/g, "");
+  const dateStamp = amzDate.slice(0, 8);
+  
+  // Create canonical request
+  const canonicalUri = path.split("?")[0];
+  const canonicalQuerystring = path.includes("?") ? path.split("?")[1] : "";
+  const payloadHash = await sha256("");
+  
+  const canonicalHeaders = `host:${host}\nx-amz-content-sha256:${payloadHash}\nx-amz-date:${amzDate}\n`;
+  const signedHeaders = "host;x-amz-content-sha256;x-amz-date";
+  
+  const canonicalRequest = [
+    method,
+    canonicalUri,
+    canonicalQuerystring,
+    canonicalHeaders,
+    signedHeaders,
+    payloadHash,
+  ].join("\n");
+  
+  // Create string to sign
+  const algorithm = "AWS4-HMAC-SHA256";
+  const credentialScope = `${dateStamp}/${region}/${service}/aws4_request`;
+  const stringToSign = [
+    algorithm,
+    amzDate,
+    credentialScope,
+    await sha256(canonicalRequest),
+  ].join("\n");
+  
+  // Calculate signature
+  const signingKey = await getSignatureKey(secretAccessKey, dateStamp, region, service);
+  const signature = await hmacHex(signingKey, stringToSign);
+  
+  const authHeader = `${algorithm} Credential=${accessKeyId}/${credentialScope}, SignedHeaders=${signedHeaders}, Signature=${signature}`;
+  
+  return {
+    authHeader,
+    amzDate,
+    headers: {
+      "Host": host,
+      "x-amz-content-sha256": payloadHash,
+    },
+  };
+}
+
+async function sha256(message: string): Promise<string> {
+  const encoder = new TextEncoder();
+  const data = encoder.encode(message);
+  const hash = await crypto.subtle.digest("SHA-256", data);
+  return Array.from(new Uint8Array(hash))
+    .map((b) => b.toString(16).padStart(2, "0"))
+    .join("");
+}
+
+async function hmac(key: ArrayBuffer | Uint8Array, message: string): Promise<ArrayBuffer> {
+  const encoder = new TextEncoder();
+  const cryptoKey = await crypto.subtle.importKey(
+    "raw",
+    key,
+    { name: "HMAC", hash: "SHA-256" },
+    false,
+    ["sign"]
+  );
+  return await crypto.subtle.sign("HMAC", cryptoKey, encoder.encode(message));
+}
+
+async function hmacHex(key: ArrayBuffer | Uint8Array, message: string): Promise<string> {
+  const result = await hmac(key, message);
+  return Array.from(new Uint8Array(result))
+    .map((b) => b.toString(16).padStart(2, "0"))
+    .join("");
+}
+
+async function getSignatureKey(
+  key: string,
+  dateStamp: string,
+  region: string,
+  service: string
+): Promise<ArrayBuffer> {
+  const encoder = new TextEncoder();
+  const kDate = await hmac(encoder.encode("AWS4" + key), dateStamp);
+  const kRegion = await hmac(kDate, region);
+  const kService = await hmac(kRegion, service);
+  const kSigning = await hmac(kService, "aws4_request");
+  return kSigning;
 }
