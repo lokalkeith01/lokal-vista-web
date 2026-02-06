@@ -22,6 +22,7 @@ import { StorageMetrics } from "@/components/health/StorageMetrics";
 import { PerformanceMetrics } from "@/components/health/PerformanceMetrics";
 import { UserActivityMetrics } from "@/components/health/UserActivityMetrics";
 import { ErrorTracking } from "@/components/health/ErrorTracking";
+import { WebVitalsCard } from "@/components/health/WebVitalsCard";
 
 interface Monitor {
   id: string;
@@ -303,30 +304,40 @@ export function SystemHealthDashboard() {
               ) : null}
             </div>
 
-            {/* Quick Monitor Status */}
-            {data?.uptime?.monitors && data.uptime.monitors.length > 0 && (
-              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3">
-                {data.uptime.monitors.slice(0, 5).map((monitor) => (
-                  <Card key={monitor.id} className="p-3">
-                    <div className="flex items-center justify-between mb-1">
-                      <span className="text-xs text-muted-foreground uppercase tracking-wide truncate">
-                        {monitor.type}
-                      </span>
-                      {getStatusIcon(monitor.status)}
-                    </div>
-                    <p className="text-sm font-medium truncate" title={monitor.name}>
-                      {monitor.name}
-                    </p>
-                    <div className="flex justify-between items-center mt-1">
-                      <span className="text-xs text-muted-foreground">
-                        {monitor.avgResponseTime ? `${monitor.avgResponseTime}ms` : "N/A"}
-                      </span>
-                      <span className="text-xs text-green-500">{monitor.availability}%</span>
-                    </div>
-                  </Card>
-                ))}
+            {/* Quick Status Cards - Monitors + Web Vitals */}
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
+              {/* Monitor Status Grid */}
+              {data?.uptime?.monitors && data.uptime.monitors.length > 0 && (
+                <div className="lg:col-span-2">
+                  <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
+                    {data.uptime.monitors.slice(0, 4).map((monitor) => (
+                      <Card key={monitor.id} className="p-3">
+                        <div className="flex items-center justify-between mb-1">
+                          <span className="text-xs text-muted-foreground uppercase tracking-wide truncate">
+                            {monitor.type}
+                          </span>
+                          {getStatusIcon(monitor.status)}
+                        </div>
+                        <p className="text-sm font-medium truncate" title={monitor.name}>
+                          {monitor.name}
+                        </p>
+                        <div className="flex justify-between items-center mt-1">
+                          <span className="text-xs text-muted-foreground">
+                            {monitor.avgResponseTime ? `${monitor.avgResponseTime}ms` : "N/A"}
+                          </span>
+                          <span className="text-xs text-green-500">{monitor.availability}%</span>
+                        </div>
+                      </Card>
+                    ))}
+                  </div>
+                </div>
+              )}
+              
+              {/* Web Vitals Card */}
+              <div className="lg:col-span-1">
+                <WebVitalsCard compact />
               </div>
-            )}
+            </div>
 
             {/* Detailed Tabs */}
             <Tabs defaultValue="performance" className="w-full">
