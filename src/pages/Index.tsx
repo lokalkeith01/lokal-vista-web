@@ -99,6 +99,10 @@ const Index = () => {
               <img 
                 src="/lovable-uploads/lokal-logo-main.png"
                 alt="Lokal logo"
+                width={256}
+                height={256}
+                loading="eager"
+                fetchPriority="high"
                 className="w-32 h-32 sm:w-48 sm:h-48 md:w-64 md:h-64"
               />
             </div>

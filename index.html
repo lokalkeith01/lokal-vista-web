@@ -7,18 +7,32 @@
     <title>Lokal - Discover Your Community</title>
     <meta name="description" content="Lokal connects you with local businesses and experiences in your community" />
     <meta name="author" content="Lokal" />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Preconnect to external origins -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://rvwdjqxyxivejtuhigxr.supabase.co" crossorigin />
+    
+    <!-- Preload critical font -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap" as="style" />
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    
+    <!-- Preload hero image for faster LCP -->
+    <link rel="preload" href="/lovable-uploads/bc81065e-751e-4110-a4d4-f3040d56684c.png" as="image" fetchpriority="high" />
+    <link rel="preload" href="/lovable-uploads/lokal-logo-main.png" as="image" fetchpriority="high" />
 
-    <meta property="og:title" content="lokal-vista-web" />
-    <meta property="og:description" content="Lovable Generated Project" />
+    <!-- Open Graph / Social -->
+    <meta property="og:title" content="Lokal - Discover Your Community" />
+    <meta property="og:description" content="Share what you love - discover local businesses and experiences" />
     <meta property="og:type" content="website" />
     <meta property="og:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
 
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:site" content="@lovable_dev" />
     <meta name="twitter:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
+    
+    <!-- DNS Prefetch for potential third-party resources -->
+    <link rel="dns-prefetch" href="https://testflight.apple.com" />
   </head>
 
   <body>
