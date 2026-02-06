@@ -183,9 +183,16 @@ export function BetterStackHealth() {
                   {getStatusIcon(monitor.status)}
                 </div>
                 <div>
-                  <p className="text-sm font-medium truncate" title={monitor.name}>
+                  <a 
+                    href={monitor.url} 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="text-sm font-medium truncate hover:text-primary hover:underline flex items-center gap-1 group"
+                    title={monitor.name}
+                  >
                     {monitor.name}
-                  </p>
+                    <ExternalLink className="h-3 w-3 opacity-0 group-hover:opacity-100 transition-opacity" />
+                  </a>
                   <p className="text-xs text-muted-foreground">
                     {monitor.status === "up" ? (
                       <span className="text-green-500">Operational</span>
