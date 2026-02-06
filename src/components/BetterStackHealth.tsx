@@ -174,37 +174,50 @@ export function BetterStackHealth() {
         {/* Individual Monitors */}
         {healthData && healthData.monitors.length > 0 && (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
-            {healthData.monitors.map((monitor) => (
-              <Card key={monitor.id} className="p-3">
-                <div className="flex items-center justify-between mb-2">
-                  <span className="text-xs text-muted-foreground uppercase tracking-wide">
-                    {monitor.type}
-                  </span>
-                  {getStatusIcon(monitor.status)}
-                </div>
-                <div>
-                  <a 
-                    href={monitor.url} 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    className="text-sm font-medium truncate hover:text-primary hover:underline flex items-center gap-1 group"
-                    title={monitor.name}
-                  >
-                    {monitor.name}
-                    <ExternalLink className="h-3 w-3 opacity-0 group-hover:opacity-100 transition-opacity" />
-                  </a>
-                  <p className="text-xs text-muted-foreground">
-                    {monitor.status === "up" ? (
-                      <span className="text-green-500">Operational</span>
-                    ) : monitor.status === "down" ? (
-                      <span className="text-red-500">Down</span>
+            {healthData.monitors.map((monitor) => {
+              // Check if this is an API endpoint (not user-friendly to click)
+              const isApiEndpoint = monitor.url.includes('/functions/') || 
+                                    monitor.url.includes('/api/') ||
+                                    monitor.url.includes('/v1/');
+              
+              return (
+                <Card key={monitor.id} className="p-3">
+                  <div className="flex items-center justify-between mb-2">
+                    <span className="text-xs text-muted-foreground uppercase tracking-wide">
+                      {isApiEndpoint ? 'API' : monitor.type}
+                    </span>
+                    {getStatusIcon(monitor.status)}
+                  </div>
+                  <div>
+                    {isApiEndpoint ? (
+                      <p className="text-sm font-medium truncate" title={monitor.url}>
+                        {monitor.name}
+                      </p>
                     ) : (
-                      <span className="text-yellow-500">{monitor.status}</span>
+                      <a 
+                        href={monitor.url} 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="text-sm font-medium truncate hover:text-primary hover:underline flex items-center gap-1 group"
+                        title={monitor.name}
+                      >
+                        {monitor.name}
+                        <ExternalLink className="h-3 w-3 opacity-0 group-hover:opacity-100 transition-opacity" />
+                      </a>
                     )}
-                  </p>
-                </div>
-              </Card>
-            ))}
+                    <p className="text-xs text-muted-foreground">
+                      {monitor.status === "up" ? (
+                        <span className="text-green-500">Operational</span>
+                      ) : monitor.status === "down" ? (
+                        <span className="text-red-500">Down</span>
+                      ) : (
+                        <span className="text-yellow-500">{monitor.status}</span>
+                      )}
+                    </p>
+                  </div>
+                </Card>
+              );
+            })}
           </div>
         )}
       </CardContent>
