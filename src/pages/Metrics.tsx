@@ -75,6 +75,13 @@ const Metrics = () => {
       case 'dashboard':
         return (
           <>
+            {/* System Health - Admin only - At top */}
+            {isAdmin && (
+              <div className="mb-8">
+                <LokalSystemHealth />
+              </div>
+            )}
+
             {/* Header */}
             <header className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-8 pb-4 border-b-2 border-border">
               <div>
@@ -116,13 +123,6 @@ const Metrics = () => {
 
             {/* Conditional Dashboard */}
             {renderDashboard()}
-
-            {/* System Health - Admin only */}
-            {isAdmin && (
-              <div className="mt-8">
-                <LokalSystemHealth />
-              </div>
-            )}
           </>
         );
       case 'content':
