@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, memo } from 'react';
 import { Carousel, CarouselContent, CarouselItem } from '@/components/ui/carousel';
 import type { CarouselApi } from '@/components/ui/carousel';
 
@@ -11,6 +11,35 @@ const heroImages = [
   '/lovable-uploads/35c240c1-f531-444d-9fe4-83b28dfd451b.png',
   '/lovable-uploads/9da8703e-c203-475b-8f09-8c711c68b405.png'
 ];
+
+// Memoized image component to prevent unnecessary re-renders
+const HeroImage = memo(({ 
+  src, 
+  index, 
+  isFirst 
+}: { 
+  src: string; 
+  index: number; 
+  isFirst: boolean;
+}) => (
+  <CarouselItem className="h-full min-h-[500px] md:min-h-[600px] lg:min-h-[700px]">
+    <div className="relative w-full h-full min-h-[500px] md:min-h-[600px] lg:min-h-[700px]">
+      <img 
+        src={src} 
+        alt={`Local business atmosphere ${index + 1}`}
+        width={1920}
+        height={1080}
+        loading={isFirst ? "eager" : "lazy"}
+        decoding={isFirst ? "sync" : "async"}
+        fetchPriority={isFirst ? "high" : "low"}
+        className="w-full h-full min-h-[500px] md:min-h-[600px] lg:min-h-[700px] object-cover object-center transition-opacity duration-1000"
+      />
+      <div className="absolute inset-0 bg-black/40"></div>
+    </div>
+  </CarouselItem>
+));
+
+HeroImage.displayName = 'HeroImage';
 
 const HeroCarousel = () => {
   const [api, setApi] = useState<CarouselApi>();
@@ -40,16 +69,12 @@ const HeroCarousel = () => {
       >
         <CarouselContent className="h-full min-h-[500px] md:min-h-[600px] lg:min-h-[700px]">
           {heroImages.map((image, index) => (
-            <CarouselItem key={index} className="h-full min-h-[500px] md:min-h-[600px] lg:min-h-[700px]">
-              <div className="relative w-full h-full min-h-[500px] md:min-h-[600px] lg:min-h-[700px]">
-                <img 
-                  src={image} 
-                  alt={`Local business atmosphere ${index + 1}`}
-                  className="w-full h-full min-h-[500px] md:min-h-[600px] lg:min-h-[700px] object-cover object-center transition-opacity duration-1000"
-                />
-                <div className="absolute inset-0 bg-black/40"></div>
-              </div>
-            </CarouselItem>
+            <HeroImage 
+              key={image} 
+              src={image} 
+              index={index} 
+              isFirst={index === 0}
+            />
           ))}
         </CarouselContent>
       </Carousel>
@@ -57,4 +82,4 @@ const HeroCarousel = () => {
   );
 };
 
-export default HeroCarousel;
+export default memo(HeroCarousel);
