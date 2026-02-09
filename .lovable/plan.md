@@ -1,64 +1,31 @@
 
-# Enhanced System Health Dashboard
 
-## Status: ✅ IMPLEMENTED
+## Navigation Auth Button Swap
 
-## Overview
-Expanded the BetterStack health component into a comprehensive monitoring dashboard with storage, performance, user activity, and error tracking.
+### Changes
 
-## What Was Built
+**File: `src/components/Navbar.tsx`**
 
-### 1. Uptime and Response Times ✅
-- Current monitor status with availability percentages
-- 24-hour response time tracking (placeholder for when BetterStack data available)
-- Recent incident history with resolution status
+1. **Desktop navigation** (around lines 63-80):
+   - Change "Sign In" from a `<Button>` to a `<Link>` styled like the other nav links (text-sm font-medium, text-blue, hover effects)
+   - Add a new "Sign Up" `<Button>` with the current primary styling (`bg-primary hover:bg-primary/90`)
+   - Show both Sign In (as link) and Sign Up (as button) when user is not logged in
 
-### 2. Storage Metrics ✅
-- Database size: 29 MB / 500 MB
-- Storage bucket breakdown with progress bars
-- Database record counts (profiles, content, businesses)
+2. **Mobile navigation** (around lines 110-120):
+   - Apply the same pattern: Sign In as a regular menu link, Sign Up as the primary button
 
-### 3. Performance Metrics ✅
-- Average response times per monitor
-- Uptime percentages 
-- Fastest/slowest endpoint identification
-- Response time charts (Recharts)
+### Technical Details
 
-### 4. User Activity ✅
-- Platform stats (users, businesses, content, campaigns)
-- 7-day DAU trends
-- Video views and completion rates
-- Session duration metrics
+Desktop (not logged in):
+```text
+[Home] [Discover] [Our Story] ... [Sign In]  [Sign Up Button]
+                                   ^link        ^primary button
+```
 
-### 5. Error Tracking ✅
-- Incident timeline with status
-- Active vs resolved incident counts
-- Edge function error note
+- "Sign In" becomes: `<Link to="/sign-in" className="text-sm font-medium text-blue hover:text-blue/80">Sign In</Link>`
+- "Sign Up" becomes: `<Button onClick={() => navigate('/sign-up')} className="bg-primary hover:bg-primary/90 text-primary-foreground">Sign Up</Button>`
 
----
+Mobile follows the same pattern with Sign In as a regular menu item and Sign Up as the styled button at the bottom.
 
-## Files Created
-
-| File | Purpose |
-|------|---------|
-| `supabase/functions/system-metrics/index.ts` | Aggregates BetterStack + Supabase data |
-| `src/components/SystemHealthDashboard.tsx` | Main tabbed dashboard component |
-| `src/components/health/StorageMetrics.tsx` | Storage usage visualization |
-| `src/components/health/PerformanceMetrics.tsx` | Response times and latency |
-| `src/components/health/UserActivityMetrics.tsx` | User engagement stats |
-| `src/components/health/ErrorTracking.tsx` | Incident tracking |
-
-## Files Modified
-
-| File | Change |
-|------|--------|
-| `src/pages/Metrics.tsx` | Replaced BetterStackHealth with SystemHealthDashboard |
-
----
-
-## Notes
-- Dashboard auto-refreshes every 60 seconds
-- Collapsible interface to save space
-- Admin-only visibility maintained
-- Response time data may be limited by BetterStack plan tier
-
+### Note
+This aligns with the memory note about a unified auth entry point but updates it so Sign Up is the primary call-to-action while Sign In remains accessible as a standard link.
