@@ -6,10 +6,11 @@ import {
   MapPin, 
   TrendingUp, 
   Settings,
-  Radio
+  Radio,
+  ToggleRight
 } from "lucide-react";
 
-export type SectionType = 'dashboard' | 'content' | 'campaigns' | 'beacons' | 'reports' | 'settings';
+export type SectionType = 'dashboard' | 'content' | 'campaigns' | 'beacons' | 'reports' | 'settings' | 'feature-flags';
 
 interface MetricsSidebarProps {
   isAdmin: boolean;
@@ -26,6 +27,7 @@ const MetricsSidebar = ({ isAdmin, activeSection, onSectionChange }: MetricsSide
     { id: 'campaigns' as SectionType, label: 'Campaigns', icon: Target, adminOnly: true },
     { id: 'beacons' as SectionType, label: 'Beacon Management', icon: MapPin, adminOnly: true },
     { id: 'reports' as SectionType, label: 'Reports', icon: TrendingUp, adminOnly: true },
+    { id: 'feature-flags' as SectionType, label: 'Feature Flags', icon: ToggleRight, adminOnly: true },
     { id: 'settings' as SectionType, label: 'Settings', icon: Settings, adminOnly: false },
   ];
 
