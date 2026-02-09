@@ -12,17 +12,63 @@ serve(async (req) => {
   }
 
   try {
+    // Require authentication
+    const authHeader = req.headers.get('Authorization');
+    if (!authHeader?.startsWith('Bearer ')) {
+      return new Response(
+        JSON.stringify({ error: 'Unauthorized' }),
+        { status: 401, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+      );
+    }
+
     const supabaseClient = createClient(
       Deno.env.get('SUPABASE_URL') ?? '',
-      Deno.env.get('SUPABASE_ANON_KEY') ?? ''
+      Deno.env.get('SUPABASE_ANON_KEY') ?? '',
+      { global: { headers: { Authorization: authHeader } } }
     );
 
-    const { action, beaconId, intensity = 'medium' } = await req.json();
+    // Verify user and check admin role
+    const token = authHeader.replace('Bearer ', '');
+    const { data: claimsData, error: claimsError } = await supabaseClient.auth.getClaims(token);
+    if (claimsError || !claimsData?.claims) {
+      return new Response(
+        JSON.stringify({ error: 'Unauthorized' }),
+        { status: 401, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+      );
+    }
 
-    console.log(`BLE Simulator - Action: ${action}, Beacon: ${beaconId}, Intensity: ${intensity}`);
+    const userId = claimsData.claims.sub;
+
+    // Check admin role via user_roles table
+    const { data: roleData } = await supabaseClient
+      .from('user_roles')
+      .select('role')
+      .eq('user_id', userId)
+      .eq('role', 'admin')
+      .maybeSingle();
+
+    if (!roleData) {
+      return new Response(
+        JSON.stringify({ error: 'Forbidden: admin access required' }),
+        { status: 403, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+      );
+    }
+
+    const body = await req.json();
+    const action = typeof body.action === 'string' ? body.action.slice(0, 20) : '';
+    const beaconId = typeof body.beaconId === 'string' ? body.beaconId.slice(0, 100) : '';
+    const intensity = ['low', 'medium', 'high'].includes(body.intensity) ? body.intensity : 'medium';
+
+    if (!action || !beaconId) {
+      return new Response(
+        JSON.stringify({ error: 'action and beaconId are required' }),
+        { status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+      );
+    }
+
+    console.log(`BLE Simulator - Action: ${action}, Beacon: ${beaconId}, Intensity: ${intensity}, User: ${userId}`);
 
     if (action === 'start') {
-      // Generate simulated BLE detections
       const intensityConfig = {
         low: { count: 2, intervalMs: 5000 },
         medium: { count: 5, intervalMs: 3000 },
@@ -31,11 +77,10 @@ serve(async (req) => {
 
       const config = intensityConfig[intensity as keyof typeof intensityConfig] || intensityConfig.medium;
 
-      // Generate detections
       for (let i = 0; i < config.count; i++) {
         const deviceFingerprint = `sim_device_${Math.random().toString(36).substring(7)}`;
-        const signalStrength = -50 - Math.floor(Math.random() * 40); // -50 to -90 dBm
-        const distanceMeters = Math.pow(10, ((-69 - signalStrength) / (10 * 2))); // RSSI to distance
+        const signalStrength = -50 - Math.floor(Math.random() * 40);
+        const distanceMeters = Math.pow(10, ((-69 - signalStrength) / (10 * 2)));
 
         await supabaseClient.from('beacon_detections').insert({
           beacon_id: beaconId,
@@ -49,7 +94,6 @@ serve(async (req) => {
           },
         });
 
-        // Check for existing active session
         const { data: existingSessions } = await supabaseClient
           .from('visitor_sessions')
           .select('*')
@@ -58,13 +102,12 @@ serve(async (req) => {
           .single();
 
         if (!existingSessions) {
-          // Create new visitor session
           await supabaseClient.from('visitor_sessions').insert({
             device_fingerprint: deviceFingerprint,
             entry_beacon_id: beaconId,
             session_start: new Date().toISOString(),
             beacon_path: JSON.stringify([{ beacon_id: beaconId, timestamp: new Date().toISOString() }]),
-            confidence_score: 0.85 + Math.random() * 0.15, // 0.85 to 1.0
+            confidence_score: 0.85 + Math.random() * 0.15,
             is_active: true,
           });
         }
@@ -83,7 +126,6 @@ serve(async (req) => {
     }
 
     if (action === 'stop') {
-      // End active sessions for this beacon
       await supabaseClient
         .from('visitor_sessions')
         .update({ 
@@ -107,7 +149,7 @@ serve(async (req) => {
   } catch (error) {
     console.error('Error in BLE simulator:', error);
     return new Response(
-      JSON.stringify({ error: error.message }),
+      JSON.stringify({ error: 'Internal server error' }),
       { status: 500, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
     );
   }
