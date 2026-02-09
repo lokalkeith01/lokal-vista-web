@@ -75,12 +75,20 @@ const Navbar = () => {
                 </Button>
               </div>
             ) : (
-              <Button 
-                className="bg-primary hover:bg-primary/90 text-primary-foreground"
-                onClick={() => navigate('/sign-in')}
-              >
-                Sign In
-              </Button>
+              <div className="flex items-center gap-4">
+                <Link
+                  to="/sign-in"
+                  className="text-sm font-medium text-blue hover:text-blue/80 transition-colors duration-200"
+                >
+                  Sign In
+                </Link>
+                <Button 
+                  className="bg-primary hover:bg-primary/90 text-primary-foreground"
+                  onClick={() => navigate('/sign-up')}
+                >
+                  Sign Up
+                </Button>
+              </div>
             )}
           </div>
 
@@ -123,12 +131,21 @@ const Navbar = () => {
                   Sign Out
                 </Button>
               ) : (
-                <Button 
-                  className="bg-primary hover:bg-primary/90 text-primary-foreground mt-2"
-                  onClick={() => { navigate('/sign-in'); setIsOpen(false); }}
-                >
-                  Sign In
-                </Button>
+                <>
+                  <Link
+                    to="/sign-in"
+                    className="px-3 py-2 text-base font-medium text-blue hover:text-blue/80 hover:bg-muted rounded-md transition-colors duration-200"
+                    onClick={() => setIsOpen(false)}
+                  >
+                    Sign In
+                  </Link>
+                  <Button 
+                    className="bg-primary hover:bg-primary/90 text-primary-foreground mt-2"
+                    onClick={() => { navigate('/sign-up'); setIsOpen(false); }}
+                  >
+                    Sign Up
+                  </Button>
+                </>
               )}
             </div>
           </div>
