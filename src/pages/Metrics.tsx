@@ -16,6 +16,7 @@ import CampaignsSection from "@/components/metrics/sections/CampaignsSection";
 import BeaconManagementSection from "@/components/metrics/sections/BeaconManagementSection";
 import ReportsSection from "@/components/metrics/sections/ReportsSection";
 import SettingsSection from "@/components/metrics/sections/SettingsSection";
+import FeatureFlagsSection from "@/components/metrics/sections/FeatureFlagsSection";
 import { SystemHealthDashboard } from "@/components/SystemHealthDashboard";
 import { Badge } from "@/components/ui/badge";
 import { useQuery } from "@tanstack/react-query";
@@ -133,6 +134,8 @@ const Metrics = () => {
         return <BeaconManagementSection />;
       case 'reports':
         return <ReportsSection />;
+      case 'feature-flags':
+        return <FeatureFlagsSection />;
       case 'settings':
         return <SettingsSection />;
       default:
