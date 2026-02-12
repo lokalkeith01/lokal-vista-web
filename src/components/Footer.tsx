@@ -79,6 +79,7 @@ const Footer = () => {
           <div className="flex space-x-6 mt-4 md:mt-0">
             <Link to="/terms-of-service" className="text-accent hover:text-white text-sm">Terms of Service</Link>
             <Link to="/privacy-policy" className="text-accent hover:text-white text-sm">Privacy Policy</Link>
+            <Link to="/data-deletion" className="text-accent hover:text-white text-sm">Delete My Data</Link>
           </div>
         </div>
       </div>

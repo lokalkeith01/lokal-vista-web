@@ -24,6 +24,7 @@ const PrivacyPolicy = lazy(() => import("./pages/PrivacyPolicy"));
 const SignIn = lazy(() => import("./pages/SignIn"));
 const SignUp = lazy(() => import("./pages/SignUp"));
 const ClaimBusiness = lazy(() => import("./pages/ClaimBusiness"));
+const DataDeletion = lazy(() => import("./pages/DataDeletion"));
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -66,6 +67,7 @@ const App = () => (
               <Route path="/sign-in" element={<SignIn />} />
               <Route path="/sign-up" element={<SignUp />} />
               <Route path="/claim-business" element={<ClaimBusiness />} />
+              <Route path="/data-deletion" element={<DataDeletion />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </Suspense>
