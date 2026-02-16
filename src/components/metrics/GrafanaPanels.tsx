@@ -11,7 +11,7 @@ interface GrafanaPanel {
 const GRAFANA_PANELS: GrafanaPanel[] = [
   {
     title: "Database Connections",
-    embedUrl: "", // Replace with your Grafana Cloud embed URL
+    embedUrl: "https://lokalkeith01.grafana.net/d-solo/metrics-endpoint-overview/metrics-endpoint-overview?orgId=1&from=1771268191074&to=1771269991074&timezone=browser&var-datasource=default&var-scrape_job=$__all&var-job=$__all&refresh=30s&panelId=panel-7&__feature.dashboardScene=true",
     height: 300,
   },
   {
