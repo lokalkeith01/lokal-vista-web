@@ -18,6 +18,7 @@ import {
   Building2
 } from "lucide-react";
 import { formatDistanceToNow } from "date-fns";
+import GrafanaPanels from "./GrafanaPanels";
 
 const AdminMetricsDashboard = () => {
   const { data: contentMetrics, isLoading: isLoadingContent } = useContentMetrics();
@@ -243,6 +244,9 @@ const AdminMetricsDashboard = () => {
           </div>
         </CardContent>
       </Card>
+
+      {/* Grafana Cloud Monitoring */}
+      <GrafanaPanels />
     </div>
   );
 };
