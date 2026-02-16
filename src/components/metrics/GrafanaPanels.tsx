@@ -26,7 +26,7 @@ const GRAFANA_PANELS: GrafanaPanel[] = [
   },
   {
     title: "Auth Events",
-    embedUrl: "", // Replace with your Grafana Cloud embed URL
+    embedUrl: "https://lokalkeith01.grafana.net/d-solo/metrics-endpoint-overview/metrics-endpoint-overview?orgId=1&from=1771268394975&to=1771270194975&timezone=browser&var-datasource=default&var-scrape_job=$__all&var-job=$__all&refresh=30s&panelId=panel-11&__feature.dashboardScene=true",
     height: 300,
   },
 ];
