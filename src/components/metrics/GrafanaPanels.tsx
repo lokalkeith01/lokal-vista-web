@@ -16,7 +16,7 @@ const GRAFANA_PANELS: GrafanaPanel[] = [
   },
   {
     title: "API Request Rate",
-    embedUrl: "", // Replace with your Grafana Cloud embed URL
+    embedUrl: "https://lokalkeith01.grafana.net/d-solo/metrics-endpoint-overview/metrics-endpoint-overview?orgId=1&from=now%2Fd&to=now&timezone=browser&var-datasource=default&var-scrape_job=$__all&var-job=$__all&refresh=30s&panelId=panel-9&__feature.dashboardScene=true",
     height: 300,
   },
   {
