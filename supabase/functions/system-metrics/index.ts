@@ -77,6 +77,7 @@ serve(async (req) => {
       userStats,
       edgeFunctionLogs,
       r2StorageData,
+      prometheusData,
     ] = await Promise.all([
       // BetterStack monitors
       fetch("https://uptime.betterstack.com/api/v2/monitors", {
@@ -102,6 +103,8 @@ serve(async (req) => {
       getEdgeFunctionMetrics(supabase),
       // Cloudflare R2 storage
       getR2StorageMetrics(),
+      // Supabase Prometheus metrics
+      getPrometheusMetrics(supabaseUrl, supabaseServiceKey),
     ]);
 
     if (!monitorsRes.ok) {
@@ -218,6 +221,7 @@ serve(async (req) => {
         userActivity: dailyAnalytics,
         platformStats: userStats,
         errors: edgeFunctionLogs,
+        prometheus: prometheusData,
         timestamp: new Date().toISOString(),
       }),
       {
@@ -382,6 +386,104 @@ async function getEdgeFunctionMetrics(_supabase: ReturnType<typeof createClient>
     recentErrors: [],
     errorRate: 0,
     note: "Edge function logs available in Supabase dashboard",
+  };
+}
+
+async function getPrometheusMetrics(supabaseUrl: string, serviceRoleKey: string) {
+  try {
+    // Supabase exposes a Prometheus endpoint with Basic Auth (service_role:<key>)
+    const projectRef = supabaseUrl.replace("https://", "").replace(".supabase.co", "");
+    const metricsUrl = `https://${projectRef}.supabase.co/customer/v1/privileged/metrics`;
+    const basicAuth = btoa(`service_role:${serviceRoleKey}`);
+
+    const response = await fetch(metricsUrl, {
+      headers: {
+        Authorization: `Basic ${basicAuth}`,
+      },
+    });
+
+    if (!response.ok) {
+      console.error("Prometheus metrics error:", response.status);
+      return { error: `HTTP ${response.status}`, metrics: null };
+    }
+
+    const text = await response.text();
+    return { metrics: parsePrometheusText(text) };
+  } catch (error) {
+    console.error("Prometheus fetch error:", error);
+    return { error: String(error), metrics: null };
+  }
+}
+
+function parsePrometheusText(text: string) {
+  const lines = text.split("\n");
+  const metrics: Record<string, number> = {};
+
+  // Key metrics we care about
+  const targetMetrics = [
+    "pg_stat_activity_count",
+    "pg_stat_database_tup_fetched",
+    "pg_stat_database_tup_inserted",
+    "pg_stat_database_tup_updated",
+    "pg_stat_database_tup_deleted",
+    "pg_stat_database_xact_commit",
+    "pg_stat_database_xact_rollback",
+    "pg_stat_database_numbackends",
+    "pg_stat_database_blks_hit",
+    "pg_stat_database_blks_read",
+    "pg_database_size_bytes",
+    "gotrue_running_total_requests",
+    "realtime_connected_cluster",
+  ];
+
+  for (const line of lines) {
+    if (line.startsWith("#") || line.trim() === "") continue;
+
+    for (const target of targetMetrics) {
+      if (line.startsWith(target)) {
+        // Extract value — format: metric_name{labels} value
+        const parts = line.split(" ");
+        const value = parseFloat(parts[parts.length - 1]);
+        if (!isNaN(value)) {
+          // Use full line key (with labels) for specificity, but also aggregate
+          const labelMatch = line.match(/^([^{]+)(\{[^}]*\})?\s/);
+          const key = labelMatch ? labelMatch[1] : target;
+          
+          // Aggregate all database metrics (don't filter by datname)
+          metrics[key] = (metrics[key] || 0) + value;
+        }
+      }
+    }
+  }
+
+  // Derive useful summaries
+  const dbConnections = metrics["pg_stat_database_numbackends"] || metrics["pg_stat_activity_count"] || 0;
+  const totalQueries = (metrics["pg_stat_database_tup_fetched"] || 0) +
+    (metrics["pg_stat_database_tup_inserted"] || 0) +
+    (metrics["pg_stat_database_tup_updated"] || 0) +
+    (metrics["pg_stat_database_tup_deleted"] || 0);
+  const transactions = (metrics["pg_stat_database_xact_commit"] || 0) + (metrics["pg_stat_database_xact_rollback"] || 0);
+  const cacheHitRate = (metrics["pg_stat_database_blks_hit"] || 0) + (metrics["pg_stat_database_blks_read"] || 0) > 0
+    ? Math.round((metrics["pg_stat_database_blks_hit"] || 0) / ((metrics["pg_stat_database_blks_hit"] || 0) + (metrics["pg_stat_database_blks_read"] || 0)) * 10000) / 100
+    : 100;
+  const dbSizeMB = Math.round((metrics["pg_database_size_bytes"] || 0) / (1024 * 1024) * 100) / 100;
+  const authRequests = metrics["gotrue_running_total_requests"] || 0;
+  const realtimeConnections = metrics["realtime_connected_cluster"] || 0;
+
+  return {
+    dbConnections,
+    totalQueries,
+    transactions,
+    commitCount: metrics["pg_stat_database_xact_commit"] || 0,
+    rollbackCount: metrics["pg_stat_database_xact_rollback"] || 0,
+    cacheHitRate,
+    dbSizeMB,
+    authRequests,
+    realtimeConnections,
+    tupFetched: metrics["pg_stat_database_tup_fetched"] || 0,
+    tupInserted: metrics["pg_stat_database_tup_inserted"] || 0,
+    tupUpdated: metrics["pg_stat_database_tup_updated"] || 0,
+    tupDeleted: metrics["pg_stat_database_tup_deleted"] || 0,
   };
 }
 

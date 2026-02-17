@@ -1,8 +1,7 @@
 import { useState, useEffect } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
 import { Skeleton } from "@/components/ui/skeleton";
-import { RefreshCw, Activity, Database, HardDrive, Shield } from "lucide-react";
+import { RefreshCw, Activity, Database, HardDrive, Shield, Gauge } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { supabase } from "@/integrations/supabase/client";
 import {
@@ -18,22 +17,36 @@ import {
   PieChart,
   Pie,
   Cell,
-  Legend,
+  RadialBarChart,
+  RadialBar,
 } from "recharts";
 
-interface MonitorData {
-  id: string;
-  name: string;
-  status: string;
-  responseTimes: number[];
-  avgResponseTime: number | null;
-  availability: number;
+interface PrometheusMetrics {
+  dbConnections: number;
+  totalQueries: number;
+  transactions: number;
+  commitCount: number;
+  rollbackCount: number;
+  cacheHitRate: number;
+  dbSizeMB: number;
+  authRequests: number;
+  realtimeConnections: number;
+  tupFetched: number;
+  tupInserted: number;
+  tupUpdated: number;
+  tupDeleted: number;
 }
 
 interface MetricsPayload {
   uptime?: {
-    monitors: MonitorData[];
-    summary: { total: number; up: number; down: number };
+    monitors: Array<{
+      id: string;
+      name: string;
+      status: string;
+      responseTimes: number[];
+      avgResponseTime: number | null;
+      availability: number;
+    }>;
   };
   storage?: {
     buckets: Array<{ name: string; files: number }>;
@@ -58,15 +71,19 @@ interface MetricsPayload {
     totalContent: number;
     totalCampaigns: number;
   };
+  prometheus?: {
+    metrics: PrometheusMetrics | null;
+    error?: string;
+  };
 }
 
 const CHART_COLORS = [
   "hsl(var(--primary))",
-  "hsl(var(--accent))",
   "hsl(210, 70%, 55%)",
   "hsl(150, 60%, 45%)",
   "hsl(35, 80%, 55%)",
   "hsl(280, 60%, 55%)",
+  "hsl(0, 70%, 55%)",
 ];
 
 const GrafanaPanels = () => {
@@ -81,7 +98,7 @@ const GrafanaPanels = () => {
         setData(metricsData);
       }
     } catch {
-      // silently fail — SystemHealthDashboard already handles errors
+      // SystemHealthDashboard handles errors
     } finally {
       setLoading(false);
     }
@@ -93,15 +110,32 @@ const GrafanaPanels = () => {
     return () => clearInterval(interval);
   }, []);
 
-  // --- Chart data transforms ---
-  const responseTimeData = (data?.uptime?.monitors || [])
-    .filter((m) => m.responseTimes.length > 0)
-    .map((m) => ({
-      name: m.name.length > 18 ? m.name.slice(0, 16) + "…" : m.name,
-      avgMs: m.avgResponseTime ?? 0,
-      availability: m.availability,
-    }));
+  const prom = data?.prometheus?.metrics;
 
+  // DB Operations breakdown
+  const dbOpsData = prom
+    ? [
+        { name: "Fetched", value: prom.tupFetched },
+        { name: "Inserted", value: prom.tupInserted },
+        { name: "Updated", value: prom.tupUpdated },
+        { name: "Deleted", value: prom.tupDeleted },
+      ].filter((d) => d.value > 0)
+    : [];
+
+  // Transaction health
+  const txData = prom
+    ? [
+        { name: "Commits", value: prom.commitCount, fill: "hsl(150, 60%, 45%)" },
+        { name: "Rollbacks", value: prom.rollbackCount, fill: "hsl(0, 70%, 55%)" },
+      ]
+    : [];
+
+  // Cache hit rate radial
+  const cacheData = prom
+    ? [{ name: "Cache Hit Rate", value: prom.cacheHitRate, fill: "hsl(var(--primary))" }]
+    : [];
+
+  // Daily activity
   const activityData = (data?.userActivity?.data || [])
     .slice()
     .reverse()
@@ -112,19 +146,26 @@ const GrafanaPanels = () => {
       Views: d.total_video_views ?? 0,
     }));
 
+  // Storage distribution
   const storagePieData = [
     ...(data?.storage?.buckets || []).map((b) => ({ name: b.name, value: b.files })),
     ...(data?.r2Storage?.folders || []).map((f) => ({ name: `R2/${f.name}`, value: f.files })),
   ].filter((d) => d.value > 0);
 
-  const platformData = data?.platformStats
-    ? [
-        { name: "Users", value: data.platformStats.totalUsers },
-        { name: "Businesses", value: data.platformStats.totalBusinesses },
-        { name: "Content", value: data.platformStats.totalContent },
-        { name: "Campaigns", value: data.platformStats.totalCampaigns },
-      ]
-    : [];
+  // Monitor response times
+  const responseTimeData = (data?.uptime?.monitors || [])
+    .filter((m) => m.responseTimes.length > 0)
+    .map((m) => ({
+      name: m.name.length > 18 ? m.name.slice(0, 16) + "…" : m.name,
+      avgMs: m.avgResponseTime ?? 0,
+    }));
+
+  const tooltipStyle = {
+    backgroundColor: "hsl(var(--card))",
+    border: "1px solid hsl(var(--border))",
+    borderRadius: "8px",
+    color: "hsl(var(--foreground))",
+  };
 
   if (loading && !data) {
     return (
@@ -136,18 +177,12 @@ const GrafanaPanels = () => {
           </h2>
         </div>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-          {Array(4)
-            .fill(0)
-            .map((_, i) => (
-              <Card key={i}>
-                <CardHeader className="pb-2">
-                  <Skeleton className="h-4 w-32" />
-                </CardHeader>
-                <CardContent>
-                  <Skeleton className="h-[220px] w-full rounded-md" />
-                </CardContent>
-              </Card>
-            ))}
+          {Array(6).fill(0).map((_, i) => (
+            <Card key={i}>
+              <CardHeader className="pb-2"><Skeleton className="h-4 w-32" /></CardHeader>
+              <CardContent><Skeleton className="h-[220px] w-full rounded-md" /></CardContent>
+            </Card>
+          ))}
         </div>
       </div>
     );
@@ -165,12 +200,116 @@ const GrafanaPanels = () => {
         </Button>
       </div>
 
+      {/* Prometheus summary stats */}
+      {prom && (
+        <div className="grid grid-cols-2 md:grid-cols-5 gap-3">
+          {[
+            { label: "DB Connections", value: prom.dbConnections, icon: Database },
+            { label: "Cache Hit Rate", value: `${prom.cacheHitRate}%`, icon: Gauge },
+            { label: "DB Size", value: `${prom.dbSizeMB} MB`, icon: HardDrive },
+            { label: "Auth Requests", value: prom.authRequests.toLocaleString(), icon: Shield },
+            { label: "Realtime", value: prom.realtimeConnections, icon: Activity },
+          ].map((stat) => (
+            <Card key={stat.label} className="p-3">
+              <div className="flex items-center gap-2 mb-1">
+                <stat.icon className="w-4 h-4 text-muted-foreground" />
+                <span className="text-xs text-muted-foreground">{stat.label}</span>
+              </div>
+              <p className="text-xl font-bold text-foreground">{stat.value}</p>
+            </Card>
+          ))}
+        </div>
+      )}
+
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-        {/* Response Times */}
+        {/* DB Operations Breakdown */}
         <Card>
           <CardHeader className="pb-2">
             <CardTitle className="text-sm font-medium text-muted-foreground flex items-center gap-2">
               <Database className="w-4 h-4" />
+              Database Operations
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            {dbOpsData.length > 0 ? (
+              <ResponsiveContainer width="100%" height={220}>
+                <BarChart data={dbOpsData} margin={{ top: 5, right: 10, left: 0, bottom: 5 }}>
+                  <CartesianGrid strokeDasharray="3 3" className="stroke-border" />
+                  <XAxis dataKey="name" tick={{ fontSize: 11 }} className="fill-muted-foreground" />
+                  <YAxis tick={{ fontSize: 11 }} className="fill-muted-foreground" />
+                  <Tooltip contentStyle={tooltipStyle} formatter={(v: number) => [v.toLocaleString(), "Tuples"]} />
+                  <Bar dataKey="value" radius={[4, 4, 0, 0]}>
+                    {dbOpsData.map((_, i) => (
+                      <Cell key={i} fill={CHART_COLORS[i % CHART_COLORS.length]} />
+                    ))}
+                  </Bar>
+                </BarChart>
+              </ResponsiveContainer>
+            ) : (
+              <div className="h-[220px] flex items-center justify-center text-sm text-muted-foreground">
+                No Prometheus data available
+              </div>
+            )}
+          </CardContent>
+        </Card>
+
+        {/* Transaction Health */}
+        <Card>
+          <CardHeader className="pb-2">
+            <CardTitle className="text-sm font-medium text-muted-foreground flex items-center gap-2">
+              <Shield className="w-4 h-4" />
+              Transaction Health
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            {txData.length > 0 && txData.some((d) => d.value > 0) ? (
+              <div className="flex items-center gap-4">
+                <ResponsiveContainer width="50%" height={220}>
+                  <PieChart>
+                    <Pie
+                      data={txData}
+                      cx="50%"
+                      cy="50%"
+                      innerRadius={50}
+                      outerRadius={80}
+                      paddingAngle={3}
+                      dataKey="value"
+                    >
+                      {txData.map((entry, i) => (
+                        <Cell key={i} fill={entry.fill} />
+                      ))}
+                    </Pie>
+                    <Tooltip contentStyle={tooltipStyle} formatter={(v: number) => [v.toLocaleString(), "Transactions"]} />
+                  </PieChart>
+                </ResponsiveContainer>
+                <div className="space-y-3">
+                  <div>
+                    <p className="text-xs text-muted-foreground">Commits</p>
+                    <p className="text-lg font-bold text-foreground">{prom?.commitCount.toLocaleString()}</p>
+                  </div>
+                  <div>
+                    <p className="text-xs text-muted-foreground">Rollbacks</p>
+                    <p className="text-lg font-bold text-foreground">{prom?.rollbackCount.toLocaleString()}</p>
+                  </div>
+                  <div>
+                    <p className="text-xs text-muted-foreground">Cache Hit Rate</p>
+                    <p className="text-lg font-bold text-foreground">{prom?.cacheHitRate}%</p>
+                  </div>
+                </div>
+              </div>
+            ) : (
+              <div className="h-[220px] flex items-center justify-center text-sm text-muted-foreground">
+                No transaction data available
+              </div>
+            )}
+          </CardContent>
+        </Card>
+
+        {/* Monitor Response Times */}
+        <Card>
+          <CardHeader className="pb-2">
+            <CardTitle className="text-sm font-medium text-muted-foreground flex items-center gap-2">
+              <Gauge className="w-4 h-4" />
               Monitor Response Times
             </CardTitle>
           </CardHeader>
@@ -181,15 +320,7 @@ const GrafanaPanels = () => {
                   <CartesianGrid strokeDasharray="3 3" className="stroke-border" />
                   <XAxis dataKey="name" tick={{ fontSize: 11 }} className="fill-muted-foreground" />
                   <YAxis tick={{ fontSize: 11 }} className="fill-muted-foreground" unit="ms" />
-                  <Tooltip
-                    contentStyle={{
-                      backgroundColor: "hsl(var(--card))",
-                      border: "1px solid hsl(var(--border))",
-                      borderRadius: "8px",
-                      color: "hsl(var(--foreground))",
-                    }}
-                    formatter={(value: number) => [`${value} ms`, "Avg Response"]}
-                  />
+                  <Tooltip contentStyle={tooltipStyle} formatter={(v: number) => [`${v} ms`, "Avg Response"]} />
                   <Bar dataKey="avgMs" fill="hsl(var(--primary))" radius={[4, 4, 0, 0]} />
                 </BarChart>
               </ResponsiveContainer>
@@ -201,11 +332,11 @@ const GrafanaPanels = () => {
           </CardContent>
         </Card>
 
-        {/* Daily Active Users */}
+        {/* Daily User Activity */}
         <Card>
           <CardHeader className="pb-2">
             <CardTitle className="text-sm font-medium text-muted-foreground flex items-center gap-2">
-              <Shield className="w-4 h-4" />
+              <Activity className="w-4 h-4" />
               Daily User Activity (7d)
             </CardTitle>
           </CardHeader>
@@ -222,29 +353,9 @@ const GrafanaPanels = () => {
                   <CartesianGrid strokeDasharray="3 3" className="stroke-border" />
                   <XAxis dataKey="date" tick={{ fontSize: 11 }} className="fill-muted-foreground" />
                   <YAxis tick={{ fontSize: 11 }} className="fill-muted-foreground" />
-                  <Tooltip
-                    contentStyle={{
-                      backgroundColor: "hsl(var(--card))",
-                      border: "1px solid hsl(var(--border))",
-                      borderRadius: "8px",
-                      color: "hsl(var(--foreground))",
-                    }}
-                  />
-                  <Area
-                    type="monotone"
-                    dataKey="DAU"
-                    stroke="hsl(var(--primary))"
-                    fill="url(#dauGrad)"
-                    strokeWidth={2}
-                  />
-                  <Area
-                    type="monotone"
-                    dataKey="Sessions"
-                    stroke="hsl(210, 70%, 55%)"
-                    fill="none"
-                    strokeWidth={2}
-                    strokeDasharray="5 5"
-                  />
+                  <Tooltip contentStyle={tooltipStyle} />
+                  <Area type="monotone" dataKey="DAU" stroke="hsl(var(--primary))" fill="url(#dauGrad)" strokeWidth={2} />
+                  <Area type="monotone" dataKey="Sessions" stroke="hsl(210, 70%, 55%)" fill="none" strokeWidth={2} strokeDasharray="5 5" />
                 </AreaChart>
               </ResponsiveContainer>
             ) : (
@@ -277,18 +388,11 @@ const GrafanaPanels = () => {
                     dataKey="value"
                     label={({ name, value }) => `${name}: ${value}`}
                   >
-                    {storagePieData.map((_, index) => (
-                      <Cell key={index} fill={CHART_COLORS[index % CHART_COLORS.length]} />
+                    {storagePieData.map((_, i) => (
+                      <Cell key={i} fill={CHART_COLORS[i % CHART_COLORS.length]} />
                     ))}
                   </Pie>
-                  <Tooltip
-                    contentStyle={{
-                      backgroundColor: "hsl(var(--card))",
-                      border: "1px solid hsl(var(--border))",
-                      borderRadius: "8px",
-                      color: "hsl(var(--foreground))",
-                    }}
-                  />
+                  <Tooltip contentStyle={tooltipStyle} />
                 </PieChart>
               </ResponsiveContainer>
             ) : (
@@ -308,23 +412,24 @@ const GrafanaPanels = () => {
             </CardTitle>
           </CardHeader>
           <CardContent>
-            {platformData.length > 0 ? (
+            {data?.platformStats ? (
               <ResponsiveContainer width="100%" height={220}>
-                <BarChart data={platformData} margin={{ top: 5, right: 10, left: 0, bottom: 5 }}>
+                <BarChart
+                  data={[
+                    { name: "Users", value: data.platformStats.totalUsers },
+                    { name: "Businesses", value: data.platformStats.totalBusinesses },
+                    { name: "Content", value: data.platformStats.totalContent },
+                    { name: "Campaigns", value: data.platformStats.totalCampaigns },
+                  ]}
+                  margin={{ top: 5, right: 10, left: 0, bottom: 5 }}
+                >
                   <CartesianGrid strokeDasharray="3 3" className="stroke-border" />
                   <XAxis dataKey="name" tick={{ fontSize: 11 }} className="fill-muted-foreground" />
                   <YAxis tick={{ fontSize: 11 }} className="fill-muted-foreground" />
-                  <Tooltip
-                    contentStyle={{
-                      backgroundColor: "hsl(var(--card))",
-                      border: "1px solid hsl(var(--border))",
-                      borderRadius: "8px",
-                      color: "hsl(var(--foreground))",
-                    }}
-                  />
+                  <Tooltip contentStyle={tooltipStyle} />
                   <Bar dataKey="value" radius={[4, 4, 0, 0]}>
-                    {platformData.map((_, index) => (
-                      <Cell key={index} fill={CHART_COLORS[index % CHART_COLORS.length]} />
+                    {[0, 1, 2, 3].map((i) => (
+                      <Cell key={i} fill={CHART_COLORS[i]} />
                     ))}
                   </Bar>
                 </BarChart>
